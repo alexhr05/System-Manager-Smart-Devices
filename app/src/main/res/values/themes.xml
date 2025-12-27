@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.ManagingHomeDevicesApp" parent="android:Theme.Material.Light.NoActionBar" />
+<!--    <style name="Theme.ManagingHomeDevicesApp" parent="android:Theme.Material.Light.NoActionBar" />-->
+    <style name="Theme.ManagingHomeDevicesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimaryVariant">#3700B3</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">#03DAC5</item>
+        <item name="colorOnSecondary">#000000</item>
+    </style>
+
 </resources>
