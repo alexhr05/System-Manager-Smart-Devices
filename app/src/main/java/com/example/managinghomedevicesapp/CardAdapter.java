@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
@@ -31,6 +33,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         CardItem item = items.get(position);
         holder.title.setText(item.getTitle());
         holder.description.setText(item.getDescription());
+        holder.switchMaterial.setText(item.getIEnabled() ? "ON" : "OFF");
+
     }
 
     @Override
@@ -43,10 +47,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         TextView title;
         TextView description;
 
+        SwitchMaterial switchMaterial;
+
+
         CardViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.cardTitle);
             description = itemView.findViewById(R.id.cardDescription);
+            switchMaterial = itemView.findViewById(R.id.switchNotifications);
+
+
         }
     }
 }
