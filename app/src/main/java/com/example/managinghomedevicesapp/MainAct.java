@@ -1,9 +1,13 @@
 package com.example.managinghomedevicesapp;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,17 @@ public class MainAct extends AppCompatActivity {
 
         CardAdapter adapter = new CardAdapter(data);
         recyclerView.setAdapter(adapter);
+        MaterialButton buttonOne = findViewById(R.id.btnOptionA);
+        MaterialButton buttonTwo = findViewById(R.id.btnOptionB);
+        buttonOne.setText("Home");
+        buttonTwo.setText("Vilata");
+        buttonOne.setOnClickListener(v -> {
+            Toast.makeText(
+                    MainAct.this,
+                    "Button clicked!",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
 
 
     }

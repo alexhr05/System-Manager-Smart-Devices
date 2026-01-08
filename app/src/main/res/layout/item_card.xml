@@ -69,9 +69,6 @@
             android:text="10"
             app:layout_constraintBaseline_toBaselineOf="@id/cardButton"
             app:layout_constraintEnd_toEndOf="parent" />
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
