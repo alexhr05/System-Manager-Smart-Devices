@@ -6,16 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8"
         app:selectionRequired="true"
+
         app:singleSelection="true">
 
         <com.google.android.material.button.MaterialButton
@@ -24,8 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
-            app:shapeAppearanceOverlay="@style/CustomButtonA"/>
+            app:backgroundTint="@drawable/toggle_button_selector"
+            app:shapeAppearanceOverlay="@style/CustomButtonA" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOptionB"
@@ -33,21 +36,52 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
-            app:shapeAppearanceOverlay="@style/CustomButtonB"/>
+            app:backgroundTint="@drawable/toggle_button_selector"
+            app:shapeAppearanceOverlay="@style/CustomButtonB" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="8dp"
-        android:layout_marginTop="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/iconTextGroup"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="160dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/temprature"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="74dp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="62dp" />
+
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
