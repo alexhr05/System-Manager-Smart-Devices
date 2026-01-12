@@ -38,13 +38,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         //Remove the last active onCheckedChangeListener
         holder.switchMaterial.setOnCheckedChangeListener(null);
         holder.switchMaterial.setChecked(item.getIsEnabled());
-        holder.switchMaterial.setText(item.getIsEnabled() ? "ON" : "OFF");
+        holder.switchMaterial.setText(item.getIsEnabled() ? "On" : "Off");
 
         // Listen for switch changes
         holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-            holder.switchMaterial.setText(item.getIsEnabled() ? "ON" : "OFF");
-            // Immediately revert UI
+            holder.switchMaterial.setText(item.getIsEnabled() ? "On" : "Off");
+            // Immediately change UI
             holder.switchMaterial.setChecked(item.getIsEnabled());
 
             // Notify activity
