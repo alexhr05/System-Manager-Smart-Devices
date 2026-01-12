@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,13 @@ public class MainAct extends AppCompatActivity {
             ).show();
         });
 
+
+
+//       SwitchMaterial switchMaterial = findViewById(R.id.switchNotifications);
+//
+//
+//
+//       boolean isCheckedSwitch = switchMaterial.isChecked();
 
     }
 

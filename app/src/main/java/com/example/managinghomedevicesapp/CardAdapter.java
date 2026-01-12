@@ -33,8 +33,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         CardItem item = items.get(position);
         holder.title.setText(item.getTitle());
         holder.description.setText(item.getDescription());
+
+        holder.switchMaterial.setOnCheckedChangeListener(null);
+        holder.switchMaterial.setChecked(item.getIEnabled());
         holder.switchMaterial.setText(item.getIEnabled() ? "ON" : "OFF");
 
+//        // Listen for switch changes
+        holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Update the model
+            item.setIEnabled(isChecked);
+
+            // Update the text
+            holder.switchMaterial.setText(isChecked ? "ON" : "OFF");
+        });
     }
 
     @Override

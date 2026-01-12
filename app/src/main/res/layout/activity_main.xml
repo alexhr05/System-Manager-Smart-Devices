@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
     <com.google.android.material.button.MaterialButtonToggleGroup
@@ -16,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintWidth_percent="0.9"
         app:selectionRequired="true"
 
         app:singleSelection="true">
@@ -50,38 +51,61 @@
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
     <LinearLayout
         android:id="@+id/iconTextGroup"
-        android:layout_width="0dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="160dp"
+        android:layout_width="185dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="60dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/leftGuide">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:src="@drawable/temprature"
             tools:layout_editor_absoluteX="41dp"
             tools:layout_editor_absoluteY="74dp" />
+
+        <TextView
+            android:id="@+id/degree"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeMinTextSize="14sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="25°C"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="62dp" />
+
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Indoor temp"
+
             tools:layout_editor_absoluteX="38dp"
             tools:layout_editor_absoluteY="62dp" />
 
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

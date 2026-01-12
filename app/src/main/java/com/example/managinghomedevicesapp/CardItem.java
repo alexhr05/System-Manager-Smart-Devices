@@ -10,6 +10,9 @@ public class CardItem {
         this.description = description;
     }
 
+    public void setIEnabled(boolean value) {
+         this.isEnabled = value;
+    }
     public String getTitle() {
         return title;
     }
