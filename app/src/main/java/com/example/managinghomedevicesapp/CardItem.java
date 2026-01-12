@@ -1,17 +1,23 @@
 package com.example.managinghomedevicesapp;
 
 public class CardItem {
+    private final int id;
     private final String title;
     private final String description;
     private boolean isEnabled = false;
 
-    public CardItem(String title, String description) {
+    public CardItem(int id, String title, String description, boolean isEnabled) {
+        this.id = id;
         this.title = title;
         this.description = description;
+        this.isEnabled =isEnabled;
     }
 
-    public void setIEnabled(boolean value) {
+    public void setIsEnabled(boolean value) {
          this.isEnabled = value;
+    }
+    public int getId() {
+        return id;
     }
     public String getTitle() {
         return title;
@@ -21,7 +27,7 @@ public class CardItem {
         return description;
     }
 
-    public boolean getIEnabled() {
+    public boolean getIsEnabled() {
         return isEnabled;
     }
 

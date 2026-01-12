@@ -15,9 +15,10 @@ import java.util.List;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
     private final List<CardItem> items;
-
-    public CardAdapter(List<CardItem> items) {
+    private final OnDeviceToggleListener listener;
+    public CardAdapter(List<CardItem> items, OnDeviceToggleListener listener) {
         this.items = items;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,17 +35,20 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         holder.title.setText(item.getTitle());
         holder.description.setText(item.getDescription());
 
+        //Remove the last active onCheckedChangeListener
         holder.switchMaterial.setOnCheckedChangeListener(null);
-        holder.switchMaterial.setChecked(item.getIEnabled());
-        holder.switchMaterial.setText(item.getIEnabled() ? "ON" : "OFF");
+        holder.switchMaterial.setChecked(item.getIsEnabled());
+        holder.switchMaterial.setText(item.getIsEnabled() ? "ON" : "OFF");
 
-//        // Listen for switch changes
+        // Listen for switch changes
         holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Update the model
-            item.setIEnabled(isChecked);
 
-            // Update the text
-            holder.switchMaterial.setText(isChecked ? "ON" : "OFF");
+            holder.switchMaterial.setText(item.getIsEnabled() ? "ON" : "OFF");
+            // Immediately revert UI
+            holder.switchMaterial.setChecked(item.getIsEnabled());
+
+            // Notify activity
+            listener.onDeviceToggled(item);
         });
     }
 

@@ -15,19 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class MainAct extends AppCompatActivity {
-
+    private ApiService apiService;
+    private CardAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        Log.d("API", "Calling endpoint...");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.bgroutingmap.com/8/")
@@ -35,7 +36,7 @@ public class MainAct extends AppCompatActivity {
                 .build();
 
 
-        ApiService apiService = retrofit.create(ApiService.class);
+        apiService = retrofit.create(ApiService.class);
 
         apiService.getAllTimers("iO92iJdwuJwe8Y",
                 "showAllTimers"
@@ -43,9 +44,16 @@ public class MainAct extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful() && response.body() != null){
-                    String rawText =response.body();
-                    Toast.makeText(MainAct.this, "Text="+rawText, Toast.LENGTH_SHORT).show();
+
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d("API", "Response: " + response.body());
+                    Toast.makeText(MainAct.this,
+                            "SUCCESS:\n" + response.body(),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainAct.this,
+                            "Server error: " + response.code(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -60,17 +68,22 @@ public class MainAct extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         List<CardItem> data = new ArrayList<>();
-        data.add(new CardItem("Lights", "Living room lights"));
-        data.add(new CardItem("Thermostat", "Set temperature"));
-        data.add(new CardItem("Security", "Camera system"));
-        data.add(new CardItem("Garage", "Door status"));
+//        data.add(new CardItem(1,"Lights", "Living room lights"));
+//        data.add(new CardItem(2,"Thermostat", "Set temperature"));
+//        data.add(new CardItem(3,"Security", "Camera system"));
+        data.add(new CardItem(8, "Light", "Living Room", false));
 
-        CardAdapter adapter = new CardAdapter(data);
+
+        adapter = new CardAdapter(data, this::toggleDevice);
+
+
         recyclerView.setAdapter(adapter);
+
         MaterialButton buttonOne = findViewById(R.id.btnOptionA);
         MaterialButton buttonTwo = findViewById(R.id.btnOptionB);
         buttonOne.setText("Home");
         buttonTwo.setText("Vilata");
+
         buttonOne.setOnClickListener(v -> {
             Toast.makeText(
                     MainAct.this,
@@ -80,14 +93,63 @@ public class MainAct extends AppCompatActivity {
         });
 
 
-
-//       SwitchMaterial switchMaterial = findViewById(R.id.switchNotifications);
-//
-//
-//
-//       boolean isCheckedSwitch = switchMaterial.isChecked();
-
     }
 
+    private void toggleDevice(CardItem item) {
+        //Get the opposite value of the current switch value
+        String action = item.getIsEnabled() ? "off" : "short";
+
+        //Make request to server for changing turn on/off current state for device
+        // and return the new state of device
+        apiService.setDeviceState(
+                "iO92iJdwuJwe8Y",
+                action,
+                item.getId()
+        ).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                String result = response.body().trim();
+
+                boolean newState = result.equalsIgnoreCase("ON");
+
+                //Set new state for switch
+                item.setIsEnabled(newState);
+
+                //Nofify adapter for changes in switch
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("API", "Network error", t);
+            }
+        });
+    }
+//    private void refreshDeviceState(CardItem item) {
+//
+//            apiService.setDeviceState(
+//                    "iO92iJdwuJwe8Y",
+//                    "status",
+//                    item.getId()
+//            ).enqueue(new Callback<String>() {
+//
+//                @Override
+//                public void onResponse(Call<String> call, Response<String> response) {
+//                    if (response.isSuccessful() && response.body() != null) {
+//
+//                        boolean state =
+//                                response.body().trim().equalsIgnoreCase("ON");
+//
+//                        item.setIsEnabled(state);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<String> call, Throwable t) {}
+//            });
+//    }
 
 }
