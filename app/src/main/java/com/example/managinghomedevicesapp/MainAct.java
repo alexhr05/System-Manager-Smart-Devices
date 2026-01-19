@@ -2,6 +2,7 @@ package com.example.managinghomedevicesapp;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +24,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class MainAct extends AppCompatActivity {
     private ApiService apiService;
     private CardAdapter adapter;
+    private List<CardItem> devices;
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        devices = new ArrayList<>();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -46,10 +49,30 @@ public class MainAct extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d("API", "Response: " + response.body());
-                    Toast.makeText(MainAct.this,
-                            "SUCCESS:\n" + response.body(),
-                            Toast.LENGTH_LONG).show();
+                    //Proccess data from server for devices
+                    String raw = response.body().trim();
+                    String[] rows = raw.split(";");
+                    //Iterate through everey element in rows array
+                    for (String row : rows) {
+                        row = row.trim();
+                        if (row.isEmpty()) continue;
+
+                        String[] parts = row.split(",");
+
+                        if (parts.length < 4) continue;
+
+                        int id = Integer.parseInt(parts[0].trim());
+                        String name = parts[1].trim();
+                        String ip = parts[2].trim();
+                        String status = parts[3].trim();
+
+                        boolean enabled = status.equalsIgnoreCase("ON");
+
+                        devices.add(new CardItem(id, name, ip, enabled));
+
+                    }
+                    adapter.notifyDataSetChanged();
+
                 } else {
                     Toast.makeText(MainAct.this,
                             "Server error: " + response.code(),
@@ -67,14 +90,7 @@ public class MainAct extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        List<CardItem> data = new ArrayList<>();
-//        data.add(new CardItem(1,"Lights", "Living room lights"));
-//        data.add(new CardItem(2,"Thermostat", "Set temperature"));
-//        data.add(new CardItem(3,"Security", "Camera system"));
-        data.add(new CardItem(8, "Light", "Living Room", false));
-
-
-        adapter = new CardAdapter(data, this::toggleDevice);
+        adapter = new CardAdapter(devices, this::toggleDevice);
 
 
         recyclerView.setAdapter(adapter);
@@ -127,29 +143,5 @@ public class MainAct extends AppCompatActivity {
             }
         });
     }
-//    private void refreshDeviceState(CardItem item) {
-//
-//            apiService.setDeviceState(
-//                    "iO92iJdwuJwe8Y",
-//                    "status",
-//                    item.getId()
-//            ).enqueue(new Callback<String>() {
-//
-//                @Override
-//                public void onResponse(Call<String> call, Response<String> response) {
-//                    if (response.isSuccessful() && response.body() != null) {
-//
-//                        boolean state =
-//                                response.body().trim().equalsIgnoreCase("ON");
-//
-//                        item.setIsEnabled(state);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<String> call, Throwable t) {}
-//            });
-//    }
 
 }

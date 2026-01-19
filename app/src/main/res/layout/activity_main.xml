@@ -7,49 +7,56 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/welcomePanel"
-        android:layout_width="185dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/temprature"
-            tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="74dp" />
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/avatar"
+        android:scaleType="centerCrop"
+
+        android:clipToOutline="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/controlPanelInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/imgProfile"
+        app:layout_constraintTop_toTopOf="@id/imgProfile"
+        >
 
         <TextView
-            android:id="@+id/controlPanelText"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:id="@+id/controlPanel"
+            android:text="CONTROL PANEL"
             android:layout_weight="1"
-            android:autoSizeMaxTextSize="24sp"
-            android:autoSizeMinTextSize="14sp"
+            android:autoSizeMaxTextSize="12sp"
+            android:autoSizeMinTextSize="5sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
-            android:text="25°C"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="38dp"
-            tools:layout_editor_absoluteY="62dp" />
+            android:textColor="#8FA3AD"
+             />
 
         <TextView
-            android:id="@+id/placeText"
-            android:layout_width="47dp"
-            android:layout_height="match_parent"
+            android:id="@+id/destination"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+
+            android:text="My Home"
+            android:textSize="18sp"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Indoor temp"
 
-            tools:layout_editor_absoluteX="38dp"
-            tools:layout_editor_absoluteY="62dp" />
-
+            android:textStyle="bold"/>
     </LinearLayout>
+
+
+
+
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleGroup"
         android:layout_width="0dp"
@@ -58,7 +65,7 @@
         android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomePanel"
+        app:layout_constraintTop_toBottomOf="@id/imgProfile"
         app:layout_constraintWidth_percent="0.9"
         app:selectionRequired="true"
 

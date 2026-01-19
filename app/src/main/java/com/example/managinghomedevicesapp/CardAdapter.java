@@ -33,7 +33,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         CardItem item = items.get(position);
         holder.title.setText(item.getTitle());
-        holder.description.setText(item.getDescription());
+        holder.description.setText(item.getIp());
 
         //Remove the last active onCheckedChangeListener
         holder.switchMaterial.setOnCheckedChangeListener(null);
@@ -45,6 +45,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
             holder.switchMaterial.setText(item.getIsEnabled() ? "On" : "Off");
             // Immediately change UI
+
             holder.switchMaterial.setChecked(item.getIsEnabled());
 
             // Notify activity
