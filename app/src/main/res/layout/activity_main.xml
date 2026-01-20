@@ -8,64 +8,73 @@
     android:fitsSystemWindows="true">
 
 
-    <ImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:src="@drawable/avatar"
-        android:scaleType="centerCrop"
-
-        android:clipToOutline="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <LinearLayout
-        android:id="@+id/controlPanelInfo"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerControlPanel"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="12dp"
-        app:layout_constraintStart_toEndOf="@id/imgProfile"
-        app:layout_constraintTop_toTopOf="@id/imgProfile"
-        >
+        android:layout_height="64dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
 
-        <TextView
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            android:id="@+id/controlPanel"
-            android:text="CONTROL PANEL"
-            android:layout_weight="1"
-            android:autoSizeMaxTextSize="12sp"
-            android:autoSizeMinTextSize="5sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:gravity="center"
-            android:textColor="#8FA3AD"
-             />
+        app:layout_constraintStart_toStartOf="@id/leftGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.65">
 
-        <TextView
-            android:id="@+id/destination"
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
 
-            android:text="My Home"
-            android:textSize="18sp"
-            android:layout_weight="1"
+            android:src="@drawable/avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            android:textStyle="bold"/>
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/controlPanelInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/imgProfile"
+            app:layout_constraintTop_toTopOf="@id/imgProfile">
 
+            <TextView
+                android:id="@+id/controlPanel"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="12sp"
+                android:autoSizeMinTextSize="8sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="CONTROL PANEL"
+                android:textColor="#8FA3AD"
 
+                />
 
+            <TextView
+                android:id="@+id/destination"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeMinTextSize="10sp"
+                android:text="My Home"
+
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgProfile"
+        app:layout_constraintStart_toStartOf="@id/leftGuide"
+        app:layout_constraintTop_toBottomOf="@id/containerControlPanel"
         app:layout_constraintWidth_percent="0.9"
         app:selectionRequired="true"
 
@@ -77,6 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+
             app:backgroundTint="@drawable/toggle_button_selector"
             app:shapeAppearanceOverlay="@style/CustomButtonA" />
 
@@ -95,7 +105,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="160dp"
         android:clipToPadding="false"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
