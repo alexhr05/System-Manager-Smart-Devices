@@ -4,13 +4,23 @@
 <!--    <style name="Theme.ManagingHomeDevicesApp" parent="android:Theme.Material.Light.NoActionBar" />-->
     <style name="Theme.ManagingHomeDevicesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color -->
-        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimary">#1E88E5</item>
         <item name="colorPrimaryVariant">#3700B3</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
         <!-- Secondary brand color -->
-        <item name="colorSecondary">#03DAC5</item>
-        <item name="colorOnSecondary">#000000</item>
+        <item name="colorSecondary">#26A69A</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">#121212</item>
+
+        <!-- StatusBar Color -->
+        <item name="android:statusBarColor">#121212</item>
+
+        <item name="android:windowBackground">@color/app_background</item>
+
+        <item name="android:forceDarkAllowed">true</item>
     </style>
 
 </resources>
