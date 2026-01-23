@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Backgrounds -->
+    <color name="colorBackgroundNight" tools:ignore="MissingDefaultResource">#101C25</color>
+    <color name="colorSurface">#1C2327</color>
+
+    <!-- Text -->
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextSecondary">#667484</color>
+
+    <!-- Accent -->
+    <color name="colorPrimary">#1E88E5</color>
+
+    <!-- Switch Button-->
+    <color name="switch_thumb_checked">#FFFFFF</color>
+    <color name="switch_thumb_unchecked">#6B7280</color>
+
+    <color name="switch_track_checked">#3B82F6</color>
+    <color name="switch_track_unchecked">#374151</color>
+
+
+</resources>

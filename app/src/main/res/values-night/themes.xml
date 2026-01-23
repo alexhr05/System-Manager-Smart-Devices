@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ManagingHomeDevicesApp" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:colorBackground">@color/colorBackgroundNight</item>
+        <item name="colorSurface">@color/colorSurface</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
+
+        <!-- StatusBar Color -->
+        <item name="android:statusBarColor">#121212</item>
+
+
+    </style>
+
+</resources>

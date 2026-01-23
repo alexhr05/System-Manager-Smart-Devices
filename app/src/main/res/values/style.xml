@@ -24,5 +24,7 @@
         <item name="cornerSizeBottomLeft">8dp</item>
         <item name="cornerSizeBottomRight">8dp</item>
     </style>
-
+    <style name="MySwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="colorControlActivated">@color/switch_thumb_checked</item>
+    </style>
 </resources>

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="?android:attr/colorBackground"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +17,7 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-
+        app:tint="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.65">
@@ -66,37 +68,57 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="4dp"
+        android:background="@drawable/toggle_group_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
         app:layout_constraintTop_toBottomOf="@id/containerControlPanel"
         app:layout_constraintWidth_percent="0.9"
         app:selectionRequired="true"
-
-        app:singleSelection="true">
+        app:singleSelection="true"
+        app:checkedButton="@id/btnOptionA">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOptionA"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            app:backgroundTint="@drawable/toggle_button_selector"
-            app:shapeAppearanceOverlay="@style/CustomButtonA" />
+            android:text="Home"
+            android:textColor="@color/toggle_button_text"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:iconTint="@color/toggle_button_text"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:strokeWidth="0dp"
+            app:backgroundTint="@color/toggle_button_background"
+            app:rippleColor="@android:color/transparent"
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOptionB"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            app:backgroundTint="@drawable/toggle_button_selector"
-            app:shapeAppearanceOverlay="@style/CustomButtonB" />
+            android:text="Vilata"
+            android:textColor="@color/toggle_button_text"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:iconTint="@color/toggle_button_text"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:strokeWidth="0dp"
+            app:backgroundTint="@color/toggle_button_background"
+            app:rippleColor="@android:color/transparent"
+            />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -134,8 +156,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:src="@drawable/temprature"
+            app:tint="@color/colorPrimary"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="74dp" />
+            tools:layout_editor_absoluteY="74dp"
+            />
 
         <TextView
             android:id="@+id/degree"
