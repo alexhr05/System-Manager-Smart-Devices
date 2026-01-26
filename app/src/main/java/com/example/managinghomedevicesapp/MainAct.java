@@ -1,6 +1,8 @@
 package com.example.managinghomedevicesapp;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,8 @@ public class MainAct extends AppCompatActivity {
     private CardAdapter adapter;
     private List<CardItem> devices;
     private TextView textView;
+
+    private final Handler handler = new Handler(Looper.getMainLooper());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +94,17 @@ public class MainAct extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        adapter = new CardAdapter(devices, this::toggleDevice);
+        adapter = new CardAdapter(devices, new OnDeviceToggleListener() {
+            @Override
+            public void onDeviceToggled(CardItem item) {
+                toggleDevice(item);
+            }
+
+            @Override
+            public void onTurnOnForTime(CardItem item, int minutes) {
+                turnOnDeviceForTime(item,minutes);
+            }
+        });
 
 
         recyclerView.setAdapter(adapter);
@@ -143,5 +157,69 @@ public class MainAct extends AppCompatActivity {
             }
         });
     }
+
+    private void turnOnDeviceForTime(CardItem item, int minutes){
+        //Make request to server for changing turn on/off current state for device
+        // and return the new state of device
+        String mins = String.valueOf(minutes);
+
+        apiService.setDeviceState(
+                "iO92iJdwuJwe8Y",
+                mins,
+                item.getId()
+        ).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                if (response.body() == null) return;
+
+                boolean isOn = response.body().trim().equalsIgnoreCase("ON");
+                item.setIsEnabled(isOn);
+                adapter.notifyDataSetChanged();
+
+                Toast.makeText(MainAct.this, "Device is turn on for" + mins+ "minutes", Toast.LENGTH_SHORT).show();
+
+                handler.postDelayed(() -> {
+                    turnOffDevice(item);
+                }, minutes * 60 * 1000L);
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("API", "Network error", t);
+            }
+        });
+    }
+
+    private void turnOffDevice(CardItem item) {
+
+        apiService.setDeviceState(
+                "iO92iJdwuJwe8Y",
+                "off",
+                item.getId()
+        ).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                item.setIsEnabled(false);
+                adapter.notifyDataSetChanged();
+
+                Toast.makeText(
+                        MainAct.this,
+                        "Device turned OFF automatically",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("API", "Failed to turn OFF", t);
+            }
+        });
+    }
+
 
 }

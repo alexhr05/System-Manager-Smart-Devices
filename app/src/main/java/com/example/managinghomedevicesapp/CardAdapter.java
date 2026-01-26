@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.List;
@@ -51,6 +52,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             // Notify activity
             listener.onDeviceToggled(item);
         });
+
+        holder.buttonOne.setOnClickListener(v -> {
+            int minutes = Integer.parseInt(v.getTag().toString());
+            listener.onTurnOnForTime(item,minutes);
+
+        });
+
     }
 
     @Override
@@ -64,14 +72,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         TextView description;
 
         SwitchMaterial switchMaterial;
-
+        MaterialButton buttonOne;
 
         CardViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.cardTitle);
             description = itemView.findViewById(R.id.cardDescription);
             switchMaterial = itemView.findViewById(R.id.switchNotifications);
-
+            buttonOne = itemView.findViewById(R.id.TimeButton1);
 
         }
     }

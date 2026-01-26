@@ -36,15 +36,16 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cardTitle"
             app:layout_constraintTop_toTopOf="parent"
-
+            app:trackTint="@color/switch_button_track"
             />
 
         <!-- Description -->
+
         <TextView
             android:id="@+id/cardDescription"
             android:layout_width="304dp"
             android:layout_height="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="36dp"
             android:ellipsize="end"
             android:maxLines="3"
             android:text="Description"
@@ -55,23 +56,17 @@
             app:layout_constraintTop_toBottomOf="@id/cardTitle" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/cardButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="ACTION"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardDescription" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/TimeButton1"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="52dp"
             android:layout_height="41dp"
-            android:text="10"
-            app:layout_constraintBaseline_toBaselineOf="@id/cardButton"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="10sp"
+            android:text="10 min"
+            android:tag="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchNotifications" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -11,12 +11,5 @@
     <!-- Accent -->
     <color name="colorPrimary">#1E88E5</color>
 
-    <!-- Switch Button-->
-    <color name="switch_thumb_checked">#FFFFFF</color>
-    <color name="switch_thumb_unchecked">#6B7280</color>
-
-    <color name="switch_track_checked">#3B82F6</color>
-    <color name="switch_track_unchecked">#374151</color>
-
 
 </resources>
