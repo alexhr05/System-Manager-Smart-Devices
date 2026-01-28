@@ -4,18 +4,22 @@ public class CardItem {
     private int id;
     private String title;
     private String ip;
+
+    //ON
+    //OFF
     private boolean isEnabled = false;
-    //private int status = 1;
+
     // 0 - offline
     // 1 - online
-    // 2 - disabled
+    private boolean status;
 
-    public CardItem(int id, String title, String ip, boolean isEnabled) {
+
+    public CardItem(int id, String title, String ip, boolean isEnabled, boolean status) {
         this.id = id;
         this.title = title;
         this.ip = ip;
         this.isEnabled = isEnabled;
-//        this.status = status;
+        this.status = status;
     }
 
     public void setId(int id) {
@@ -31,9 +35,9 @@ public class CardItem {
         this.isEnabled = value;
     }
 
-//    public void setStatus(int status) {
-//        this.status = status;
-//    }
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     public int getId() {
         return id;
     }
@@ -48,8 +52,8 @@ public class CardItem {
     public boolean getIsEnabled() {
         return isEnabled;
     }
-    //public int getStatus() {
-//        return status;
-//    }
+    public boolean getStatus() {
+        return status;
+    }
 
 }

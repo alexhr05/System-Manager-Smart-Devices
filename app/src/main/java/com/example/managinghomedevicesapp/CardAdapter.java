@@ -4,11 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.List;
@@ -53,6 +55,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             listener.onDeviceToggled(item);
         });
 
+
+        if(item.getStatus()){
+            holder.materialCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.card_offline));
+        }else{
+            holder.materialCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.card_online));
+        }
+
         holder.buttonOne.setOnClickListener(v -> {
             int minutes = Integer.parseInt(v.getTag().toString());
             listener.onTurnOnForTime(item,minutes);
@@ -73,14 +82,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
         SwitchMaterial switchMaterial;
         MaterialButton buttonOne;
-
+        MaterialCardView materialCardView;
         CardViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.cardTitle);
             description = itemView.findViewById(R.id.cardDescription);
             switchMaterial = itemView.findViewById(R.id.switchNotifications);
             buttonOne = itemView.findViewById(R.id.TimeButton1);
-
+            materialCardView = itemView.findViewById(R.id.CardView);
         }
     }
 }

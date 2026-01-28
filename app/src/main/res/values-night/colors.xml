@@ -11,5 +11,8 @@
     <!-- Accent -->
     <color name="colorPrimary">#1E88E5</color>
 
+    <!-- Online/Offline device color -->
+    <color name="card_online">#90CAF9</color>
+    <color name="card_offline">#424242</color>
 
 </resources>

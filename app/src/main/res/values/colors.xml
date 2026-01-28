@@ -28,6 +28,10 @@
     <color name="switch_track_checked">#2563EB</color>
     <color name="switch_track_unchecked">#D1D5DB</color>
 
+    <!-- Online/Offline device color -->
+    <color name="card_online">#FFFFFF</color>
+    <color name="card_offline">#B0B0B0</color>
+
 
 
 </resources>

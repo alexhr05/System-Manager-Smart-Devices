@@ -63,16 +63,18 @@ public class MainAct extends AppCompatActivity {
 
                         String[] parts = row.split(",");
 
-                        if (parts.length < 4) continue;
+                        if (parts.length < 5) continue;
 
                         int id = Integer.parseInt(parts[0].trim());
                         String name = parts[1].trim();
                         String ip = parts[2].trim();
-                        String status = parts[3].trim();
+                        String turnOnOff = parts[3].trim();
+                        String status = parts[4].trim();
 
-                        boolean enabled = status.equalsIgnoreCase("ON");
+                        boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
+                        boolean statusBoolean = status.equalsIgnoreCase("ONLINE");
 
-                        devices.add(new CardItem(id, name, ip, enabled));
+                        devices.add(new CardItem(id, name, ip, enabledOnOff, statusBoolean));
 
                     }
                     adapter.notifyDataSetChanged();
@@ -141,14 +143,23 @@ public class MainAct extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
                 String result = response.body().trim();
+                boolean status = result.equalsIgnoreCase("offline");
+                if(status){
+                    item.setIsEnabled(false);
+                    item.setStatus(false);
 
-                boolean newState = result.equalsIgnoreCase("ON");
+                    Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
+//                    adapter.notifyDataSetChanged();
+                }else{
+                    boolean newState = result.equalsIgnoreCase("ON");
 
-                //Set new state for switch
-                item.setIsEnabled(newState);
+                    //Set new state for switch
+                    item.setIsEnabled(newState);
 
-                //Nofify adapter for changes in switch
-                adapter.notifyDataSetChanged();
+                    //Nofify adapter for changes in switch
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override
@@ -173,16 +184,26 @@ public class MainAct extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
                 if (response.body() == null) return;
+                String result = response.body().trim();
+                boolean status = result.equalsIgnoreCase("offline");
+                if(status){
+                    item.setIsEnabled(false);
+                    item.setStatus(false);
 
-                boolean isOn = response.body().trim().equalsIgnoreCase("ON");
-                item.setIsEnabled(isOn);
-                adapter.notifyDataSetChanged();
+                    Toast.makeText(MainAct.this, "This devices is OFFLINE;status="+item.getStatus(), Toast.LENGTH_SHORT).show();
+                }else{
+                    boolean isOn = result.equalsIgnoreCase("ON");
+                    item.setIsEnabled(isOn);
+                    adapter.notifyDataSetChanged();
 
-                Toast.makeText(MainAct.this, "Device is turn on for" + mins+ "minutes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
 
-                handler.postDelayed(() -> {
-                    turnOffDevice(item);
-                }, minutes * 60 * 1000L);
+//                handler.postDelayed(() -> {
+//                    turnOffDevice(item);
+//                }, minutes * 60 * 1000L);
+
+                }
+
 
             }
 
