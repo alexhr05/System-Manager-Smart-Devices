@@ -8,10 +8,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
 
         <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColorSecondary">@android:color/darker_gray</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
 
         <!-- StatusBar Color -->
         <item name="android:statusBarColor">#121212</item>
+
 
 
     </style>

@@ -144,22 +144,20 @@ public class MainAct extends AppCompatActivity {
 
                 String result = response.body().trim();
                 boolean status = result.equalsIgnoreCase("offline");
+                Log.d("API", "Response: " + result + "; status="+status);
                 if(status){
                     item.setIsEnabled(false);
                     item.setStatus(false);
 
                     Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
-//                    adapter.notifyDataSetChanged();
                 }else{
                     boolean newState = result.equalsIgnoreCase("ON");
-
+                    item.setStatus(true);
                     //Set new state for switch
                     item.setIsEnabled(newState);
-
-                    //Nofify adapter for changes in switch
-                    adapter.notifyDataSetChanged();
                 }
-
+                //Nofify adapter for changes in switch
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -190,11 +188,11 @@ public class MainAct extends AppCompatActivity {
                     item.setIsEnabled(false);
                     item.setStatus(false);
 
-                    Toast.makeText(MainAct.this, "This devices is OFFLINE;status="+item.getStatus(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
                 }else{
                     boolean isOn = result.equalsIgnoreCase("ON");
                     item.setIsEnabled(isOn);
-                    adapter.notifyDataSetChanged();
+                    item.setStatus(true);
 
                     Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
 
@@ -203,8 +201,7 @@ public class MainAct extends AppCompatActivity {
 //                }, minutes * 60 * 1000L);
 
                 }
-
-
+                adapter.notifyDataSetChanged();
             }
 
             @Override

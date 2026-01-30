@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <color name="purple_200">#FFBB86FC</color>-->
-<!--    <color name="purple_500">#FF6200EE</color>-->
-<!--    <color name="purple_700">#FF3700B3</color>-->
-<!--    <color name="teal_200">#FF03DAC5</color>-->
-<!--    <color name="teal_700">#FF018786</color>-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!-- Backgrounds -->
@@ -12,14 +7,11 @@
     <color name="colorSurface">#F5F5F5</color>
 
     <!-- Text -->
-    <color name="colorTextPrimary">#111111</color>
-    <color name="colorTextSecondary">#666666</color>
+    <color name="colorTextPrimary">#3d3d3d  </color>
+    <color name="colorTextSecondary">#939393</color>
 
     <!-- Accent -->
     <color name="colorPrimary">#1E88E5</color>
-
-    <!-- icon temp-->
-    <color name="iconTemp">#FFFFFF</color>
 
     <!-- Switch Button -->
     <color name="switch_thumb_checked">#FFFFFF</color>
@@ -29,9 +21,20 @@
     <color name="switch_track_unchecked">#D1D5DB</color>
 
     <!-- Online/Offline device color -->
-    <color name="card_online">#FFFFFF</color>
-    <color name="card_offline">#B0B0B0</color>
+    <color name="card_online">#F4F4F4</color>
+    <color name="card_offline">#ABABAB</color>
 
+    <color name="card_title_text">#282828</color>
+
+
+
+    <color name="card_dark">#1C2A32</color>
+    <color name="card_stroke">#334954</color>
+
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_dark">#9FB3BF</color>
+
+    <color name="blue_accent">#1EB9FF</color>
 
 
 </resources>

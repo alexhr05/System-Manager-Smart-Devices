@@ -6,13 +6,17 @@
 
     <!-- Text -->
     <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextSecondary">#667484</color>
+    <color name="colorTextSecondary">#D8D8D8</color>
 
     <!-- Accent -->
     <color name="colorPrimary">#1E88E5</color>
 
     <!-- Online/Offline device color -->
-    <color name="card_online">#90CAF9</color>
-    <color name="card_offline">#424242</color>
+    <color name="card_online">#2F2F2F</color>
+    <color name="card_offline">#7C7C7C</color>
+
+
+    <color name="card_title_text">#EDEDED</color>
+
 
 </resources>

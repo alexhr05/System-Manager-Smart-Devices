@@ -43,30 +43,35 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         holder.switchMaterial.setChecked(item.getIsEnabled());
         holder.switchMaterial.setText(item.getIsEnabled() ? "On" : "Off");
 
+        changeBackgroundColor(holder,item);
+
         // Listen for switch changes
         holder.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-            holder.switchMaterial.setText(item.getIsEnabled() ? "On" : "Off");
-            // Immediately change UI
-
             holder.switchMaterial.setChecked(item.getIsEnabled());
+            item.setStatus(item.getStatus());
+            holder.switchMaterial.setText(item.getIsEnabled() ? "On" : "Off");
 
             // Notify activity
             listener.onDeviceToggled(item);
         });
 
 
-        if(item.getStatus()){
-            holder.materialCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.card_offline));
-        }else{
-            holder.materialCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.card_online));
-        }
 
         holder.buttonOne.setOnClickListener(v -> {
             int minutes = Integer.parseInt(v.getTag().toString());
             listener.onTurnOnForTime(item,minutes);
 
         });
+
+    }
+
+    private void changeBackgroundColor(CardViewHolder holder, CardItem item){
+        if(item.getStatus()){
+            holder.materialCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.card_online));
+
+        }else{
+            holder.materialCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.card_offline));
+        }
 
     }
 

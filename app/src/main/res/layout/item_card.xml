@@ -24,9 +24,11 @@
             android:text="Card Title"
             android:textSize="14dp"
             android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toStartOf="@id/switchNotifications"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <!-- Toggle -->
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -51,6 +53,7 @@
             android:maxLines="3"
             android:text="Description"
             android:textSize="12dp"
+            android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,11 +64,11 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="52dp"
             android:layout_height="41dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:textSize="10sp"
-            android:text="10 min"
             android:tag="10"
+            android:text="10 min"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/switchNotifications" />
     </androidx.constraintlayout.widget.ConstraintLayout>

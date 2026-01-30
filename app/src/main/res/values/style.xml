@@ -27,4 +27,12 @@
     <style name="MySwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="colorControlActivated">@color/switch_thumb_checked</item>
     </style>
+
+    <style name="SignalBar">
+        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:background">@color/blue_accent</item>
+    </style>
+
+
 </resources>

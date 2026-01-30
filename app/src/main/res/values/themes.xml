@@ -21,12 +21,12 @@
         <item name="colorSurface">@color/colorSurface</item>
 
         <!-- Primary -->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorOnSurface">@color/colorTextPrimary</item>
+
 
         <!-- Text -->
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
-
 
 
 
