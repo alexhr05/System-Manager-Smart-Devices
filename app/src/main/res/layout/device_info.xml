@@ -15,7 +15,6 @@
         android:padding="15dp"
         android:text="Turn Device On"
         android:textColor="?attr/colorOnSurface"
-
         android:textSize="15sp"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +24,7 @@
         app:layout_constraintWidth_percent="0.9" />
 
     <TextView
-        android:id="@+id/TextdeviceDetails"
+        android:id="@+id/TextdeviceDetailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -33,7 +32,7 @@
         android:text="Device Details"
         android:textColor="?attr/colorOnSurface"
         android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/backIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:text="Living room lamp"
         android:textColor="?attr/colorOnSurface"
         android:textSize="32sp"
@@ -49,11 +48,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_arrow_back_ios_24" />
@@ -63,9 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextdeviceDetails"
+        app:layout_constraintTop_toBottomOf="@+id/TextdeviceDetailsText"
         app:srcCompat="@drawable/avatar_image" />
 
     <TextView
@@ -81,43 +82,190 @@
         app:layout_constraintTop_toBottomOf="@+id/textdeviceDetails" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:weightSum="2">
+        android:paddingHorizontal="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeButton">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:minHeight="120dp"
+            app:cardBackgroundColor="@color/card_dark"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="@color/card_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeButton"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
-<!--            <include layout="@layout/card_last_restart"/>-->
+            <include layout="@layout/card_last_restart" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:minHeight="120dp"
+            app:cardBackgroundColor="@color/card_dark"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="@color/card_dark"
+            app:layout_constraintStart_toEndOf="@+id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@+id/timeButton"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
-<!--            <include layout="@layout/card_signal_strength"/>-->
+            <include layout="@layout/card_signal_strenght" />
 
         </com.google.android.material.card.MaterialCardView>
+
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="409dp"
+        android:layout_height="289dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerControlPanel"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="68dp"
+            android:layout_marginEnd="28dp"
+            android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/leftGuide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.90"
+            app:tint="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/touch_manual_device_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/controlPanelInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="@id/imgProfile"
+                app:layout_constraintTop_toTopOf="@id/imgProfile"
+                app:layout_constraintWidth_percent="0.55">
+
+                <TextView
+                    android:id="@+id/controlPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:text="Manual Activation"
+                    android:textColor="#8FA3AD"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:text="2 ming ago" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textdeviceDetails3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Activity log"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerControlPanel"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="28dp"
+            android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textdeviceDetails3"
+            app:layout_constraintWidth_percent="0.90"
+            app:tint="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timer_off_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/controlPanelInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="@id/imgProfile"
+                app:layout_constraintTop_toTopOf="@id/imgProfile"
+                app:layout_constraintWidth_percent="0.55">
+
+                <TextView
+                    android:id="@+id/controlPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:text="Scheduled Off"
+                    android:textColor="#8FA3AD"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:text="08:00 AM" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

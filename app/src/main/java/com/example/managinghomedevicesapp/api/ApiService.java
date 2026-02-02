@@ -1,4 +1,4 @@
-package com.example.managinghomedevicesapp;
+package com.example.managinghomedevicesapp.api;
 
 
 import retrofit2.Call;

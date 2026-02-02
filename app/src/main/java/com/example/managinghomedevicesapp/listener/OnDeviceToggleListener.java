@@ -1,4 +1,6 @@
-package com.example.managinghomedevicesapp;
+package com.example.managinghomedevicesapp.listener;
+
+import com.example.managinghomedevicesapp.CardItem;
 
 public interface OnDeviceToggleListener {
     void onDeviceToggled(CardItem item);

@@ -1,14 +1,17 @@
-package com.example.managinghomedevicesapp;
+package com.example.managinghomedevicesapp.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.managinghomedevicesapp.CardItem;
+import com.example.managinghomedevicesapp.R;
+import com.example.managinghomedevicesapp.listener.OnDeviceToggleListener;
+import com.example.managinghomedevicesapp.listener.OnItemClickListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -19,9 +22,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     private final List<CardItem> items;
     private final OnDeviceToggleListener listener;
-    public CardAdapter(List<CardItem> items, OnDeviceToggleListener listener) {
+    private final OnItemClickListener itemClickListener;
+
+    public CardAdapter(List<CardItem> items, OnDeviceToggleListener listener, OnItemClickListener itemClickListener) {
         this.items = items;
         this.listener = listener;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -55,13 +61,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             listener.onDeviceToggled(item);
         });
 
-
-
         holder.buttonOne.setOnClickListener(v -> {
             int minutes = Integer.parseInt(v.getTag().toString());
             listener.onTurnOnForTime(item,minutes);
 
         });
+
+        holder.itemView.setOnClickListener(v ->
+                itemClickListener.onItemClick(item)
+        );
 
     }
 
@@ -97,4 +105,5 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             materialCardView = itemView.findViewById(R.id.CardView);
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.managinghomedevicesapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.managinghomedevicesapp.adapter.CardAdapter;
+import com.example.managinghomedevicesapp.api.ApiService;
+import com.example.managinghomedevicesapp.listener.OnDeviceToggleListener;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,8 @@ public class MainAct extends AppCompatActivity {
     private CardAdapter adapter;
     private List<CardItem> devices;
     private TextView textView;
-
+    private RecyclerView recyclerView;
+    //private CardAdapter.RecyclerViewClickListner recyclerListner;
     private final Handler handler = new Handler(Looper.getMainLooper());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +110,17 @@ public class MainAct extends AppCompatActivity {
             public void onTurnOnForTime(CardItem item, int minutes) {
                 turnOnDeviceForTime(item,minutes);
             }
-        });
+        },
+        item ->{
+            Intent intent = new Intent(MainAct.this, DeviceInfo.class);
+            intent.putExtra("device_id",item.getId());
+            intent.putExtra("device_name", item.getTitle());
+            intent.putExtra("device_ip", item.getIp());
+            intent.putExtra("device_status", item.getStatus());
 
+            startActivity(intent);
+
+        });
 
         recyclerView.setAdapter(adapter);
 
