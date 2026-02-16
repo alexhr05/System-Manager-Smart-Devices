@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/timeText"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
             android:text="14:20 PM"
             android:textSize="14sp"
             android:textColor="@color/text_secondary_dark"/>

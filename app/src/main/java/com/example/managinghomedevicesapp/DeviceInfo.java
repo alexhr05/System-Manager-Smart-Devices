@@ -20,12 +20,7 @@ public class DeviceInfo extends AppCompatActivity {
         String deviceIp = getIntent().getStringExtra("device_ip");
         boolean isOnline = getIntent().getBooleanExtra("device_status", false);
 
-        textView.setText(
-                "ID: " + deviceId + "\n" +
-                        "Name: " + deviceName + "\n" +
-                        "IP: " + deviceIp + "\n" +
-                        "Status: " + (isOnline ? "ONLINE" : "OFFLINE")
-        );
+        textView.setText(deviceName);
 
         //backIcon.setOnClickListener(v-> finish());
         backIcon.setOnClickListener(v -> {

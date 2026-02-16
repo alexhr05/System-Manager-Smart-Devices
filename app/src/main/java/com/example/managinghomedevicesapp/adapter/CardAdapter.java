@@ -16,6 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
@@ -72,6 +73,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         );
 
     }
+
 
     private void changeBackgroundColor(CardViewHolder holder, CardItem item){
         if(item.getStatus()){

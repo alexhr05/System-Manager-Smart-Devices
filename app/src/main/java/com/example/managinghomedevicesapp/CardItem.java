@@ -13,13 +13,15 @@ public class CardItem {
     // 1 - online
     private boolean status;
 
+    private String place;
 
-    public CardItem(int id, String title, String ip, boolean isEnabled, boolean status) {
+    public CardItem(int id, String title, String ip, boolean isEnabled, boolean status, String place) {
         this.id = id;
         this.title = title;
         this.ip = ip;
         this.isEnabled = isEnabled;
         this.status = status;
+        this.place = place;
     }
 
     public void setId(int id) {
@@ -38,6 +40,9 @@ public class CardItem {
     public void setStatus(boolean status) {
         this.status = status;
     }
+    public void setPlace(String place) {
+        this.place = place;
+    }
     public int getId() {
         return id;
     }
@@ -54,6 +59,9 @@ public class CardItem {
     }
     public boolean getStatus() {
         return status;
+    }
+    public String getPlace() {
+        return place;
     }
 
 }

@@ -26,6 +26,8 @@
 
     <color name="card_title_text">#282828</color>
 
+    <!-- Back Icon Color -->
+    <color name="back_icon_bg">#000000</color>
 
 
     <color name="card_dark">#1C2A32</color>

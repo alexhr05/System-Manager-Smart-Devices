@@ -30,16 +30,26 @@ public class MainAct extends AppCompatActivity {
     private ApiService apiService;
     private CardAdapter adapter;
     private List<CardItem> devices;
+    private List<CardItem> visibleDevices;
     private TextView textView;
+
+    private MaterialButton btnHome;
+    private MaterialButton btnVilata;
     private RecyclerView recyclerView;
+
+    private String textHome = "Home";
+    private String textVilata = "Vilata";
     //private CardAdapter.RecyclerViewClickListner recyclerListner;
     private final Handler handler = new Handler(Looper.getMainLooper());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        devices = new ArrayList<>();
+        btnHome = findViewById(R.id.btnHome);
+        btnVilata = findViewById(R.id.btnVilata);
 
+        devices = new ArrayList<>();
+        visibleDevices = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.bgroutingmap.com/8/")
@@ -67,21 +77,24 @@ public class MainAct extends AppCompatActivity {
 
                         String[] parts = row.split(",");
 
-                        if (parts.length < 5) continue;
+                        if (parts.length < 6) continue;
 
                         int id = Integer.parseInt(parts[0].trim());
                         String name = parts[1].trim();
                         String ip = parts[2].trim();
                         String turnOnOff = parts[3].trim();
                         String status = parts[4].trim();
+                        String place = parts[5].trim();
 
                         boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
                         boolean statusBoolean = status.equalsIgnoreCase("ONLINE");
 
-                        devices.add(new CardItem(id, name, ip, enabledOnOff, statusBoolean));
+                        devices.add(new CardItem(id, name, ip, enabledOnOff, statusBoolean, place));
 
                     }
+                    Log.d("AllDevices","Devices AllSize="+devices.size());
                     adapter.notifyDataSetChanged();
+                    showPlace("Vilata");
 
                 } else {
                     Toast.makeText(MainAct.this,
@@ -100,7 +113,7 @@ public class MainAct extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        adapter = new CardAdapter(devices, new OnDeviceToggleListener() {
+        adapter = new CardAdapter(visibleDevices, new OnDeviceToggleListener() {
             @Override
             public void onDeviceToggled(CardItem item) {
                 toggleDevice(item);
@@ -124,20 +137,45 @@ public class MainAct extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        MaterialButton buttonOne = findViewById(R.id.btnOptionA);
-        MaterialButton buttonTwo = findViewById(R.id.btnOptionB);
-        buttonOne.setText("Home");
-        buttonTwo.setText("Vilata");
 
-        buttonOne.setOnClickListener(v -> {
+        btnHome.setText(textHome);
+        btnVilata.setText(textVilata);
+
+        btnHome.setOnClickListener(v -> {
+            Log.d("AllDevices","Home click AllSize="+devices.size());
+            showPlace(textHome);
             Toast.makeText(
                     MainAct.this,
-                    "Button clicked!",
+                    "Clicked Home button!",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+
+        btnVilata.setOnClickListener(v -> {
+            Log.d("AllDevices","VIlata click AllSize="+devices.size());
+            showPlace(textVilata);
+            Toast.makeText(
+                    MainAct.this,
+                    "Clicked Vilata button!",
                     Toast.LENGTH_SHORT
             ).show();
         });
 
 
+    }
+
+    private void showPlace(String place) {
+
+//        List<CardItem> filtered = new ArrayList<>();
+        visibleDevices.clear();
+        for (CardItem item : devices) {
+
+            if (item.getPlace().equalsIgnoreCase(place)) {
+
+                visibleDevices.add(item);
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 
     private void toggleDevice(CardItem item) {

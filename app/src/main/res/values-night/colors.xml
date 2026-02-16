@@ -18,5 +18,7 @@
 
     <color name="card_title_text">#EDEDED</color>
 
+    <!-- Back Icon Color -->
+    <color name="back_icon_bg">#FFFFFF</color>
 
 </resources>

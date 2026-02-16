@@ -37,13 +37,14 @@
 
     <TextView
         android:id="@+id/textdeviceDetails"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+
         android:layout_marginTop="12dp"
         android:text="Living room lamp"
         android:textColor="?attr/colorOnSurface"
         android:textSize="32sp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -52,9 +53,10 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"
+        android:backgroundTint="@color/back_icon_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_arrow_back_ios_24" />
@@ -63,8 +65,8 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextdeviceDetailsText"
         app:srcCompat="@drawable/avatar_image" />
@@ -87,22 +89,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:weightSum="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeButton">
+        app:layout_constraintTop_toBottomOf="@id/timeButton">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:minHeight="120dp"
+            android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/card_dark"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeButton"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
@@ -113,15 +114,12 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:minHeight="120dp"
+            android:layout_marginStart="8dp"
             app:cardBackgroundColor="@color/card_dark"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
-            app:layout_constraintStart_toEndOf="@+id/materialCardView"
-            app:layout_constraintTop_toBottomOf="@+id/timeButton"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
@@ -129,8 +127,8 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
     </LinearLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="409dp"
