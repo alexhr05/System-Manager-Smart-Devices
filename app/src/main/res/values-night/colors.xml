@@ -21,4 +21,10 @@
     <!-- Back Icon Color -->
     <color name="back_icon_bg">#FFFFFF</color>
 
+
+    <color name="toggle_container">#1F2933</color>
+    <color name="toggle_selected">#111827</color>
+    <color name="toggle_text_selected">#FFFFFF</color>
+    <color name="toggle_text_unselected">#9CA3AF</color>
+
 </resources>
