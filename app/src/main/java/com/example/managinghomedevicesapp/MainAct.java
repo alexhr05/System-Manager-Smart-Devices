@@ -94,7 +94,7 @@ public class MainAct extends AppCompatActivity {
                     }
                     Log.d("AllDevices","Devices AllSize="+devices.size());
                     adapter.notifyDataSetChanged();
-                    showPlace("Vilata");
+                    showPlace("Home");
 
                 } else {
                     Toast.makeText(MainAct.this,
@@ -165,8 +165,6 @@ public class MainAct extends AppCompatActivity {
     }
 
     private void showPlace(String place) {
-
-//        List<CardItem> filtered = new ArrayList<>();
         visibleDevices.clear();
         for (CardItem item : devices) {
 
