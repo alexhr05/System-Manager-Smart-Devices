@@ -34,5 +34,16 @@
         <item name="android:background">@color/blue_accent</item>
     </style>
 
+    <style name="ToggleGroupShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="ToggleButtonShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">22dp</item>
+    </style>
+
+
 
 </resources>
