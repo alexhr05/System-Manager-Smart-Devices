@@ -5,6 +5,7 @@ public class CardItem {
     private String title;
     private String ip;
 
+    private String macAddress;
     //ON
     //OFF
     private boolean isEnabled = false;
@@ -15,13 +16,17 @@ public class CardItem {
 
     private String place;
 
-    public CardItem(int id, String title, String ip, boolean isEnabled, boolean status, String place) {
+
+
+    public CardItem(int id, String title, String ip, String macAddress, boolean isEnabled, boolean status, String place) {
         this.id = id;
         this.title = title;
         this.ip = ip;
+        this.macAddress = macAddress;
         this.isEnabled = isEnabled;
         this.status = status;
         this.place = place;
+
     }
 
     public void setId(int id) {
@@ -43,6 +48,10 @@ public class CardItem {
     public void setPlace(String place) {
         this.place = place;
     }
+
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
     public int getId() {
         return id;
     }
@@ -62,6 +71,10 @@ public class CardItem {
     }
     public String getPlace() {
         return place;
+    }
+
+    public String getMacAddress() {
+        return macAddress;
     }
 
 }

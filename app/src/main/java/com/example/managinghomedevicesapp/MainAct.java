@@ -1,6 +1,8 @@
 package com.example.managinghomedevicesapp;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +38,7 @@ public class MainAct extends AppCompatActivity {
 
     private MaterialButton btnHome;
     private MaterialButton btnVilata;
+    private MaterialButton selectedButton = null;
     private RecyclerView recyclerView;
 
     private String textHome = "Home";
@@ -77,24 +81,27 @@ public class MainAct extends AppCompatActivity {
 
                         String[] parts = row.split(",");
 
-                        if (parts.length < 6) continue;
+                        if (parts.length < 7) continue;
 
                         int id = Integer.parseInt(parts[0].trim());
                         String name = parts[1].trim();
                         String ip = parts[2].trim();
-                        String turnOnOff = parts[3].trim();
-                        String status = parts[4].trim();
-                        String place = parts[5].trim();
+                        String macAddress = parts[3].trim();
+                        String turnOnOff = parts[4].trim();
+                        String status = parts[5].trim();
+                        String place = parts[6].trim();
+
 
                         boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
                         boolean statusBoolean = status.equalsIgnoreCase("ONLINE");
 
-                        devices.add(new CardItem(id, name, ip, enabledOnOff, statusBoolean, place));
+                        devices.add(new CardItem(id, name, ip, macAddress, enabledOnOff, statusBoolean, place));
 
                     }
                     Log.d("AllDevices","Devices AllSize="+devices.size());
                     adapter.notifyDataSetChanged();
-                    showPlace("Home");
+
+                    SelectedButton(btnHome);
 
                 } else {
                     Toast.makeText(MainAct.this,
@@ -143,7 +150,7 @@ public class MainAct extends AppCompatActivity {
 
         btnHome.setOnClickListener(v -> {
             Log.d("AllDevices","Home click AllSize="+devices.size());
-            showPlace(textHome);
+            SelectedButton(btnHome);
             Toast.makeText(
                     MainAct.this,
                     "Clicked Home button!",
@@ -153,7 +160,8 @@ public class MainAct extends AppCompatActivity {
 
         btnVilata.setOnClickListener(v -> {
             Log.d("AllDevices","VIlata click AllSize="+devices.size());
-            showPlace(textVilata);
+            SelectedButton(btnVilata);
+            //showPlace(textVilata);
             Toast.makeText(
                     MainAct.this,
                     "Clicked Vilata button!",
@@ -164,12 +172,43 @@ public class MainAct extends AppCompatActivity {
 
     }
 
+    private void SelectedButton(MaterialButton button){
+        // Prevent reselecting the same button
+        if (button == selectedButton) return;
+
+        // Deselect previous
+        if (selectedButton != null) {
+            selectedButton.setChecked(false);
+            selectedButton.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            selectedButton.setTextColor(ContextCompat.getColor(this, R.color.toggle_text_selected));
+        }
+
+        // Select New
+        button.setChecked(true);
+        button.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.toggle_selected)));
+        button.setTextColor(ContextCompat.getColor(this,R.color.toggle_text_selected));
+        selectedButton = button;
+
+        // React to which button is selected
+        if (button.getId() == R.id.btnHome) {
+            onHomeSelected();
+        } else if (button.getId() == R.id.btnVilata) {
+            onVilataSelected();
+        }
+    }
+
+    private void onHomeSelected() {
+        showPlace("Home");
+    }
+
+    private void onVilataSelected() {
+        showPlace("Vilata");
+    }
+
     private void showPlace(String place) {
         visibleDevices.clear();
         for (CardItem item : devices) {
-
             if (item.getPlace().equalsIgnoreCase(place)) {
-
                 visibleDevices.add(item);
             }
         }
