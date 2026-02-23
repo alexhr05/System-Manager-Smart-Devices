@@ -18,4 +18,18 @@ public interface ApiService {
             @Query("action") String action,
             @Query("timer_id") int timer_id
     );
+
+    //Get info when Timer need to be turned on/off for the day
+    @GET("timerGetConfigNew.php")
+    Call<String> setDeviceState(
+            @Query("nkey") String nkey,
+            @Query("needParams") String needParams,
+            @Query("timer_id") int timer_id,
+            @Query("mac_address") String mac_address
+    );
+
+
+
+
+
 }
