@@ -20,6 +20,7 @@
             android:name=".MainAct"
             android:exported="true"
             android:label="@string/app_name"
+            android:usesCleartextTraffic="true"
             android:theme="@style/Theme.ManagingHomeDevicesApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

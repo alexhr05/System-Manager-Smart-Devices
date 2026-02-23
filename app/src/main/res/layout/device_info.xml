@@ -137,7 +137,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/containerControlPanel"
+            android:id="@+id/containerManualActivation"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginTop="68dp"
@@ -145,13 +145,12 @@
             android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/leftGuide"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.90"
             app:tint="@color/colorPrimary">
 
             <ImageView
-                android:id="@+id/imgProfile"
+                android:id="@+id/imgManualActivation"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
                 android:clipToOutline="true"
@@ -161,17 +160,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/controlPanelInfo"
+                android:id="@+id/controlPanelManualActivation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:orientation="vertical"
-                app:layout_constraintStart_toEndOf="@id/imgProfile"
-                app:layout_constraintTop_toTopOf="@id/imgProfile"
+                app:layout_constraintStart_toEndOf="@id/imgManualActivation"
+                app:layout_constraintTop_toTopOf="@id/imgManualActivation"
                 app:layout_constraintWidth_percent="0.55">
 
                 <TextView
-                    android:id="@+id/controlPanel"
+                    android:id="@+id/textViewManualActivation"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -183,7 +182,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/destination"
+                    android:id="@+id/textViewTimeManualActivation"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -207,19 +206,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/containerControlPanel"
+            android:id="@+id/containerScheduledOff"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_marginTop="84dp"
             android:layout_marginEnd="28dp"
             android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textdeviceDetails3"
+            app:layout_constraintTop_toBottomOf="@+id/containerManualActivation"
             app:layout_constraintWidth_percent="0.90"
             app:tint="@color/colorPrimary">
 
             <ImageView
-                android:id="@+id/imgProfile"
+                android:id="@+id/imgClock"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
                 android:clipToOutline="true"
@@ -234,12 +232,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:orientation="vertical"
-                app:layout_constraintStart_toEndOf="@id/imgProfile"
-                app:layout_constraintTop_toTopOf="@id/imgProfile"
+                app:layout_constraintStart_toEndOf="@id/imgClock"
+                app:layout_constraintTop_toTopOf="@id/imgClock"
                 app:layout_constraintWidth_percent="0.55">
 
                 <TextView
-                    android:id="@+id/controlPanel"
+                    android:id="@+id/textViewScheduledOff"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -251,7 +249,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/destination"
+                    android:id="@+id/textViewTime"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

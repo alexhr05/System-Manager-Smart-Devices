@@ -21,10 +21,10 @@ public interface ApiService {
 
     //Get info when Timer need to be turned on/off for the day
     @GET("timerGetConfigNew.php")
-    Call<String> setDeviceState(
+    Call<String> getTimerConfig(
+
             @Query("nkey") String nkey,
             @Query("needParams") String needParams,
-            @Query("timer_id") int timer_id,
             @Query("mac_address") String mac_address
     );
 
