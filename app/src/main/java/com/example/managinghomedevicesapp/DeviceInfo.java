@@ -11,8 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.managinghomedevicesapp.api.ApiService;
+import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -28,10 +30,19 @@ public class DeviceInfo extends AppCompatActivity {
     private TextView textViewDuration1;
     private TextView textViewDuration2;
     private TextView textDevicePlace;
+    private TextView textViewStatus;
+
+    private MaterialButton timeButtonShortInt;
+
+    private MaterialButton timeButtonLongInt;
+
+    private MaterialButton timeButtonTurnOff;
     //Short interval turn on device
     private String shortInt = "";
     //Long interval turn on device
     private String longInt = "";
+
+    private int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +65,17 @@ public class DeviceInfo extends AppCompatActivity {
         textViewDuration1 = findViewById(R.id.textViewDuration1);
         textViewDuration2 = findViewById(R.id.textViewDuration2);
 
+        textViewStatus = findViewById(R.id.textViewStatus);
+
+        timeButtonShortInt = findViewById(R.id.timeButtonShortInt);
+        timeButtonLongInt = findViewById(R.id.timeButtonLongInt);
+        timeButtonTurnOff = findViewById(R.id.timeButtonTurnOff);
 
 
         TextView textView = findViewById(R.id.textdeviceDetails);
         ImageView backIcon = findViewById(R.id.backIcon);
 
-        int deviceId =getIntent().getIntExtra("device_id",-1);
+        deviceId =getIntent().getIntExtra("device_id",-1);
         String deviceName = getIntent().getStringExtra("device_name");
         String deviceIp = getIntent().getStringExtra("device_ip");
         boolean isOnline = getIntent().getBooleanExtra("device_status", false);
@@ -76,6 +92,17 @@ public class DeviceInfo extends AppCompatActivity {
                     android.view.animation.AnimationUtils.loadAnimation(this, R.anim.scale_click)
             );
             finish();
+        });
+
+        timeButtonShortInt.setOnClickListener(v-> {
+            turnOnDeviceForTime(parseInt(shortInt));
+        });
+
+        timeButtonLongInt.setOnClickListener(v-> {
+            turnOnDeviceForTime(parseInt(longInt));
+        });
+        timeButtonTurnOff.setOnClickListener(v-> {
+            turnOffDevice();
         });
     }
 
@@ -155,8 +182,7 @@ public class DeviceInfo extends AppCompatActivity {
             case "config":
                 String[] parts2 = cleaned.split("@");
                 String place = "";
-                String shortInt = "";
-                String longInt = "";
+
                 String uptime = "";
                 String lastSeen = "";
                 for(String part: parts2){
@@ -166,7 +192,7 @@ public class DeviceInfo extends AppCompatActivity {
                     if(part.startsWith("place1=")){
                         place = part.replace("place1=", "");
                     }else if(part.startsWith("shortInterval1=")){
-                        shortInt = part.replace("shortInt=", "");
+                        shortInt = part.replace("shortInterval1=", "");
                     }else if(part.startsWith("longInterval1=")){
                         longInt = part.replace("longInterval1=", "");
                     }else if(part.startsWith("uptime=")){
@@ -204,4 +230,78 @@ public class DeviceInfo extends AppCompatActivity {
 
         return res;
     }
+    private void turnOnDeviceForTime(int minutes){
+        //Make request to server for changing turn on/off current state for device
+        // and return the new state of device
+        String mins = String.valueOf(minutes);
+
+        apiService.setDeviceState(
+                "iO92iJdwuJwe8Y",
+                mins,
+                deviceId
+        ).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                if (response.body() == null) return;
+                String result = response.body().trim();
+                boolean status = result.equalsIgnoreCase("offline");
+                Log.d("API", "Response: " + result + "; status="+status);
+                Toast.makeText(DeviceInfo.this, "Device is ON for "+minutes+" mins", Toast.LENGTH_SHORT).show();
+//                if(status){
+//                    item.setIsEnabled(false);
+//                    item.setStatus(false);
+//
+//                  //  Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    boolean isOn = result.equalsIgnoreCase("ON");
+//                    item.setIsEnabled(isOn);
+//                    item.setStatus(true);
+//
+//                    //Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
+//
+////                handler.postDelayed(() -> {
+////                    turnOffDevice(item);
+////                }, minutes * 60 * 1000L);
+
+                //}
+                //adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("API", "Network error", t);
+            }
+        });
+    }
+
+    private void turnOffDevice() {
+
+        apiService.setDeviceState(
+                "iO92iJdwuJwe8Y",
+                "off",
+                deviceId
+        ).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(DeviceInfo.this, "Device is OFF", Toast.LENGTH_SHORT).show();
+//                item.setIsEnabled(false);
+//                adapter.notifyDataSetChanged();
+
+//                Toast.makeText(
+//                        MainAct.this,
+//                        "Device turned OFF automatically",
+//                        Toast.LENGTH_SHORT
+//                ).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("API", "Failed to turn OFF", t);
+            }
+        });
+    }
+
 }
