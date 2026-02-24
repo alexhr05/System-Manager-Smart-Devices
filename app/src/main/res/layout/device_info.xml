@@ -1,53 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/timeButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:minHeight="56sp"
-        android:padding="15dp"
-        android:text="Turn Device On"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="15sp"
-        app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintWidth_percent="0.9" />
-
-    <TextView
-        android:id="@+id/TextdeviceDetailsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="10dp"
-        android:text="Device Details"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/backIcon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textdeviceDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="12dp"
-        android:text="Living room lamp"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="32sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
+    <!-- Back Icon (fixed, outside scroll) -->
     <ImageView
         android:id="@+id/backIcon"
         android:layout_width="45dp"
@@ -61,207 +19,590 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_arrow_back_ios_24" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextdeviceDetailsText"
-        app:srcCompat="@drawable/avatar_image" />
-
+    <!-- Device Details Title (fixed, outside scroll) -->
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/TextdeviceDetailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="16dp"
-        android:text="Status:ON"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textdeviceDetails" />
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="10dp"
+        android:text="Device Details"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/backIcon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <!-- Everything else scrolls -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
-        android:weightSum="2"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/TextdeviceDetailsText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timeButton">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="120dp"
-            android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="@color/card_dark"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            app:strokeColor="@color/card_stroke"
-            app:strokeWidth="1dp">
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
 
-            <include layout="@layout/card_last_restart" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="120dp"
-            android:layout_marginStart="8dp"
-            app:cardBackgroundColor="@color/card_dark"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            app:strokeColor="@color/card_stroke"
-            app:strokeWidth="1dp">
-
-            <include layout="@layout/card_signal_strenght" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="409dp"
-        android:layout_height="289dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/containerManualActivation"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="28dp"
-            android:padding="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.90"
-            app:tint="@color/colorPrimary">
-
+            <!-- Device Image -->
             <ImageView
-                android:id="@+id/imgManualActivation"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/touch_manual_device_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/controlPanelManualActivation"
-                android:layout_width="0dp"
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toEndOf="@id/imgManualActivation"
-                app:layout_constraintTop_toTopOf="@id/imgManualActivation"
-                app:layout_constraintWidth_percent="0.55">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/avatar_image" />
+
+            <!-- Device Name -->
+            <TextView
+                android:id="@+id/textdeviceDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Living room lamp"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="32sp" />
+            <TextView
+                android:id="@+id/textDevicePlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Place"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="22sp" />
+
+            <!-- Status -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="Status: ON"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="18sp" />
+
+            <!-- Turn On Button -->
+             <LinearLayout
+                android:id="@+id/linearLayoutButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:weightSum="2">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/timeButtonShortInt"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:minHeight="56sp"
+                    android:padding="15dp"
+                    android:layout_weight="1"
+                    android:text="Turn On (short interval)"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="15sp"
+                    app:cornerRadius="8dp" />
+
+                 <com.google.android.material.button.MaterialButton
+                     android:id="@+id/timeButtonLongInt"
+                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_marginStart="16dp"
+                     android:layout_marginTop="12dp"
+                     android:layout_marginEnd="16dp"
+                     android:minHeight="56sp"
+                     android:padding="15dp"
+                     android:layout_weight="1"
+                     android:text="Turn On (long interval)"
+                     android:textColor="?attr/colorOnSurface"
+                     android:textSize="15sp"
+                     app:cornerRadius="8dp" />
+
+             </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/timeButtonTurnOff"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:minHeight="56sp"
+                android:padding="15dp"
+                android:text="Turn Device Off"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="15sp"
+                app:cornerRadius="8dp" />
+            <!-- Last Restart + Signal Cards -->
+            <LinearLayout
+                android:id="@+id/linearLayoutCardElements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:weightSum="2">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:minHeight="120dp"
+                    app:cardBackgroundColor="@color/card_dark"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:strokeColor="@color/card_stroke"
+                    app:strokeWidth="1dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <!-- Header -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            >
+                            <ImageView
+                                android:id="@+id/icon"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/restart_image"
+                                app:tint="@color/blue_accent"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/titleText"
+                                android:layout_marginStart="8dp"
+                                android:text="LAST RESTART"
+                                android:textSize="12sp"
+                                android:letterSpacing="0.08"
+                                android:textColor="@color/text_secondary_dark" />
+                        </LinearLayout>
+                        <!-- Date -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dateText"
+                            android:layout_marginTop="14dp"
+                            android:text="Oct 24"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary_dark"/>
+
+                        <!-- Time -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/timeText"
+                            android:layout_marginTop="12dp"
+                            android:text="14:20 PM"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary_dark"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:minHeight="120dp"
+                    app:cardBackgroundColor="@color/card_dark"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:strokeColor="@color/card_stroke"
+                    app:strokeWidth="1dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!-- Header -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/wifiIcon"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/wifi_image"
+                                app:tint="@color/blue_accent" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:letterSpacing="0.08"
+                                android:text="SIGNAL STRENGTH"
+                                android:textColor="@color/text_secondary_dark"
+                                android:textSize="12sp"
+                                />
+                        </LinearLayout>
+
+                        <!-- Percentage -->
+                        <TextView
+                            android:id="@+id/percantages"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="97%"
+                            android:textColor="@color/text_primary_dark"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <!-- Bars -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="bottom"
+                            android:orientation="horizontal">
+
+                            <View
+                                style="@style/SignalBar"
+                                android:layout_height="6dp" />
+
+                            <View
+                                style="@style/SignalBar"
+                                android:layout_height="10dp" />
+
+                            <View
+                                style="@style/SignalBar"
+                                android:layout_height="14dp" />
+
+                            <View
+                                style="@style/SignalBar"
+                                android:layout_height="18dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Activity Log Title -->
+            <TextView
+                android:id="@+id/textdeviceDetails3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Activity log"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Manual Activation Row -->
+            <LinearLayout
+                android:id="@+id/containerManualActivation"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgManualActivation"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/touch_manual_device_icon"
+                    app:tint="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewManualActivation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Manual Activation"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewTimeManualActivation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 mins ago"
+                        android:textColor="#8FA3AD"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- Scheduled Off Row -->
+            <LinearLayout
+                android:id="@+id/containerScheduledOff"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgClock"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/timer_off_icon"
+                    app:tint="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewScheduledOff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Scheduled Off"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="08:00 AM"
+                        android:textColor="#8FA3AD"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Schedules Title -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp">
 
                 <TextView
-                    android:id="@+id/textViewManualActivation"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:autoSizeStepGranularity="2sp"
-                    android:autoSizeTextType="uniform"
-                    android:text="Manual Activation"
-                    android:textColor="#8FA3AD"
-                    android:textSize="30sp"
+                    android:text="Schedules"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewTimeManualActivation"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="14sp"
-                    android:autoSizeMinTextSize="8sp"
-                    android:text="2 ming ago" />
+                    android:id="@+id/tvEditSchedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
 
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textdeviceDetails3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="Activity log"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/containerScheduledOff"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="28dp"
-            android:padding="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/containerManualActivation"
-            app:layout_constraintWidth_percent="0.90"
-            app:tint="@color/colorPrimary">
-
-            <ImageView
-                android:id="@+id/imgClock"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/timer_off_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/controlPanelInfo"
-                android:layout_width="0dp"
+            <!-- Schedules Table Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toEndOf="@id/imgClock"
-                app:layout_constraintTop_toTopOf="@id/imgClock"
-                app:layout_constraintWidth_percent="0.55">
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardBackgroundColor="@color/card_dark"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:strokeColor="@color/card_stroke"
+                app:strokeWidth="1dp">
 
-                <TextView
-                    android:id="@+id/textViewScheduledOff"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:autoSizeStepGranularity="2sp"
-                    android:autoSizeTextType="uniform"
-                    android:text="Scheduled Off"
-                    android:textColor="#8FA3AD"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/textViewTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="14sp"
-                    android:autoSizeMinTextSize="8sp"
-                    android:text="08:00 AM" />
+                    <!-- Table Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="START"
+                            android:textColor="#8FA3AD"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="END"
+                            android:textColor="#8FA3AD"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="DURATION"
+                            android:textColor="#8FA3AD"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <!-- Header Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/divider_color" />
+
+                    <!-- Row 1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textViewStartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="06:00 AM"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textViewTimeEnd1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="08:30 AM"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewDuration1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2h 30m"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <!-- Row Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@color/divider_color" />
+
+                    <!-- Row 2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textViewStartTime2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="06:30 PM"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textViewTimeEnd2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="11:00 PM"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewDuration2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="4h 30m"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

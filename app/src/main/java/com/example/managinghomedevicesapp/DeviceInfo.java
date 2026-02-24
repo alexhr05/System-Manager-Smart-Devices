@@ -1,5 +1,7 @@
 package com.example.managinghomedevicesapp;
 
+import static java.lang.Integer.parseInt;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -17,6 +19,20 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class DeviceInfo extends AppCompatActivity {
     private ApiService apiService;
+    private TextView textViewStartTime;
+
+    private TextView textViewStartTime2;
+    private TextView textViewTimeEnd1;
+    private TextView textViewTimeEnd2;
+
+    private TextView textViewDuration1;
+    private TextView textViewDuration2;
+    private TextView textDevicePlace;
+    //Short interval turn on device
+    private String shortInt = "";
+    //Long interval turn on device
+    private String longInt = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +45,16 @@ public class DeviceInfo extends AppCompatActivity {
 
         apiService = retrofit.create(ApiService.class);
 
-        fetchTimerConfig("daytimer");
-        //fetchTimerConfig("config");
+        textDevicePlace = findViewById(R.id.textDevicePlace);
+
+        textViewStartTime = findViewById(R.id.textViewStartTime);
+        textViewStartTime2 = findViewById(R.id.textViewStartTime2);
+        textViewTimeEnd1 = findViewById(R.id.textViewTimeEnd1);
+        textViewTimeEnd2 = findViewById(R.id.textViewTimeEnd2);
+        textViewDuration1 = findViewById(R.id.textViewDuration1);
+        textViewDuration2 = findViewById(R.id.textViewDuration2);
+
+
 
         TextView textView = findViewById(R.id.textdeviceDetails);
         ImageView backIcon = findViewById(R.id.backIcon);
@@ -39,6 +63,10 @@ public class DeviceInfo extends AppCompatActivity {
         String deviceName = getIntent().getStringExtra("device_name");
         String deviceIp = getIntent().getStringExtra("device_ip");
         boolean isOnline = getIntent().getBooleanExtra("device_status", false);
+        String deviceMacAddress = getIntent().getStringExtra("device_mac_address");
+
+        fetchTimerConfig("daytimer", deviceMacAddress);
+        fetchTimerConfig("config", deviceMacAddress);
 
         textView.setText(deviceName);
 
@@ -52,7 +80,7 @@ public class DeviceInfo extends AppCompatActivity {
     }
 
     //
-    private void fetchTimerConfig(String needParams){
+    private void fetchTimerConfig(String needParams, String deviceMacAddress){
         apiService.getTimerConfig(
 
                 "Fekm8Y3j6M43",
@@ -107,6 +135,14 @@ public class DeviceInfo extends AppCompatActivity {
                     }
                 }
 
+
+                textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
+                textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
+                textViewTimeEnd1.setText(minutesToTime(parseInt(onTime1) + parseInt(duration1)));
+                textViewTimeEnd2.setText(minutesToTime(parseInt(onTime2) + parseInt(duration2)));
+                textViewDuration1.setText(minutesToTime(parseInt(duration1)));
+                textViewDuration2.setText(minutesToTime(parseInt(duration2)));
+
                 Log.d("Timer", "onTime1: " + onTime1);    // 1305
                 Log.d("Timer", "duration1: " + duration1); // 0
                 Log.d("Timer", "onTime2: " + onTime2);    // 1315
@@ -117,11 +153,55 @@ public class DeviceInfo extends AppCompatActivity {
                 Toast.makeText(DeviceInfo.this, "Day Timer "+response, Toast.LENGTH_SHORT).show();
                 break;
             case "config":
+                String[] parts2 = cleaned.split("@");
+                String place = "";
+                String shortInt = "";
+                String longInt = "";
+                String uptime = "";
+                String lastSeen = "";
+                for(String part: parts2){
+                    part = part.trim();
+                    if(part.isEmpty())
+                        continue;
+                    if(part.startsWith("place1=")){
+                        place = part.replace("place1=", "");
+                    }else if(part.startsWith("shortInterval1=")){
+                        shortInt = part.replace("shortInt=", "");
+                    }else if(part.startsWith("longInterval1=")){
+                        longInt = part.replace("longInterval1=", "");
+                    }else if(part.startsWith("uptime=")){
+                        uptime = part.replace("uptime=", "");
+                    }else if(part.startsWith("last_time_seen=")){
+                        lastSeen = part.replace("last_time_seen=", "");
+                    }
+                }
+                if(place.equalsIgnoreCase("vilata")){
+                    textDevicePlace.setText("Vilata");
+                }else{
+                    textDevicePlace.setText("Home");
+                }
+
+
+
+
                 Toast.makeText(DeviceInfo.this, "Config "+response, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(DeviceInfo.this, "Unknown type "+response, Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private String minutesToTime(int totalMinutes){
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        // % - start of placeholder
+        // 0 - if number is short, add 0 infront
+        // 2 - minimum 2 digits wide
+        // d - value is integer
+        String res = String.format("%02d:%02d",hours, minutes);
+
+        return res;
     }
 }

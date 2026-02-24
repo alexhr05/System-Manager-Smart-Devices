@@ -44,6 +44,7 @@
     <color name="toggle_selected">#FFFFFF</color>
     <color name="toggle_text_selected">#111827</color>
     <color name="toggle_text_unselected">#6B7280</color>
+    <color name="divider_color">#000000</color>
 
 
 </resources>

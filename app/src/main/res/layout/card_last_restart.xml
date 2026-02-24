@@ -23,7 +23,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/restart_image"
-                android:tint="@color/blue_accent"
+                app:tint="@color/blue_accent"
                 />
                 <TextView
                     android:layout_width="match_parent"

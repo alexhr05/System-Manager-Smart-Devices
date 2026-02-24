@@ -137,6 +137,7 @@ public class MainAct extends AppCompatActivity {
             intent.putExtra("device_name", item.getTitle());
             intent.putExtra("device_ip", item.getIp());
             intent.putExtra("device_status", item.getStatus());
+            intent.putExtra("device_mac_address", item.getMacAddress());
 
             startActivity(intent);
 

@@ -26,5 +26,5 @@
     <color name="toggle_selected">#111827</color>
     <color name="toggle_text_selected">#FFFFFF</color>
     <color name="toggle_text_unselected">#9CA3AF</color>
-
+    <color name="divider_color">#FFFFFF</color>
 </resources>
