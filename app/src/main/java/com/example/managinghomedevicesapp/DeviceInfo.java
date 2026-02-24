@@ -65,7 +65,7 @@ public class DeviceInfo extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     String res = response.body().trim();
-                    Log.d("Timerawadawd", "Response: " + response);
+                    Log.d("TIMER RESPONSE", "Response: " + res);
                     Toast.makeText(DeviceInfo.this, ""+res, Toast.LENGTH_SHORT).show();
                     handleTimerResponse(needParams, res);
                 }
