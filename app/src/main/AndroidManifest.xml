@@ -31,6 +31,8 @@
 
         <activity android:name=".DeviceInfo"/>
 
+
+
     </application>
 
 </manifest>

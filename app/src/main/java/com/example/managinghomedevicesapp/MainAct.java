@@ -32,7 +32,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class MainAct extends AppCompatActivity {
     private ApiService apiService;
     private CardAdapter adapter;
-    private List<CardItem> devices;
+//    private List<CardItem> devices;
     private List<CardItem> visibleDevices;
     private TextView textView;
 
@@ -52,7 +52,7 @@ public class MainAct extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
         btnVilata = findViewById(R.id.btnVilata);
 
-        devices = new ArrayList<>();
+        AppData.devices = new ArrayList<>();
         visibleDevices = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -95,10 +95,10 @@ public class MainAct extends AppCompatActivity {
                         boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
                         boolean statusBoolean = status.equalsIgnoreCase("ONLINE");
 
-                        devices.add(new CardItem(id, name, ip, macAddress, enabledOnOff, statusBoolean, place));
+                        AppData.devices.add(new CardItem(id, name, ip, macAddress, enabledOnOff, statusBoolean, place));
 
                     }
-                    Log.d("AllDevices","Devices AllSize="+devices.size());
+                    Log.d("AllDevices","Devices AllSize="+AppData.devices.size());
                     adapter.notifyDataSetChanged();
 
                     SelectedButton(btnHome);
@@ -150,7 +150,7 @@ public class MainAct extends AppCompatActivity {
         btnVilata.setText(textVilata);
 
         btnHome.setOnClickListener(v -> {
-            Log.d("AllDevices","Home click AllSize="+devices.size());
+            Log.d("AllDevices","Home click AllSize="+AppData.devices.size());
             SelectedButton(btnHome);
             Toast.makeText(
                     MainAct.this,
@@ -160,7 +160,7 @@ public class MainAct extends AppCompatActivity {
         });
 
         btnVilata.setOnClickListener(v -> {
-            Log.d("AllDevices","VIlata click AllSize="+devices.size());
+            Log.d("AllDevices","VIlata click AllSize="+AppData.devices.size());
             SelectedButton(btnVilata);
             //showPlace(textVilata);
             Toast.makeText(
@@ -169,9 +169,18 @@ public class MainAct extends AppCompatActivity {
                     Toast.LENGTH_SHORT
             ).show();
         });
-
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // refresh the list every time you come back to this page
+//        devices.clear();
+//        devices.addAll(AppData.devices);
+        showPlace("Home");
+        adapter.notifyDataSetChanged();
+    }
+
 
     private void SelectedButton(MaterialButton button){
         // Prevent reselecting the same button
@@ -208,7 +217,7 @@ public class MainAct extends AppCompatActivity {
 
     private void showPlace(String place) {
         visibleDevices.clear();
-        for (CardItem item : devices) {
+        for (CardItem item : AppData.devices) {
             if (item.getPlace().equalsIgnoreCase(place)) {
                 visibleDevices.add(item);
             }
