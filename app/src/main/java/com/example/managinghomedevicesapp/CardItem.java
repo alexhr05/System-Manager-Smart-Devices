@@ -63,6 +63,16 @@ public class CardItem {
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
     }
+
+    public void setLastActivation(int lastActivation) {
+        this.lastActivation = lastActivation;
+    }
+    public void setWifiNetwork(String wifiNetwork) {
+        this.wifiNetwork = wifiNetwork;
+    }
+    public void setSignalStrength(String signalStrength) {
+        this.signalStrength = signalStrength;
+    }
     public int getId() {
         return id;
     }
@@ -86,6 +96,16 @@ public class CardItem {
 
     public String getMacAddress() {
         return macAddress;
+    }
+
+    public int getLastActivation() {
+        return lastActivation;
+    }
+    public String getWifiNetwork() {
+        return wifiNetwork;
+    }
+    public String getSignalStrength() {
+        return signalStrength;
     }
 
 }

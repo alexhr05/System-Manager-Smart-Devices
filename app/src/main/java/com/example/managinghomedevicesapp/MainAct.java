@@ -80,7 +80,7 @@ public class MainAct extends AppCompatActivity {
 
                         String[] parts = row.split(",");
 
-                        if (parts.length < 7) continue;
+                        if (parts.length < 10) continue;
 
                         int id = Integer.parseInt(parts[0].trim());
                         String name = parts[1].trim();
@@ -89,12 +89,17 @@ public class MainAct extends AppCompatActivity {
                         String turnOnOff = parts[4].trim();
                         String status = parts[5].trim();
                         String place = parts[6].trim();
+                        int lastActivation = parts[7].isEmpty() ? -1: Integer.parseInt(parts[7].trim());
+                        Log.d("AllDevices", "lastActivation=" + lastActivation);
+                        String wifiNetwork = parts[8].trim();
+                        String signalStrength = parts[9].trim();
 
 
                         boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
                         boolean statusBoolean = status.equalsIgnoreCase("ONLINE");
 
-                        AppData.devices.add(new CardItem(id, name, ip, macAddress, enabledOnOff, statusBoolean, place));
+                        AppData.devices.add(new CardItem(id, name, ip, macAddress, enabledOnOff, statusBoolean,
+                                place, lastActivation, wifiNetwork, signalStrength));
 
                     }
                     Log.d("AllDevices", "Devices AllSize=" + AppData.devices.size());
