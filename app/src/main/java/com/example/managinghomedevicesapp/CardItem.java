@@ -16,9 +16,15 @@ public class CardItem {
 
     private String place;
 
+    private int lastActivation;
+    private String wifiNetwork;
+    private String signalStrength;
 
-
-    public CardItem(int id, String title, String ip, String macAddress, boolean isEnabled, boolean status, String place) {
+    public CardItem(int id, String title, String ip, String macAddress, boolean isEnabled, boolean status, String place,
+        int lastActivation,
+        String wifiNetwork,
+        String signalStrength
+    ) {
         this.id = id;
         this.title = title;
         this.ip = ip;
@@ -26,6 +32,11 @@ public class CardItem {
         this.isEnabled = isEnabled;
         this.status = status;
         this.place = place;
+        this.lastActivation = lastActivation;
+        this.wifiNetwork = wifiNetwork;
+        this.signalStrength = signalStrength;
+
+
 
     }
 
