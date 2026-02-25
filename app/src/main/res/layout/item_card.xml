@@ -16,7 +16,6 @@
         android:padding="8dp"
         >
 
-
         <TextView
             android:id="@+id/cardTitle"
             android:layout_width="0dp"

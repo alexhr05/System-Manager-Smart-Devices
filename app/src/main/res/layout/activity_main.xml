@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="?android:attr/colorBackground"
     >
 
 
@@ -96,7 +95,7 @@
             app:rippleColor="@android:color/transparent"
             app:shapeAppearanceOverlay="@style/ToggleButtonShape"
             app:strokeWidth="0dp"
-            app:backgroundTintMode="src_in"/>
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVilata"
@@ -113,7 +112,7 @@
             app:rippleColor="@android:color/transparent"
             app:shapeAppearanceOverlay="@style/ToggleButtonShape"
             app:strokeWidth="0dp"
-            app:backgroundTintMode="src_in"/>
+            />
 
     </LinearLayout>
 

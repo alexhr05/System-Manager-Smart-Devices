@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="Status: ON"
+                android:text=""
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="18sp" />
 
@@ -165,11 +165,12 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:minHeight="120dp"
-                    app:cardBackgroundColor="@color/card_dark"
+                    app:backgroundTint="@color/toggle_bg_selector"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
                     app:strokeColor="@color/card_stroke"
                     app:strokeWidth="1dp">
+<!--                    app:cardBackgroundColor="@color/card_dark"-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -196,8 +197,8 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/titleText"
                                 android:layout_marginStart="8dp"
-                                android:text="LAST RESTART"
-                                android:textSize="12sp"
+                                android:text="UP TIME"
+                                android:textSize="14sp"
                                 android:letterSpacing="0.08"
                                 android:textColor="@color/text_secondary_dark" />
                         </LinearLayout>
@@ -210,17 +211,17 @@
                             android:text="Oct 24"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary_dark"/>
+                            android:textColor="@color/colorTextPrimary"/>
 
                         <!-- Time -->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/timeText"
-                            android:layout_marginTop="12dp"
-                            android:text="14:20 PM"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_secondary_dark"/>
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:id="@+id/timeText"-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:text="14:20 PM"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:textColor="@color/text_secondary_dark"/>-->
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -230,7 +231,8 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:minHeight="120dp"
-                    app:cardBackgroundColor="@color/card_dark"
+                    app:backgroundTint="@color/toggle_bg_selector"
+
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
                     app:strokeColor="@color/card_stroke"
@@ -275,7 +277,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="97%"
-                            android:textColor="@color/text_primary_dark"
+                            android:textColor="@color/colorTextPrimary"
                             android:textSize="22sp"
                             android:textStyle="bold" />
 
@@ -369,48 +371,43 @@
 
 
             <!-- Scheduled Off Row -->
-            <LinearLayout
-                android:id="@+id/containerScheduledOff"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/containerScheduledOff"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="64dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:id="@+id/imgClock"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:src="@drawable/timer_off_icon"
-                    app:tint="@color/colorPrimary" />
+<!--               -->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="12dp"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_marginStart="12dp"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/textViewScheduledOff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Scheduled Off"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textViewScheduledOff"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Scheduled Off"-->
+<!--                        android:textColor="?attr/colorOnSurface"-->
+<!--                        android:textSize="14sp"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <TextView
-                        android:id="@+id/textViewTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="08:00 AM"
-                        android:textColor="#8FA3AD"
-                        android:textSize="12sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textViewTime"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="08:00 AM"-->
+<!--                        android:textColor="#8FA3AD"-->
+<!--                        android:textSize="12sp" />-->
 
-                </LinearLayout>
-            </LinearLayout>
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
 
             <!-- Schedules Title -->
             <LinearLayout
@@ -423,6 +420,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="12dp">
 
+                <ImageView
+                    android:id="@+id/imgClock"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/timer_off_icon"
+                    app:tint="@color/colorPrimary" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -432,13 +436,13 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvEditSchedule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvEditSchedule"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Edit"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="14sp" />-->
 
             </LinearLayout>
 

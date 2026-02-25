@@ -32,7 +32,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class MainAct extends AppCompatActivity {
     private ApiService apiService;
     private CardAdapter adapter;
-//    private List<CardItem> devices;
+    //    private List<CardItem> devices;
     private List<CardItem> visibleDevices;
     private TextView textView;
 
@@ -40,11 +40,11 @@ public class MainAct extends AppCompatActivity {
     private MaterialButton btnVilata;
     private MaterialButton selectedButton = null;
     private RecyclerView recyclerView;
-
     private String textHome = "Home";
     private String textVilata = "Vilata";
     //private CardAdapter.RecyclerViewClickListner recyclerListner;
     private final Handler handler = new Handler(Looper.getMainLooper());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +60,11 @@ public class MainAct extends AppCompatActivity {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
-
         apiService = retrofit.create(ApiService.class);
 
         apiService.getAllTimers("iO92iJdwuJwe8Y",
                 "showAllTimers"
-        ).enqueue(new retrofit2.Callback<String>(){
+        ).enqueue(new retrofit2.Callback<String>() {
 
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -98,7 +97,7 @@ public class MainAct extends AppCompatActivity {
                         AppData.devices.add(new CardItem(id, name, ip, macAddress, enabledOnOff, statusBoolean, place));
 
                     }
-                    Log.d("AllDevices","Devices AllSize="+AppData.devices.size());
+                    Log.d("AllDevices", "Devices AllSize=" + AppData.devices.size());
                     adapter.notifyDataSetChanged();
 
                     SelectedButton(btnHome);
@@ -112,7 +111,7 @@ public class MainAct extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainAct.this, "Network error="+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainAct.this, "Network error=" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -128,29 +127,29 @@ public class MainAct extends AppCompatActivity {
 
             @Override
             public void onTurnOnForTime(CardItem item, int minutes) {
-                turnOnDeviceForTime(item,minutes);
+                turnOnDeviceForTime(item, minutes);
             }
         },
-        item ->{
-            Intent intent = new Intent(MainAct.this, DeviceInfo.class);
-            intent.putExtra("device_id",item.getId());
-            intent.putExtra("device_name", item.getTitle());
-            intent.putExtra("device_ip", item.getIp());
-            intent.putExtra("device_status", item.getStatus());
-            intent.putExtra("device_mac_address", item.getMacAddress());
+                item -> {
+                    Intent intent = new Intent(MainAct.this, DeviceInfo.class);
+                    intent.putExtra("device_id", item.getId());
+                    intent.putExtra("device_name", item.getTitle());
+                    intent.putExtra("device_ip", item.getIp());
+                    intent.putExtra("device_is_enabled", item.getIsEnabled());
+                    intent.putExtra("device_status", item.getStatus());
+                    intent.putExtra("device_mac_address", item.getMacAddress());
 
-            startActivity(intent);
+                    startActivity(intent);
 
-        });
+                });
 
         recyclerView.setAdapter(adapter);
-
 
         btnHome.setText(textHome);
         btnVilata.setText(textVilata);
 
         btnHome.setOnClickListener(v -> {
-            Log.d("AllDevices","Home click AllSize="+AppData.devices.size());
+            Log.d("AllDevices", "Home click AllSize=" + AppData.devices.size());
             SelectedButton(btnHome);
             Toast.makeText(
                     MainAct.this,
@@ -160,7 +159,7 @@ public class MainAct extends AppCompatActivity {
         });
 
         btnVilata.setOnClickListener(v -> {
-            Log.d("AllDevices","VIlata click AllSize="+AppData.devices.size());
+            Log.d("AllDevices", "VIlata click AllSize=" + AppData.devices.size());
             SelectedButton(btnVilata);
             //showPlace(textVilata);
             Toast.makeText(
@@ -175,14 +174,27 @@ public class MainAct extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // refresh the list every time you come back to this page
-//        devices.clear();
-//        devices.addAll(AppData.devices);
+        int deviceId = getIntent().getIntExtra("device_id", -1);
+        String deviceName = getIntent().getStringExtra("device_name");
+        String deviceIp = getIntent().getStringExtra("device_ip");
+        boolean isEnabled = getIntent().getBooleanExtra("device_is_enabled", false);
+        boolean isOnline = getIntent().getBooleanExtra("device_status", false);
+        String deviceMacAddress = getIntent().getStringExtra("device_mac_address");
+
+        for (CardItem device : AppData.devices) {
+            if (device.getId() == deviceId) {
+                device.setTitle(deviceName);
+                device.setIp(deviceIp);
+                device.setIsEnabled(isEnabled);
+                device.setStatus(isOnline);
+                device.setMacAddress(deviceMacAddress);
+            }
+        }
         showPlace("Home");
         adapter.notifyDataSetChanged();
     }
 
-
-    private void SelectedButton(MaterialButton button){
+    private void SelectedButton(MaterialButton button) {
         // Prevent reselecting the same button
         if (button == selectedButton) return;
 
@@ -196,7 +208,7 @@ public class MainAct extends AppCompatActivity {
         // Select New
         button.setChecked(true);
         button.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.toggle_selected)));
-        button.setTextColor(ContextCompat.getColor(this,R.color.toggle_text_selected));
+        button.setTextColor(ContextCompat.getColor(this, R.color.toggle_text_selected));
         selectedButton = button;
 
         // React to which button is selected
@@ -242,13 +254,13 @@ public class MainAct extends AppCompatActivity {
 
                 String result = response.body().trim();
                 boolean status = result.equalsIgnoreCase("offline");
-                Log.d("API", "Response: " + result + "; status="+status);
-                if(status){
+                Log.d("API", "Response: " + result + "; status=" + status);
+                if (status) {
                     item.setIsEnabled(false);
                     item.setStatus(false);
 
                     Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     boolean newState = result.equalsIgnoreCase("ON");
                     item.setStatus(true);
                     //Set new state for switch
@@ -265,7 +277,7 @@ public class MainAct extends AppCompatActivity {
         });
     }
 
-    private void turnOnDeviceForTime(CardItem item, int minutes){
+    private void turnOnDeviceForTime(CardItem item, int minutes) {
         //Make request to server for changing turn on/off current state for device
         // and return the new state of device
         String mins = String.valueOf(minutes);
@@ -282,17 +294,17 @@ public class MainAct extends AppCompatActivity {
                 if (response.body() == null) return;
                 String result = response.body().trim();
                 boolean status = result.equalsIgnoreCase("offline");
-                if(status){
+                if (status) {
                     item.setIsEnabled(false);
                     item.setStatus(false);
 
                     Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     boolean isOn = result.equalsIgnoreCase("ON");
                     item.setIsEnabled(isOn);
                     item.setStatus(true);
 
-                    Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainAct.this, "Device is turn on for " + mins + " minutes", Toast.LENGTH_SHORT).show();
 
 //                handler.postDelayed(() -> {
 //                    turnOffDevice(item);
