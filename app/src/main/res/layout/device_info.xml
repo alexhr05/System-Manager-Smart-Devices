@@ -27,7 +27,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="10dp"
         android:text="Device Details"
-        android:textColor="@color/black"
+        android:textColor="@color/colorTextPrimary"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/backIcon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -167,7 +167,7 @@
                     android:minHeight="120dp"
                     app:backgroundTint="@color/toggle_bg_selector"
                     app:cardCornerRadius="20dp"
-                    app:cardElevation="8dp"
+                    app:cardElevation="4dp"
                     app:strokeColor="@color/card_stroke"
                     app:strokeWidth="1dp">
 <!--                    app:cardBackgroundColor="@color/card_dark"-->
@@ -232,9 +232,8 @@
                     android:layout_marginStart="8dp"
                     android:minHeight="120dp"
                     app:backgroundTint="@color/toggle_bg_selector"
-
                     app:cardCornerRadius="20dp"
-                    app:cardElevation="8dp"
+                    app:cardElevation="4dp"
                     app:strokeColor="@color/card_stroke"
                     app:strokeWidth="1dp">
                     <LinearLayout
@@ -452,7 +451,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:cardBackgroundColor="@color/card_dark"
+                app:cardBackgroundColor="@color/toggle_bg_selector"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
                 app:strokeColor="@color/card_stroke"
@@ -468,7 +467,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        app:cardBackgroundColor="@color/toggle_bg_selector">
 
                         <TextView
                             android:layout_width="0dp"
@@ -510,7 +510,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginBottom="12dp"
+                        app:cardBackgroundColor="@color/toggle_bg_selector">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -523,7 +524,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="06:00 AM"
-                                android:textColor="@color/white"
+                                android:textColor="@color/colorTextPrimary"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
@@ -535,7 +536,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="08:30 AM"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -545,7 +546,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="2h 30m"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -575,7 +576,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="06:30 PM"
-                                android:textColor="@color/white"
+                                android:textColor="@color/colorTextPrimary"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
@@ -587,7 +588,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="11:00 PM"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -597,7 +598,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="4h 30m"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorTextPrimary"
                             android:textSize="14sp" />
 
                     </LinearLayout>
