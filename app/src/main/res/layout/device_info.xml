@@ -87,7 +87,7 @@
                 android:gravity="center"
                 android:text="Status"
                 android:textStyle="bold"
-                android:textColor="@color/statusText"
+                android:textColor="@color/utilitesElementsBlue"
                 android:textSize="20sp" />
 
             <!-- Turn On Button -->
@@ -116,7 +116,12 @@
                     android:text="Turn On"
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="15sp"
-                    app:cornerRadius="8dp" />
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/short_interval_image"
+                    app:iconGravity="textStart"
+                    app:iconSize="30dp"
+                    app:iconTint="@color/utilitesElementsBlue"
+                    app:iconPadding="8dp"/>
 
                  <com.google.android.material.button.MaterialButton
                      android:id="@+id/timeButtonLongInt"
@@ -130,10 +135,15 @@
                      android:minHeight="56sp"
                      android:padding="15dp"
                      android:layout_weight="1"
-                     android:text="Turn On (long interval)"
+                     android:text="Turn On"
                      android:textColor="?attr/colorOnSurface"
                      android:textSize="15sp"
-                     app:cornerRadius="8dp" />
+                     app:cornerRadius="8dp"
+                     app:icon="@drawable/long_interval_image"
+                     app:iconGravity="textStart"
+                     app:iconSize="30dp"
+                     app:iconTint="@color/utilitesElementsBlue"
+                     app:iconPadding="8dp"/>
 
              </LinearLayout>
             <com.google.android.material.button.MaterialButton

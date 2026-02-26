@@ -109,7 +109,7 @@ public class DeviceInfo extends AppCompatActivity {
         } else {
             textViewStatus.setText("Status: OFFLINE");
         }
-        textViewNetworkName.setText("NETWORK: "+deviceWifiNetwork);
+        textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
         fetchTimerConfig("daytimer", deviceMacAddress);
         fetchTimerConfig("config", deviceMacAddress);
@@ -254,8 +254,8 @@ public class DeviceInfo extends AppCompatActivity {
                     textDevicePlace.setText("Place: Home");
 
                 }
-                timeButtonShortInt.setText("TURN ON FOR "+shortInt);
-                timeButtonLongInt.setText("TURN ON FOR "+longInt);
+                timeButtonShortInt.setText(shortInt + " mins");
+                timeButtonLongInt.setText(longInt + " mins");
 
                 dateText.setText(uptime);
 

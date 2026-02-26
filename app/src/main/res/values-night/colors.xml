@@ -30,6 +30,6 @@
 
     <!-- For Device info page-->
     <color name="turnOffBtn">#262025</color>
-    <color name="statusText">#019FE7</color>
+    <color name="utilitesElementsBlue">#019FE7</color>
 
 </resources>
