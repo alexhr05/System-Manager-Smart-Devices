@@ -13,9 +13,7 @@ public class CardItem {
     // 0 - offline
     // 1 - online
     private boolean status;
-
     private String place;
-
     private int lastActivation;
     private String wifiNetwork;
     private String signalStrength;
@@ -35,9 +33,6 @@ public class CardItem {
         this.lastActivation = lastActivation;
         this.wifiNetwork = wifiNetwork;
         this.signalStrength = signalStrength;
-
-
-
     }
 
     public void setId(int id) {

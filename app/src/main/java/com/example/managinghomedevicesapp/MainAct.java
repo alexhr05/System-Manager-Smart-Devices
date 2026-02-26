@@ -143,6 +143,9 @@ public class MainAct extends AppCompatActivity {
                     intent.putExtra("device_is_enabled", item.getIsEnabled());
                     intent.putExtra("device_status", item.getStatus());
                     intent.putExtra("device_mac_address", item.getMacAddress());
+                    intent.putExtra("device_last_activation", item.getLastActivation());
+                    intent.putExtra("device_wifi_network", item.getWifiNetwork());
+                    intent.putExtra("device_signal_strength", item.getSignalStrength());
 
                     startActivity(intent);
 

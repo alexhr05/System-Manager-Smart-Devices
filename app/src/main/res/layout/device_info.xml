@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
     <!-- Back Icon (fixed, outside scroll) -->
+
+
     <ImageView
         android:id="@+id/backIcon"
         android:layout_width="45dp"
@@ -18,19 +20,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_arrow_back_ios_24" />
-
-    <!-- Device Details Title (fixed, outside scroll) -->
     <TextView
         android:id="@+id/TextdeviceDetailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="8dp"
         android:text="Device Details"
         android:textColor="@color/colorTextPrimary"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/backIcon"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- Device Details Title (fixed, outside scroll) -->
 
     <!-- Everything else scrolls -->
     <androidx.core.widget.NestedScrollView
@@ -66,7 +67,7 @@
                 android:gravity="center"
                 android:text="Living room lamp"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="32sp" />
+                android:textSize="28sp" />
             <TextView
                 android:id="@+id/textDevicePlace"
                 android:layout_width="match_parent"
@@ -79,13 +80,15 @@
             <!-- Status -->
             <TextView
                 android:id="@+id/textViewStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text=""
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="18sp" />
+                android:gravity="center"
+                android:text="Status"
+                android:textStyle="bold"
+                android:textColor="@color/statusText"
+                android:textSize="20sp" />
 
             <!-- Turn On Button -->
              <LinearLayout
@@ -110,7 +113,7 @@
                     android:minHeight="56sp"
                     android:padding="15dp"
                     android:layout_weight="1"
-                    android:text="Turn On (short interval)"
+                    android:text="Turn On"
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="15sp"
                     app:cornerRadius="8dp" />
@@ -145,9 +148,10 @@
                 android:minHeight="56sp"
                 android:padding="15dp"
                 android:text="Turn Device Off"
-                android:textColor="?attr/colorOnSurface"
+                android:textColor="@color/turnOffBtnText"
                 android:textSize="15sp"
-                app:cornerRadius="8dp" />
+                app:backgroundTint="@color/turnOffBtn"
+                app:cornerRadius="14dp" />
             <!-- Last Restart + Signal Cards -->
             <LinearLayout
                 android:id="@+id/linearLayoutCardElements"
@@ -259,19 +263,20 @@
                                 app:tint="@color/blue_accent" />
 
                             <TextView
+                                android:id="@+id/textViewNetworkName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:letterSpacing="0.08"
-                                android:text="SIGNAL STRENGTH"
+                                android:text="NETWORK"
                                 android:textColor="@color/text_secondary_dark"
-                                android:textSize="12sp"
+                                android:textSize="14sp"
                                 />
                         </LinearLayout>
 
                         <!-- Percentage -->
                         <TextView
-                            android:id="@+id/percantages"
+                            android:id="@+id/textViewSignalStrength"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
@@ -451,7 +456,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:cardBackgroundColor="@color/toggle_bg_selector"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
                 app:strokeColor="@color/card_stroke"

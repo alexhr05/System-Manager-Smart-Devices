@@ -27,4 +27,9 @@
     <color name="toggle_text_selected">#FFFFFF</color>
     <color name="toggle_text_unselected">#9CA3AF</color>
     <color name="divider_color">#FFFFFF</color>
+
+    <!-- For Device info page-->
+    <color name="turnOffBtn">#262025</color>
+    <color name="statusText">#019FE7</color>
+
 </resources>

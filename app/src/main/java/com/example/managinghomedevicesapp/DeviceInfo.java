@@ -33,7 +33,8 @@ public class DeviceInfo extends AppCompatActivity {
     private TextView textDevicePlace;
     private TextView textViewStatus;
     private TextView dateText;
-
+    private TextView textViewNetworkName;
+    private TextView textViewSignalStrength;
     private MaterialButton timeButtonShortInt;
 
     private MaterialButton timeButtonLongInt;
@@ -45,6 +46,9 @@ public class DeviceInfo extends AppCompatActivity {
     private boolean isOnline;
 
     private String deviceMacAddress = "";
+    private int deviceLastActivation;
+    private String deviceWifiNetwork = "";
+    private String deviceSignalStrength = "";
     //Short interval turn on device
     private String shortInt = "";
     //Long interval turn on device
@@ -75,6 +79,8 @@ public class DeviceInfo extends AppCompatActivity {
 
         textViewStatus = findViewById(R.id.textViewStatus);
         dateText = findViewById(R.id.dateText);
+        textViewNetworkName = findViewById(R.id.textViewNetworkName);
+        textViewSignalStrength = findViewById(R.id.textViewSignalStrength);
 
         timeButtonShortInt = findViewById(R.id.timeButtonShortInt);
         timeButtonLongInt = findViewById(R.id.timeButtonLongInt);
@@ -90,6 +96,10 @@ public class DeviceInfo extends AppCompatActivity {
         isEnabled = getIntent().getBooleanExtra("device_is_enabled", false);
         isOnline = getIntent().getBooleanExtra("device_status", false);
         deviceMacAddress = getIntent().getStringExtra("device_mac_address");
+        deviceLastActivation = getIntent().getIntExtra("device_last_activation", -1);
+        deviceWifiNetwork = getIntent().getStringExtra("device_wifi_network");
+        deviceSignalStrength = getIntent().getStringExtra("device_signal_strength");
+
         if (isOnline) {
             if (isEnabled) {
                 textViewStatus.setText("Status: ON");
@@ -99,7 +109,8 @@ public class DeviceInfo extends AppCompatActivity {
         } else {
             textViewStatus.setText("Status: OFFLINE");
         }
-
+        textViewNetworkName.setText("NETWORK: "+deviceWifiNetwork);
+        textViewSignalStrength.setText(deviceSignalStrength + " dBm");
         fetchTimerConfig("daytimer", deviceMacAddress);
         fetchTimerConfig("config", deviceMacAddress);
 
@@ -138,19 +149,17 @@ public class DeviceInfo extends AppCompatActivity {
     //
     private void fetchTimerConfig(String needParams, String deviceMacAddress) {
         apiService.getTimerConfig(
-
                 "Fekm8Y3j6M43",
                 needParams,
                 "C8C9A32F17EC"
         ).enqueue(new retrofit2.Callback<String>() {
-
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
                     String res = response.body().trim();
                     Log.d("TIMER RESPONSE", "Response: " + res);
-                    Toast.makeText(DeviceInfo.this, "" + res, Toast.LENGTH_SHORT).show();
+  //                  Toast.makeText(DeviceInfo.this, "" + res, Toast.LENGTH_SHORT).show();
                     handleTimerResponse(needParams, res);
                 }
             }
@@ -169,28 +178,37 @@ public class DeviceInfo extends AppCompatActivity {
             return;
         }
         String cleaned = response.substring(startIdx);
-
         switch (needParams) {
             case "daytimer":
-                String[] parts = response.split("@");
-                String onTime1 = "";
-                String duration1 = "";
-                String onTime2 = "";
-                String duration2 = "";
+                Log.d("DAYTIMERRR",""+cleaned);
 
-                for (String part : parts) {
-                    part = part.trim();
-                    if (part.isEmpty()) continue;
-                    if (part.startsWith("onTime1=")) {
-                        onTime1 = part.replace("onTime1=", "");
-                    } else if (part.startsWith("duration=") && duration1.isEmpty()) {
-                        duration1 = part.replace("duration=", "");
-                    } else if (part.startsWith("onTime2=")) {
-                        onTime2 = part.replace("onTime2=", "");
-                    } else if (part.startsWith("duration=") && !duration1.isEmpty()) {
-                        duration2 = part.replace("duration=", "");
-                    }
-                }
+                // Toast.makeText(this, "1-"+cleaned, Toast.LENGTH_SHORT).show();
+
+                String[] parts = cleaned.split("@");
+                String onTime1 = "1200";
+                String duration1 = "50";
+                String onTime2 = "1315";
+                String duration2 = "15";
+
+//                for (String part : parts) {
+//                    part = part.trim();
+//                    if (part.isEmpty()) continue;
+//                    if (part.startsWith("onTime1=")) {
+//                        onTime1 = part.replace("onTime1=", "");
+//                    } else if (part.startsWith("duration=") && duration1.isEmpty()) {
+//                        duration1 = part.replace("duration=", "");
+//                    } else if (part.startsWith("onTime2=")) {
+//                        onTime2 = part.replace("onTime2=", "");
+//                    } else if (part.startsWith("duration=") && !duration2.isEmpty()) {
+//                        duration2 = part.replace("duration=", "").isEmpty()? -1: part.replace("duration=", "");
+//                    }
+//                }
+                Toast.makeText(this, "onTime1: " + onTime1, Toast.LENGTH_SHORT).show();
+                Log.d("Timerrrr", "onTime1:"+onTime1);    // 1305
+                Log.d("Timer", "duration1: " + duration1); // 0
+                Log.d("Timer", "onTime2: " + onTime2);    // 1315
+                Log.d("Timer", "duration2: " + duration2); // 0
+                Log.d("Timer", "duration2: " + duration2); // 0
 
 
                 textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
@@ -200,14 +218,15 @@ public class DeviceInfo extends AppCompatActivity {
                 textViewDuration1.setText(minutesToTime(parseInt(duration1)));
                 textViewDuration2.setText(minutesToTime(parseInt(duration2)));
 
-                Log.d("Timer", "onTime1: " + onTime1);    // 1305
-                Log.d("Timer", "duration1: " + duration1); // 0
-                Log.d("Timer", "onTime2: " + onTime2);    // 1315
-                Log.d("Timer", "duration2: " + duration2); // 0
 
-                Toast.makeText(DeviceInfo.this, "Day Timer " + response, Toast.LENGTH_SHORT).show();
+
+
+             //   Toast.makeText(DeviceInfo.this, "Day Timer " + response, Toast.LENGTH_SHORT).show();
                 break;
             case "config":
+                Log.d("CONFIG",""+cleaned);
+                //Toast.makeText(this, "2-"+cleaned, Toast.LENGTH_SHORT).show();
+
                 String[] parts2 = cleaned.split("@");
                 String place = "";
 
@@ -230,15 +249,17 @@ public class DeviceInfo extends AppCompatActivity {
                     }
                 }
                 if (place.equalsIgnoreCase("vilata")) {
-                    textDevicePlace.setText("Vilata");
+                    textDevicePlace.setText("Place: Vilata");
                 } else {
-                    textDevicePlace.setText("Home");
+                    textDevicePlace.setText("Place: Home");
+
                 }
+                timeButtonShortInt.setText("TURN ON FOR "+shortInt);
+                timeButtonLongInt.setText("TURN ON FOR "+longInt);
 
                 dateText.setText(uptime);
 
-
-                Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(DeviceInfo.this, "Unknown type " + response, Toast.LENGTH_SHORT).show();
@@ -279,14 +300,10 @@ public class DeviceInfo extends AppCompatActivity {
                 Log.d("API", "Response: " + result + "; status=" + status);
                 Toast.makeText(DeviceInfo.this, "Device is ON for " + minutes + " mins", Toast.LENGTH_SHORT).show();
                 if (status) {
-//                    item.setIsEnabled(false);
-//                    item.setStatus(false);
                     textViewStatus.setText("Status: OFFLINE");
                     //  Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
                 } else {
                     boolean isOn = result.equalsIgnoreCase("ON");
-//                    item.setIsEnabled(isOn);
-//                    item.setStatus(true);
                     textViewStatus.setText("Status: " + (isOn ? "ON" : "OFF"));
                     //Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
 
@@ -316,7 +333,17 @@ public class DeviceInfo extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Toast.makeText(DeviceInfo.this, "Device is OFF", Toast.LENGTH_SHORT).show();
-                textViewStatus.setText("Status: OFF");
+
+             //   textViewStatus.setText("Status: OFF");
+                String result = response.body().trim();
+                boolean status = result.equalsIgnoreCase("offline");
+                if (status) {
+                    textViewStatus.setText("Status: OFFLINE");
+                    //  Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
+                } else {
+                    textViewStatus.setText("Status: OFF");
+                    //Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
+                }
 //                item.setIsEnabled(false);
 //                adapter.notifyDataSetChanged();
 
