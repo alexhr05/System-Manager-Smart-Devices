@@ -232,6 +232,11 @@ public class DeviceInfo extends AppCompatActivity {
 
                 String uptime = "";
                 String lastSeen = "";
+                onTime1 = "1200";
+                duration1 = "50";
+                onTime2 = "1315";
+                duration2 = "15";
+
                 for (String part : parts2) {
                     part = part.trim();
                     if (part.isEmpty())
@@ -246,6 +251,14 @@ public class DeviceInfo extends AppCompatActivity {
                         uptime = part.replace("uptime=", "");
                     } else if (part.startsWith("last_time_seen=")) {
                         lastSeen = part.replace("last_time_seen=", "");
+                    }else if (part.startsWith("onTime1=")) {
+                        onTime1 = part.replace("onTime1=", "");
+                    } else if (part.startsWith("duration=") && duration1.isEmpty()) {
+                        duration1 = part.replace("duration=", "");
+                    } else if (part.startsWith("onTime2=")) {
+                        onTime2 = part.replace("onTime2=", "");
+                    } else if (part.startsWith("duration=") && !duration2.isEmpty()) {
+                        duration2 = part.replace("duration=", "").isEmpty()? "-1": part.replace("duration=", "");
                     }
                 }
                 if (place.equalsIgnoreCase("vilata")) {
@@ -259,7 +272,15 @@ public class DeviceInfo extends AppCompatActivity {
 
                 dateText.setText(uptime);
 
-              //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
+                textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
+                textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
+                textViewTimeEnd1.setText(minutesToTime(parseInt(onTime1) + parseInt(duration1)));
+                textViewTimeEnd2.setText(minutesToTime(parseInt(onTime2) + parseInt(duration2)));
+                textViewDuration1.setText(minutesToTime(parseInt(duration1)));
+                textViewDuration2.setText(minutesToTime(parseInt(duration2)));
+
+
+                //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(DeviceInfo.this, "Unknown type " + response, Toast.LENGTH_SHORT).show();
