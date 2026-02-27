@@ -111,7 +111,7 @@ public class DeviceInfo extends AppCompatActivity {
         }
         textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
-        fetchTimerConfig("daytimer", deviceMacAddress);
+      //  fetchTimerConfig("daytimer", deviceMacAddress);
         fetchTimerConfig("config", deviceMacAddress);
 
         textView.setText(deviceName);
@@ -151,7 +151,7 @@ public class DeviceInfo extends AppCompatActivity {
         apiService.getTimerConfig(
                 "Fekm8Y3j6M43",
                 needParams,
-                "C8C9A32F17EC"
+                "68C63AF70EF3"
         ).enqueue(new retrofit2.Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -185,10 +185,6 @@ public class DeviceInfo extends AppCompatActivity {
                 // Toast.makeText(this, "1-"+cleaned, Toast.LENGTH_SHORT).show();
 
                 String[] parts = cleaned.split("@");
-                String onTime1 = "1200";
-                String duration1 = "50";
-                String onTime2 = "1315";
-                String duration2 = "15";
 
 //                for (String part : parts) {
 //                    part = part.trim();
@@ -203,20 +199,20 @@ public class DeviceInfo extends AppCompatActivity {
 //                        duration2 = part.replace("duration=", "").isEmpty()? -1: part.replace("duration=", "");
 //                    }
 //                }
-                Toast.makeText(this, "onTime1: " + onTime1, Toast.LENGTH_SHORT).show();
-                Log.d("Timerrrr", "onTime1:"+onTime1);    // 1305
-                Log.d("Timer", "duration1: " + duration1); // 0
-                Log.d("Timer", "onTime2: " + onTime2);    // 1315
-                Log.d("Timer", "duration2: " + duration2); // 0
-                Log.d("Timer", "duration2: " + duration2); // 0
-
-
-                textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
-                textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
-                textViewTimeEnd1.setText(minutesToTime(parseInt(onTime1) + parseInt(duration1)));
-                textViewTimeEnd2.setText(minutesToTime(parseInt(onTime2) + parseInt(duration2)));
-                textViewDuration1.setText(minutesToTime(parseInt(duration1)));
-                textViewDuration2.setText(minutesToTime(parseInt(duration2)));
+//                Toast.makeText(this, "onTime1: " + onTime1, Toast.LENGTH_SHORT).show();
+//                Log.d("Timerrrr", "onTime1:"+onTime1);    // 1305
+//                Log.d("Timer", "duration1: " + duration1); // 0
+//                Log.d("Timer", "onTime2: " + onTime2);    // 1315
+//                Log.d("Timer", "duration2: " + duration2); // 0
+//                Log.d("Timer", "duration2: " + duration2); // 0
+//
+//
+//                textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
+//                textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
+//                textViewTimeEnd1.setText(minutesToTime(parseInt(onTime1) + parseInt(duration1)));
+//                textViewTimeEnd2.setText(minutesToTime(parseInt(onTime2) + parseInt(duration2)));
+//                textViewDuration1.setText(minutesToTime(parseInt(duration1)));
+//                textViewDuration2.setText(minutesToTime(parseInt(duration2)));
 
 
 
@@ -232,10 +228,11 @@ public class DeviceInfo extends AppCompatActivity {
 
                 String uptime = "";
                 String lastSeen = "";
-                onTime1 = "1200";
-                duration1 = "50";
-                onTime2 = "1315";
-                duration2 = "15";
+                String onTime1 = "";
+                String duration1 = "";
+                String onTime2 = "";
+                String duration2 = "";
+
 
                 for (String part : parts2) {
                     part = part.trim();
@@ -251,14 +248,14 @@ public class DeviceInfo extends AppCompatActivity {
                         uptime = part.replace("uptime=", "");
                     } else if (part.startsWith("last_time_seen=")) {
                         lastSeen = part.replace("last_time_seen=", "");
-                    }else if (part.startsWith("onTime1=")) {
-                        onTime1 = part.replace("onTime1=", "");
-                    } else if (part.startsWith("duration=") && duration1.isEmpty()) {
-                        duration1 = part.replace("duration=", "");
-                    } else if (part.startsWith("onTime2=")) {
-                        onTime2 = part.replace("onTime2=", "");
-                    } else if (part.startsWith("duration=") && !duration2.isEmpty()) {
-                        duration2 = part.replace("duration=", "").isEmpty()? "-1": part.replace("duration=", "");
+                    }else if (part.startsWith("Timer1onTime1=")) {
+                        onTime1 = part.replace("Timer1onTime1=", "");
+                    } else if (part.startsWith("Timer1duration1=") && duration1.isEmpty()) {
+                        duration1 = part.replace("Timer1duration1=", "");
+                    } else if (part.startsWith("Timer1onTime2=")) {
+                        onTime2 = part.replace("Timer1onTime2=", "");
+                    } else if (part.startsWith("Timer1duration2=") && !duration2.isEmpty()) {
+                        duration2 = part.replace("Timer1duration2=", "");
                     }
                 }
                 if (place.equalsIgnoreCase("vilata")) {
@@ -272,12 +269,12 @@ public class DeviceInfo extends AppCompatActivity {
 
                 dateText.setText(uptime);
 
-                textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
-                textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
-                textViewTimeEnd1.setText(minutesToTime(parseInt(onTime1) + parseInt(duration1)));
-                textViewTimeEnd2.setText(minutesToTime(parseInt(onTime2) + parseInt(duration2)));
-                textViewDuration1.setText(minutesToTime(parseInt(duration1)));
-                textViewDuration2.setText(minutesToTime(parseInt(duration2)));
+                textViewStartTime.setText(minutesToTime(onTime1));
+                textViewStartTime2.setText(minutesToTime(onTime2));
+                textViewTimeEnd1.setText(minutesToTime(onTime1 + duration1));
+                textViewTimeEnd2.setText(minutesToTime(onTime2+ duration2));
+                textViewDuration1.setText(minutesToTime(duration1));
+                textViewDuration2.setText(minutesToTime(duration2));
 
 
                 //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
@@ -288,9 +285,13 @@ public class DeviceInfo extends AppCompatActivity {
         }
     }
 
-    private String minutesToTime(int totalMinutes) {
-        int hours = totalMinutes / 60;
-        int minutes = totalMinutes % 60;
+    private String minutesToTime(String totalMinutes) {
+        if(totalMinutes.isEmpty()){
+            return "---";
+        }
+        int totalMinutesInt = parseInt(totalMinutes);
+        int hours = totalMinutesInt / 60;
+        int minutes = totalMinutesInt % 60;
 
         // % - start of placeholder
         // 0 - if number is short, add 0 infront
