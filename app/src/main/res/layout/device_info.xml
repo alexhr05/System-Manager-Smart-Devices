@@ -162,169 +162,290 @@
                 android:textSize="15sp"
                 app:backgroundTint="@color/turnOffBtn"
                 app:cornerRadius="14dp" />
-            <!-- Last Restart + Signal Cards -->
+            <!-- Last Restart + Signal Cards + IP card + MAC adress card -->
+            <!-- Two rows of two cards each -->
             <LinearLayout
                 android:id="@+id/linearLayoutCardElements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
-                android:weightSum="2">
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
-                    android:layout_width="0dp"
+                <!--UP TIME + NETWORK-->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:minHeight="120dp"
-                    app:backgroundTint="@color/toggle_bg_selector"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:strokeColor="@color/card_stroke"
-                    app:strokeWidth="1dp">
-<!--                    app:cardBackgroundColor="@color/card_dark"-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Card 1 - UP TIME -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-                        <!-- Header -->
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:minHeight="120dp"
+                        app:backgroundTint="@color/toggle_bg_selector"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/card_stroke"
+                        app:strokeWidth="1dp">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            >
-                            <ImageView
-                                android:id="@+id/icon"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:src="@drawable/restart_image"
-                                app:tint="@color/blue_accent"
-                                />
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/titleText"
-                                android:layout_marginStart="8dp"
-                                android:text="UP TIME"
-                                android:textSize="14sp"
-                                android:letterSpacing="0.08"
-                                android:textColor="@color/text_secondary_dark" />
-                        </LinearLayout>
-                        <!-- Date -->
-                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/dateText"
-                            android:layout_marginTop="14dp"
-                            android:text="Oct 24"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorTextPrimary"/>
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                        <!-- Time -->
-<!--                        <TextView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:id="@+id/timeText"-->
-<!--                            android:layout_marginTop="12dp"-->
-<!--                            android:text="14:20 PM"-->
-<!--                            android:textSize="14sp"-->
-<!--                            android:textColor="@color/text_secondary_dark"/>-->
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:minHeight="120dp"
-                    app:backgroundTint="@color/toggle_bg_selector"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:strokeColor="@color/card_stroke"
-                    app:strokeWidth="1dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                                <ImageView
+                                    android:id="@+id/icon"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/restart_image"
+                                    app:tint="@color/blue_accent" />
 
-                        <!-- Header -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/titleText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="UP TIME"
+                                    android:textSize="14sp"
+                                    android:letterSpacing="0.08"
+                                    android:textColor="@color/text_secondary_dark" />
 
-                            <ImageView
-                                android:id="@+id/wifiIcon"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:src="@drawable/wifi_image"
-                                app:tint="@color/blue_accent" />
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/textViewNetworkName"
+                                android:id="@+id/dateText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:letterSpacing="0.08"
-                                android:text="NETWORK"
-                                android:textColor="@color/text_secondary_dark"
-                                android:textSize="14sp"
-                                />
+                                android:layout_marginTop="14dp"
+                                android:text="Oct 24"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextPrimary" />
+
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Percentage -->
-                        <TextView
-                            android:id="@+id/textViewSignalStrength"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="97%"
-                            android:textColor="@color/colorTextPrimary"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                    <!-- Card 2 - NETWORK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:minHeight="120dp"
+                        app:backgroundTint="@color/toggle_bg_selector"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/card_stroke"
+                        app:strokeWidth="1dp">
 
-                        <!-- Bars -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="bottom"
-                            android:orientation="horizontal">
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                            <View
-                                style="@style/SignalBar"
-                                android:layout_height="6dp" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-                            <View
-                                style="@style/SignalBar"
-                                android:layout_height="10dp" />
+                                <ImageView
+                                    android:id="@+id/wifiIcon"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/wifi_image"
+                                    app:tint="@color/blue_accent" />
 
-                            <View
-                                style="@style/SignalBar"
-                                android:layout_height="14dp" />
+                                <TextView
+                                    android:id="@+id/textViewNetworkName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:letterSpacing="0.08"
+                                    android:text="NETWORK"
+                                    android:textColor="@color/text_secondary_dark"
+                                    android:textSize="14sp" />
 
-                            <View
-                                style="@style/SignalBar"
-                                android:layout_height="18dp" />
+                            </LinearLayout>
+
+                            <!-- Percentage -->
+                            <TextView
+                                android:id="@+id/textViewSignalStrength"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="97%"
+                                android:textColor="@color/colorTextPrimary"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <!-- Signal Bars -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="bottom"
+                                android:orientation="horizontal">
+
+                                <View style="@style/SignalBar" android:layout_height="6dp" />
+                                <View style="@style/SignalBar" android:layout_height="10dp" />
+                                <View style="@style/SignalBar" android:layout_height="14dp" />
+                                <View style="@style/SignalBar" android:layout_height="18dp" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- IP + MAC address -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Card 3 - IP ADDRESS -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/material_card_IP"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:minHeight="120dp"
+                        app:backgroundTint="@color/toggle_bg_selector"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/card_stroke"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <!-- Header -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/ipIcon"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/restart_image"
+                                    app:tint="@color/blue_accent" />
+
+                                <TextView
+                                    android:id="@+id/ipTitleText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="IP ADDRESS"
+                                    android:textSize="14sp"
+                                    android:letterSpacing="0.08"
+                                    android:textColor="@color/text_secondary_dark" />
+
+                            </LinearLayout>
+
+                            <!-- Value -->
+                            <TextView
+                                android:id="@+id/textViewIP"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:text="192.168.1.1"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextPrimary" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 4 - MAC ADDRESS -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/material_card_MAC"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:minHeight="120dp"
+                        app:backgroundTint="@color/toggle_bg_selector"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/card_stroke"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <!-- Header -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/macIcon"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/restart_image"
+                                    app:tint="@color/blue_accent" />
+
+                                <TextView
+                                    android:id="@+id/macTitleText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="MAC ADDRESS"
+                                    android:textSize="14sp"
+                                    android:letterSpacing="0.08"
+                                    android:textColor="@color/text_secondary_dark" />
+
+                            </LinearLayout>
+
+                            <!-- Value -->
+                            <TextView
+                                android:id="@+id/textViewMAC"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:text="00:1A:2B:3C"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextPrimary" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
 
             </LinearLayout>
+
 
             <!-- Activity Log Title -->
             <TextView

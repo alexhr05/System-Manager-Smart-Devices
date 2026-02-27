@@ -36,6 +36,8 @@ public class DeviceInfo extends AppCompatActivity {
     private TextView textViewNetworkName;
     private TextView textViewSignalStrength;
     private TextView textViewTimeManualActivation;
+    private TextView textViewIP;
+    private TextView textViewMAC;
     private MaterialButton timeButtonShortInt;
 
     private MaterialButton timeButtonLongInt;
@@ -83,7 +85,8 @@ public class DeviceInfo extends AppCompatActivity {
         textViewTimeManualActivation = findViewById(R.id.textViewTimeManualActivation);
         textViewNetworkName = findViewById(R.id.textViewNetworkName);
         textViewSignalStrength = findViewById(R.id.textViewSignalStrength);
-
+        textViewIP = findViewById(R.id.textViewIP);
+        textViewMAC = findViewById(R.id.textViewMAC);
 
         timeButtonShortInt = findViewById(R.id.timeButtonShortInt);
         timeButtonLongInt = findViewById(R.id.timeButtonLongInt);
@@ -115,6 +118,17 @@ public class DeviceInfo extends AppCompatActivity {
         textViewTimeManualActivation.setText(minutesToTime(deviceLastActivation));
         textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
+        textViewIP.setText(deviceIp);
+
+        StringBuilder temp = new StringBuilder(deviceMacAddress);
+
+        temp.insert(2,  ':');  // "C8:C9A32F17EC"
+        temp.insert(5,  ':');  // "C8:C9:A32F17EC"
+        temp.insert(8,  ':');  // "C8:C9:A3:2F17EC"
+        temp.insert(11, ':');  // "C8:C9:A3:2F:17EC"
+        temp.insert(14, ':');  // "C8:C9:A3:2F:17:EC"
+        deviceMacAddress = temp.toString();
+        textViewMAC.setText(deviceMacAddress);
       //  fetchTimerConfig("daytimer", deviceMacAddress);
         fetchTimerConfig("config", deviceMacAddress);
 
