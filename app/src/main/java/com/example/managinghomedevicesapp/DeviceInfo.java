@@ -35,6 +35,7 @@ public class DeviceInfo extends AppCompatActivity {
     private TextView dateText;
     private TextView textViewNetworkName;
     private TextView textViewSignalStrength;
+    private TextView textViewTimeManualActivation;
     private MaterialButton timeButtonShortInt;
 
     private MaterialButton timeButtonLongInt;
@@ -79,8 +80,10 @@ public class DeviceInfo extends AppCompatActivity {
 
         textViewStatus = findViewById(R.id.textViewStatus);
         dateText = findViewById(R.id.dateText);
+        textViewTimeManualActivation = findViewById(R.id.textViewTimeManualActivation);
         textViewNetworkName = findViewById(R.id.textViewNetworkName);
         textViewSignalStrength = findViewById(R.id.textViewSignalStrength);
+
 
         timeButtonShortInt = findViewById(R.id.timeButtonShortInt);
         timeButtonLongInt = findViewById(R.id.timeButtonLongInt);
@@ -109,6 +112,7 @@ public class DeviceInfo extends AppCompatActivity {
         } else {
             textViewStatus.setText("Status: OFFLINE");
         }
+        textViewTimeManualActivation.setText(minutesToTime(deviceLastActivation));
         textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
       //  fetchTimerConfig("daytimer", deviceMacAddress);
@@ -180,7 +184,6 @@ public class DeviceInfo extends AppCompatActivity {
         String cleaned = response.substring(startIdx);
         switch (needParams) {
             case "daytimer":
-                Log.d("DAYTIMERRR",""+cleaned);
 
                 // Toast.makeText(this, "1-"+cleaned, Toast.LENGTH_SHORT).show();
 
@@ -269,12 +272,37 @@ public class DeviceInfo extends AppCompatActivity {
 
                 dateText.setText(uptime);
 
-                textViewStartTime.setText(minutesToTime(onTime1));
-                textViewStartTime2.setText(minutesToTime(onTime2));
-                textViewTimeEnd1.setText(minutesToTime(onTime1 + duration1));
-                textViewTimeEnd2.setText(minutesToTime(onTime2+ duration2));
-                textViewDuration1.setText(minutesToTime(duration1));
-                textViewDuration2.setText(minutesToTime(duration2));
+
+
+                Log.d("Time1+dur",""+(onTime1+duration1));
+                Log.d("Time1",""+onTime1);
+                Log.d("dur",""+duration1);
+                setTimerViews(onTime1, duration1, textViewStartTime,  textViewTimeEnd1, textViewDuration1);
+                setTimerViews(onTime2, duration2, textViewStartTime2, textViewTimeEnd2, textViewDuration2);
+//                if(onTime1.isEmpty() || duration1.isEmpty()){
+//                    onTime1 = "---";
+//                    duration1 = "---";
+//                    textViewStartTime.setText(onTime1);
+//                    textViewTimeEnd1.setText(onTime1);
+//                    textViewDuration1.setText(duration1);
+//                }else{
+//                    textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
+//                    textViewTimeEnd1.setText(minutesToTime((parseInt(onTime1)+parseInt(duration1))));
+//                    textViewDuration1.setText(minutesToTime(parseInt(duration1)));
+//                }
+//                if(onTime2.isEmpty() || duration2.isEmpty()){
+//                    onTime2 = "---";
+//                    duration2 = "---";
+//                    textViewStartTime.setText(onTime2);
+//                    textViewTimeEnd1.setText(onTime2);
+//                    textViewDuration1.setText(duration2);
+//                }else{
+//                    textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
+//                    textViewTimeEnd2.setText(minutesToTime((parseInt(onTime2)+parseInt(duration2))));
+//                    textViewDuration2.setText(minutesToTime(parseInt(duration2)));
+//                }
+
+
 
 
                 //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
@@ -285,13 +313,28 @@ public class DeviceInfo extends AppCompatActivity {
         }
     }
 
-    private String minutesToTime(String totalMinutes) {
-        if(totalMinutes.isEmpty()){
-            return "---";
+    private void setTimerViews(String onTime, String duration,
+                               TextView tvStart, TextView tvEnd, TextView tvDuration) {
+        if (onTime.isEmpty() || duration.isEmpty()) {
+            tvStart.setText("---");
+            tvEnd.setText("---");
+            tvDuration.setText("---");
+        } else {
+            int start    = Integer.parseInt(onTime);
+            int dur      = Integer.parseInt(duration);
+            tvStart.setText(minutesToTime(start));
+            tvEnd.setText(minutesToTime(start + dur));
+            tvDuration.setText(minutesToTime(dur));
         }
-        int totalMinutesInt = parseInt(totalMinutes);
-        int hours = totalMinutesInt / 60;
-        int minutes = totalMinutesInt % 60;
+    }
+
+    private String minutesToTime(int totalMinutes) {
+//        if(totalMinutes.isEmpty()){
+//            return "---";
+//        }
+//        int totalMinutesInt = totalMinutes);
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
 
         // % - start of placeholder
         // 0 - if number is short, add 0 infront
