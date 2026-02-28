@@ -210,7 +210,7 @@ public class MainAct extends AppCompatActivity {
         if (selectedButton != null) {
             selectedButton.setChecked(false);
             selectedButton.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-            selectedButton.setTextColor(ContextCompat.getColor(this, R.color.toggle_text_selected));
+            selectedButton.setTextColor(ContextCompat.getColor(this, R.color.toggle_text_unselected));
         }
 
         // Select New

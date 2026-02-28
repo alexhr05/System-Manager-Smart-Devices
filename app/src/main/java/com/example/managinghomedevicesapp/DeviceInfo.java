@@ -376,15 +376,14 @@ public class DeviceInfo extends AppCompatActivity {
                 if (response.body() == null) return;
                 String result = response.body().trim();
                 boolean status = result.equalsIgnoreCase("offline");
-                Log.d("API", "Response: " + result + "; status=" + status);
-                Toast.makeText(DeviceInfo.this, "Device is ON for " + minutes + " mins", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(DeviceInfo.this, "Device is ON for " + minutes + " mins", Toast.LENGTH_SHORT).show();
                 if (status) {
                     textViewStatus.setText("Status: OFFLINE");
-                    //  Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeviceInfo.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
                 } else {
                     boolean isOn = result.equalsIgnoreCase("ON");
                     textViewStatus.setText("Status: " + (isOn ? "ON" : "OFF"));
-                    //Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeviceInfo.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
 
 //                handler.postDelayed(() -> {
 //                    turnOffDevice(item);
@@ -411,16 +410,18 @@ public class DeviceInfo extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(DeviceInfo.this, "Device is OFF", Toast.LENGTH_SHORT).show();
+
 
              //   textViewStatus.setText("Status: OFF");
                 String result = response.body().trim();
                 boolean status = result.equalsIgnoreCase("offline");
                 if (status) {
                     textViewStatus.setText("Status: OFFLINE");
+                    Toast.makeText(DeviceInfo.this, "Device is OFFLINE", Toast.LENGTH_SHORT).show();
                     //  Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
                 } else {
                     textViewStatus.setText("Status: OFF");
+                    Toast.makeText(DeviceInfo.this, "Device is OFF", Toast.LENGTH_SHORT).show();
                     //Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
                 }
 //                item.setIsEnabled(false);

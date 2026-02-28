@@ -90,11 +90,12 @@
             android:text="Home"
             android:textAllCaps="false"
             android:textColor="@color/toggle_text_selector"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/toggle_bg_selector"
             app:rippleColor="@android:color/transparent"
             app:shapeAppearanceOverlay="@style/ToggleButtonShape"
-            app:strokeWidth="0dp"
+
             />
 
         <com.google.android.material.button.MaterialButton
@@ -107,11 +108,12 @@
             android:text="Vilata"
             android:textAllCaps="false"
             android:textColor="@color/toggle_text_selector"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/toggle_bg_selector"
             app:rippleColor="@android:color/transparent"
             app:shapeAppearanceOverlay="@style/ToggleButtonShape"
-            app:strokeWidth="0dp"
+
             />
 
     </LinearLayout>

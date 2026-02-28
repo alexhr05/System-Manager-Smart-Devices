@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:text="Device Details"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/backIcon"
         app:layout_constraintTop_toTopOf="parent" />
     <!-- Device Details Title (fixed, outside scroll) -->
@@ -57,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/avatar_image" />
+                app:srcCompat="@drawable/light_bulb_icon"
+                app:tint="@color/blue_accent"/>
 
             <!-- Device Name -->
             <TextView
@@ -67,12 +68,14 @@
                 android:gravity="center"
                 android:text="Living room lamp"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="28sp" />
+                android:textSize="28sp"
+                android:layout_marginTop="8dp"/>
             <TextView
                 android:id="@+id/textDevicePlace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginTop="4dp"
                 android:text="Place"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="22sp" />
@@ -490,7 +493,7 @@
                         android:layout_height="wrap_content"
                         android:text="Manual Activation"
                         android:textColor="?attr/colorOnSurface"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -499,7 +502,7 @@
                         android:layout_height="wrap_content"
                         android:text="2 mins ago"
                         android:textColor="#8FA3AD"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -569,7 +572,8 @@
                     android:text="Schedules"
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginLeft="8dp"/>
 
 <!--                <TextView-->
 <!--                    android:id="@+id/tvEditSchedule"-->
