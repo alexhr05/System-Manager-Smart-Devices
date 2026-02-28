@@ -45,29 +45,30 @@
 
         <TextView
             android:id="@+id/cardDescription"
-            android:layout_width="304dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="306dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:maxLines="3"
             android:text="Description"
-            android:textSize="12dp"
             android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardTitle" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/TimeButton1"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="52dp"
-            android:layout_height="41dp"
+            android:layout_width="54dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="6dp"
             android:tag="10"
             android:text="10 min"
             android:textSize="10sp"
+            android:textColor="@color/utilitesElementsBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/switchNotifications" />
     </androidx.constraintlayout.widget.ConstraintLayout>
