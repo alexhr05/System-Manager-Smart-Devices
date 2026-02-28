@@ -115,6 +115,7 @@ public class DeviceInfo extends AppCompatActivity {
         } else {
             textViewStatus.setText("Status: OFFLINE");
         }
+
         textViewTimeManualActivation.setText(minutesToTime(deviceLastActivation));
         textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
@@ -238,7 +239,6 @@ public class DeviceInfo extends AppCompatActivity {
                 break;
             case "config":
                 Log.d("CONFIG",""+cleaned);
-                //Toast.makeText(this, "2-"+cleaned, Toast.LENGTH_SHORT).show();
 
                 String[] parts2 = cleaned.split("@");
                 String place = "";
@@ -249,7 +249,6 @@ public class DeviceInfo extends AppCompatActivity {
                 String duration1 = "";
                 String onTime2 = "";
                 String duration2 = "";
-
 
                 for (String part : parts2) {
                     part = part.trim();
@@ -286,39 +285,11 @@ public class DeviceInfo extends AppCompatActivity {
 
                 dateText.setText(uptime);
 
-
-
                 Log.d("Time1+dur",""+(onTime1+duration1));
                 Log.d("Time1",""+onTime1);
                 Log.d("dur",""+duration1);
                 setTimerViews(onTime1, duration1, textViewStartTime,  textViewTimeEnd1, textViewDuration1);
                 setTimerViews(onTime2, duration2, textViewStartTime2, textViewTimeEnd2, textViewDuration2);
-//                if(onTime1.isEmpty() || duration1.isEmpty()){
-//                    onTime1 = "---";
-//                    duration1 = "---";
-//                    textViewStartTime.setText(onTime1);
-//                    textViewTimeEnd1.setText(onTime1);
-//                    textViewDuration1.setText(duration1);
-//                }else{
-//                    textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
-//                    textViewTimeEnd1.setText(minutesToTime((parseInt(onTime1)+parseInt(duration1))));
-//                    textViewDuration1.setText(minutesToTime(parseInt(duration1)));
-//                }
-//                if(onTime2.isEmpty() || duration2.isEmpty()){
-//                    onTime2 = "---";
-//                    duration2 = "---";
-//                    textViewStartTime.setText(onTime2);
-//                    textViewTimeEnd1.setText(onTime2);
-//                    textViewDuration1.setText(duration2);
-//                }else{
-//                    textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
-//                    textViewTimeEnd2.setText(minutesToTime((parseInt(onTime2)+parseInt(duration2))));
-//                    textViewDuration2.setText(minutesToTime(parseInt(duration2)));
-//                }
-
-
-
-
                 //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -343,10 +314,9 @@ public class DeviceInfo extends AppCompatActivity {
     }
 
     private String minutesToTime(int totalMinutes) {
-//        if(totalMinutes.isEmpty()){
-//            return "---";
-//        }
-//        int totalMinutesInt = totalMinutes);
+        if(totalMinutes == -1){
+            return "---";
+        }
         int hours = totalMinutes / 60;
         int minutes = totalMinutes % 60;
 
