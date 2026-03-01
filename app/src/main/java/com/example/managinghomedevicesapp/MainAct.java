@@ -1,5 +1,7 @@
 package com.example.managinghomedevicesapp;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -74,25 +76,70 @@ public class MainAct extends AppCompatActivity {
                     String raw = response.body().trim();
                     String[] rows = raw.split(";");
                     //Iterate through everey element in rows array
+                    Log.d("Test","");
+                    int id = -1;
+                    String name = "";
+                    String ip = "";
+                    String macAddress = "";
+                    String turnOnOff = "";
+                    String status = "";
+                    String place = "";
+                    String uptime = "";
+                    String wifiNetwork = "";
+                    String signalStrength = "";
+                    int lastActivation = -1;
                     for (String row : rows) {
                         row = row.trim();
                         if (row.isEmpty()) continue;
 
                         String[] parts = row.split(",");
+                        if (row.length() < 11) continue;
 
-                        if (parts.length < 10) continue;
+                        for(String part: parts){
+                            part = part.trim();
+                            if (part.isEmpty())
+                                continue;
 
-                        int id = Integer.parseInt(parts[0].trim());
-                        String name = parts[1].trim();
-                        String ip = parts[2].trim();
-                        String macAddress = parts[3].trim();
-                        String turnOnOff = parts[4].trim();
-                        String status = parts[5].trim();
-                        String place = parts[6].trim();
-                        int lastActivation = parts[7].isEmpty() ? -1: Integer.parseInt(parts[7].trim());
+                            if (part.startsWith("timer_id=")) {
+                                id = StringTextToInt(part.replace("timer_id=",""),"timer_id=");
+                                //         id = parts[0].replace("place1=", "").isEmpty() ? -1: parseInt(parts[0].replace("place1=", ""));
+                            }else if(part.startsWith("timer_description=")){
+                                name = part.replace("timer_description=","");
+                            }else if(part.startsWith("ip_address=")){
+                                ip = part.replace("ip_address=","");
+                            }else if(part.startsWith("mac_address=")){
+                                macAddress = part.replace("mac_address=","");
+                            }else if(part.startsWith("status=")){
+                                turnOnOff = part.replace("status=","");
+                            }else if(part.startsWith("online_status=")){
+                                status = part.replace("online_status=","");
+                            }else if(part.startsWith("uptime=")){
+                                uptime = part.replace("uptime=","");
+                            }else if(part.startsWith("place=")){
+                                place = part.replace("place=","");
+                            }else if(part.startsWith("last_time_change=")){
+                                lastActivation = StringTextToInt(part.replace("last_time_change=",""),"last_time_change=");
+                            }else if(part.startsWith("ssid_name=")){
+                                wifiNetwork = part.replace("ssid_name=","");
+                            }else if(part.startsWith("rssi=")){
+                                signalStrength = part.replace("rssi=","");
+                            }
+
+                        }
+
+
+
+                       // int id = parseInt(parts[0].trim());
+                        //String name = parts[1].trim();
+                       // String ip = parts[2].trim();
+                        //String macAddress = parts[3].trim();
+                       // String turnOnOff = parts[4].trim();
+                       // String status = parts[5].trim();
+                       // String place = parts[6].trim();
+                       // int lastActivation = parts[7].isEmpty() ? -1: parseInt(parts[7].trim());
                         Log.d("AllDevices", "lastActivation=" + lastActivation);
-                        String wifiNetwork = parts[8].trim();
-                        String signalStrength = parts[9].trim();
+                    //    String wifiNetwork = parts[8].trim();
+                     //   String signalStrength = parts[9].trim();
 
 
                         boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
@@ -178,6 +225,13 @@ public class MainAct extends AppCompatActivity {
         });
     }
 
+    private int StringTextToInt(String str, String startWithStr){
+        if(str.isEmpty()){
+            return -1;
+        }
+        str = str.replace(startWithStr,"");
+        return parseInt(str);
+    }
     @Override
     protected void onResume() {
         super.onResume();
