@@ -43,7 +43,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         CardItem item = items.get(position);
         holder.title.setText(item.getTitle());
-        holder.description.setText(item.getIp());
+        if(item.getStatus() == true){
+            if(item.getIsEnabled() == true){
+                holder.description.setText("ON from:\n"+minutesToTime(item.getLastActivation()));
+            }else if(item.getIsEnabled() == false){
+                holder.description.setText("OFF from:\n"+minutesToTime(item.getLastActivation()));
+            }
+
+        }else{
+            holder.description.setText("OFFLINE");
+        }
+
 
         //Remove the last active onCheckedChangeListener
         holder.switchMaterial.setOnCheckedChangeListener(null);
@@ -101,11 +111,34 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         CardViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.cardTitle);
-            description = itemView.findViewById(R.id.cardDescription);
+            description = itemView.findViewById(R.id.cardLastActive);
             switchMaterial = itemView.findViewById(R.id.switchNotifications);
             buttonOne = itemView.findViewById(R.id.TimeButton1);
             materialCardView = itemView.findViewById(R.id.CardView);
         }
     }
+
+    private String minutesToTime(int totalMinutes) {
+        if(totalMinutes == -1){
+            return "---";
+        }
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        // % - start of placeholder
+        // 0 - if number is short, add 0 infront
+        // 2 - minimum 2 digits wide
+        // d - value is integer
+        String res = "";
+        if(hours > 24){
+            res = String.format("%02dd %02dh:%02dm", hours/24,hours%24, minutes);
+        }else{
+            res = String.format("%02dh:%02dm", hours, minutes);
+        }
+
+
+        return res;
+    }
+
 
 }

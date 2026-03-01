@@ -199,43 +199,6 @@ public class DeviceInfo extends AppCompatActivity {
         String cleaned = response.substring(startIdx);
         switch (needParams) {
             case "daytimer":
-
-                // Toast.makeText(this, "1-"+cleaned, Toast.LENGTH_SHORT).show();
-
-                String[] parts = cleaned.split("@");
-
-//                for (String part : parts) {
-//                    part = part.trim();
-//                    if (part.isEmpty()) continue;
-//                    if (part.startsWith("onTime1=")) {
-//                        onTime1 = part.replace("onTime1=", "");
-//                    } else if (part.startsWith("duration=") && duration1.isEmpty()) {
-//                        duration1 = part.replace("duration=", "");
-//                    } else if (part.startsWith("onTime2=")) {
-//                        onTime2 = part.replace("onTime2=", "");
-//                    } else if (part.startsWith("duration=") && !duration2.isEmpty()) {
-//                        duration2 = part.replace("duration=", "").isEmpty()? -1: part.replace("duration=", "");
-//                    }
-//                }
-//                Toast.makeText(this, "onTime1: " + onTime1, Toast.LENGTH_SHORT).show();
-//                Log.d("Timerrrr", "onTime1:"+onTime1);    // 1305
-//                Log.d("Timer", "duration1: " + duration1); // 0
-//                Log.d("Timer", "onTime2: " + onTime2);    // 1315
-//                Log.d("Timer", "duration2: " + duration2); // 0
-//                Log.d("Timer", "duration2: " + duration2); // 0
-//
-//
-//                textViewStartTime.setText(minutesToTime(parseInt(onTime1)));
-//                textViewStartTime2.setText(minutesToTime(parseInt(onTime2)));
-//                textViewTimeEnd1.setText(minutesToTime(parseInt(onTime1) + parseInt(duration1)));
-//                textViewTimeEnd2.setText(minutesToTime(parseInt(onTime2) + parseInt(duration2)));
-//                textViewDuration1.setText(minutesToTime(parseInt(duration1)));
-//                textViewDuration2.setText(minutesToTime(parseInt(duration2)));
-
-
-
-
-             //   Toast.makeText(DeviceInfo.this, "Day Timer " + response, Toast.LENGTH_SHORT).show();
                 break;
             case "config":
                 Log.d("CONFIG",""+cleaned);

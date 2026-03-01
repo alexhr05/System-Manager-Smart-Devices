@@ -3,6 +3,7 @@ package com.example.managinghomedevicesapp;
 import static java.lang.Integer.parseInt;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class MainAct extends AppCompatActivity {
     //private CardAdapter.RecyclerViewClickListner recyclerListner;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +59,69 @@ public class MainAct extends AppCompatActivity {
         AppData.devices = new ArrayList<>();
         visibleDevices = new ArrayList<>();
 
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        adapter = new CardAdapter(visibleDevices, new OnDeviceToggleListener() {
+            @Override
+            public void onDeviceToggled(CardItem item) {
+                toggleDevice(item);
+            }
+
+            @Override
+            public void onTurnOnForTime(CardItem item, int minutes) {
+                turnOnDeviceForTime(item, minutes);
+            }
+        },
+                item -> {
+                    Intent intent = new Intent(MainAct.this, DeviceInfo.class);
+                    intent.putExtra("device_id", item.getId());
+                    intent.putExtra("device_name", item.getTitle());
+                    intent.putExtra("device_ip", item.getIp());
+                    intent.putExtra("device_is_enabled", item.getIsEnabled());
+                    intent.putExtra("device_status", item.getStatus());
+                    intent.putExtra("device_mac_address", item.getMacAddress());
+                    intent.putExtra("device_last_activation", item.getLastActivation());
+                    intent.putExtra("device_wifi_network", item.getWifiNetwork());
+                    intent.putExtra("device_signal_strength", item.getSignalStrength());
+
+                    startActivity(intent);
+
+                });
+
+        recyclerView.setAdapter(adapter);
+
+        btnHome.setText(textHome);
+        btnVilata.setText(textVilata);
+
+        btnHome.setOnClickListener(v -> {
+            SelectedButton(btnHome);
+            Toast.makeText(
+                    MainAct.this,
+                    "Clicked Home button!",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+
+        btnVilata.setOnClickListener(v -> {
+            SelectedButton(btnVilata);
+            //showPlace(textVilata);
+            Toast.makeText(
+                    MainAct.this,
+                    "Clicked Vilata button!",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.bgroutingmap.com/8/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
         apiService = retrofit.create(ApiService.class);
+
 
         apiService.getAllTimers("iO92iJdwuJwe8Y",
                 "showAllTimers"
@@ -126,21 +185,7 @@ public class MainAct extends AppCompatActivity {
                             }
 
                         }
-
-
-
-                       // int id = parseInt(parts[0].trim());
-                        //String name = parts[1].trim();
-                       // String ip = parts[2].trim();
-                        //String macAddress = parts[3].trim();
-                       // String turnOnOff = parts[4].trim();
-                       // String status = parts[5].trim();
-                       // String place = parts[6].trim();
-                       // int lastActivation = parts[7].isEmpty() ? -1: parseInt(parts[7].trim());
                         Log.d("AllDevices", "lastActivation=" + lastActivation);
-                    //    String wifiNetwork = parts[8].trim();
-                     //   String signalStrength = parts[9].trim();
-
 
                         boolean enabledOnOff = turnOnOff.equalsIgnoreCase("ON");
                         boolean statusBoolean = status.equalsIgnoreCase("ONLINE");
@@ -152,7 +197,10 @@ public class MainAct extends AppCompatActivity {
                     Log.d("AllDevices", "Devices AllSize=" + AppData.devices.size());
                     adapter.notifyDataSetChanged();
 
+
+
                     SelectedButton(btnHome);
+
 
                 } else {
                     Toast.makeText(MainAct.this,
@@ -167,62 +215,9 @@ public class MainAct extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        adapter = new CardAdapter(visibleDevices, new OnDeviceToggleListener() {
-            @Override
-            public void onDeviceToggled(CardItem item) {
-                toggleDevice(item);
-            }
 
-            @Override
-            public void onTurnOnForTime(CardItem item, int minutes) {
-                turnOnDeviceForTime(item, minutes);
-            }
-        },
-                item -> {
-                    Intent intent = new Intent(MainAct.this, DeviceInfo.class);
-                    intent.putExtra("device_id", item.getId());
-                    intent.putExtra("device_name", item.getTitle());
-                    intent.putExtra("device_ip", item.getIp());
-                    intent.putExtra("device_is_enabled", item.getIsEnabled());
-                    intent.putExtra("device_status", item.getStatus());
-                    intent.putExtra("device_mac_address", item.getMacAddress());
-                    intent.putExtra("device_last_activation", item.getLastActivation());
-                    intent.putExtra("device_wifi_network", item.getWifiNetwork());
-                    intent.putExtra("device_signal_strength", item.getSignalStrength());
-
-                    startActivity(intent);
-
-                });
-
-        recyclerView.setAdapter(adapter);
-
-        btnHome.setText(textHome);
-        btnVilata.setText(textVilata);
-
-        btnHome.setOnClickListener(v -> {
-            Log.d("AllDevices", "Home click AllSize=" + AppData.devices.size());
-            SelectedButton(btnHome);
-            Toast.makeText(
-                    MainAct.this,
-                    "Clicked Home button!",
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
-
-        btnVilata.setOnClickListener(v -> {
-            Log.d("AllDevices", "VIlata click AllSize=" + AppData.devices.size());
-            SelectedButton(btnVilata);
-            //showPlace(textVilata);
-            Toast.makeText(
-                    MainAct.this,
-                    "Clicked Vilata button!",
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
     }
 
     private int StringTextToInt(String str, String startWithStr){
@@ -327,6 +322,7 @@ public class MainAct extends AppCompatActivity {
                     item.setStatus(true);
                     //Set new state for switch
                     item.setIsEnabled(newState);
+                    item.setLastActivation(0);
                 }
                 //Nofify adapter for changes in switch
                 adapter.notifyDataSetChanged();
