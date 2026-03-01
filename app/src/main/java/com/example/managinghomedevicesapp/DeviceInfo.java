@@ -382,17 +382,15 @@ public class DeviceInfo extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
 
-             //   textViewStatus.setText("Status: OFF");
                 String result = response.body().trim();
                 boolean status = result.equalsIgnoreCase("offline");
                 if (status) {
                     textViewStatus.setText("Status: OFFLINE");
                     Toast.makeText(DeviceInfo.this, "Device is OFFLINE", Toast.LENGTH_SHORT).show();
-                    //  Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
                 } else {
                     textViewStatus.setText("Status: OFF");
                     Toast.makeText(DeviceInfo.this, "Device is OFF", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(MainAct.this, "Device is turn on for " + mins+ " minutes", Toast.LENGTH_SHORT).show();
+
                 }
 //                item.setIsEnabled(false);
 //                adapter.notifyDataSetChanged();
