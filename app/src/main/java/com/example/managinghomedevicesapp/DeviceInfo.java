@@ -10,9 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managinghomedevicesapp.api.ApiService;
 import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +48,8 @@ public class DeviceInfo extends AppCompatActivity {
     private MaterialButton timeButtonLongInt;
 
     private MaterialButton timeButtonTurnOff;
+
+    private RecyclerView recyclerView;
     private String deviceName = "";
     private String deviceIp = "";
     private boolean isEnabled;
@@ -59,15 +66,25 @@ public class DeviceInfo extends AppCompatActivity {
 
     private int deviceId;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_info);
 
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.bgroutingmap.com/8/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
+
+        recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        List<ActivityLogItem> logItems = new ArrayList<>();
+
         int counts = 5;
         apiService = retrofit.create(ApiService.class);
 
@@ -82,7 +99,7 @@ public class DeviceInfo extends AppCompatActivity {
 
         textViewStatus = findViewById(R.id.textViewStatus);
         dateText = findViewById(R.id.dateText);
-        textViewTimeManualActivation = findViewById(R.id.textViewTimeManualActivation);
+       // textViewTimeManualActivation = findViewById(R.id.textViewTimeManualActivation);
         textViewNetworkName = findViewById(R.id.textViewNetworkName);
         textViewSignalStrength = findViewById(R.id.textViewSignalStrength);
         textViewIP = findViewById(R.id.textViewIP);
@@ -116,7 +133,7 @@ public class DeviceInfo extends AppCompatActivity {
             textViewStatus.setText("Status: OFFLINE");
         }
 
-        textViewTimeManualActivation.setText(minutesToTime(deviceLastActivation));
+   //     textViewTimeManualActivation.setText(minutesToTime(deviceLastActivation));
         textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
         textViewIP.setText(deviceIp);
@@ -209,12 +226,11 @@ public class DeviceInfo extends AppCompatActivity {
                             }else if(part.startsWith("minutes_passed=")){
                                 minutePassed = part.replace("minutes_passed=","");
                             }
-
                         }
-
-
-
                     }
+                    boolean statusBoolean = status.equalsIgnoreCase("ON");
+
+
 
 
                 }
