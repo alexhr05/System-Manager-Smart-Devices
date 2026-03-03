@@ -180,6 +180,41 @@ public class DeviceInfo extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     String res = response.body().trim();
 
+                    String raw = response.body().trim();
+                    String[] rows = raw.split(";");
+
+                    //Iterate through everey element in rows array
+                    String date = "";
+                    String status = "";
+                    String reason = "";
+                    String minutePassed = "";
+
+                    for (String row : rows) {
+                        row = row.trim();
+                        if (row.isEmpty()) continue;
+
+                        String[] parts = row.split(",");
+
+                        for(String part: parts){
+                            part = part.trim();
+                            if (part.isEmpty())
+                                continue;
+
+                            if (part.startsWith("date=")) {
+                                date = part.replace("date=","");
+                            }else if(part.startsWith("status=")){
+                                status = part.replace("status=","");
+                            }else if(part.startsWith("reason=")){
+                                reason = part.replace("reason=","");
+                            }else if(part.startsWith("minutes_passed=")){
+                                minutePassed = part.replace("minutes_passed=","");
+                            }
+
+                        }
+
+
+
+                    }
 
 
                 }
@@ -192,6 +227,9 @@ public class DeviceInfo extends AppCompatActivity {
         });
     }
 
+    private String convertDatetTo(){
+        return "";
+    }
 
     //Get Info about certain Timer
     private void fetchTimerConfig(String needParams, String deviceMacAddress) {
