@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.managinghomedevicesapp.adapter.ActivityLogAdapter;
+import com.example.managinghomedevicesapp.adapter.CardAdapter;
 import com.example.managinghomedevicesapp.api.ApiService;
 import com.google.android.material.button.MaterialButton;
 
@@ -65,7 +67,9 @@ public class DeviceInfo extends AppCompatActivity {
     private String longInt = "";
 
     private int deviceId;
+    private List<ActivityLogItem> logItems;
 
+    private ActivityLogAdapter adapter;
 
 
     @Override
@@ -83,7 +87,12 @@ public class DeviceInfo extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ActivityLogItem> logItems = new ArrayList<>();
+        logItems = new ArrayList<>();
+
+        adapter = new ActivityLogAdapter(logItems);
+        recyclerView.setAdapter(adapter);
+
+
 
         int counts = 5;
         apiService = retrofit.create(ApiService.class);
@@ -149,6 +158,7 @@ public class DeviceInfo extends AppCompatActivity {
         textViewMAC.setText(deviceMacAddress);
       //  fetchTimerConfig("daytimer", deviceMacAddress);
         fetchTimerConfig("config", deviceMacAddress);
+        Log.d("IDTIMER","deviceId="+deviceId);
         getTimerLog(deviceId, counts);
 
         textView.setText(deviceName);
@@ -204,7 +214,7 @@ public class DeviceInfo extends AppCompatActivity {
                     String date = "";
                     String status = "";
                     String reason = "";
-                    String minutePassed = "";
+                    String minutesPassed = "";
 
                     for (String row : rows) {
                         row = row.trim();
@@ -224,13 +234,17 @@ public class DeviceInfo extends AppCompatActivity {
                             }else if(part.startsWith("reason=")){
                                 reason = part.replace("reason=","");
                             }else if(part.startsWith("minutes_passed=")){
-                                minutePassed = part.replace("minutes_passed=","");
+                                minutesPassed = part.replace("minutes_passed=","");
                             }
                         }
+                        boolean statusBoolean = status.equalsIgnoreCase("ON");
+                        logItems.add(new ActivityLogItem(date,statusBoolean,reason,minutesPassed));
+
                     }
-                    boolean statusBoolean = status.equalsIgnoreCase("ON");
 
 
+
+                    adapter.notifyDataSetChanged();
 
 
                 }
