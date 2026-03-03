@@ -130,12 +130,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         // 2 - minimum 2 digits wide
         // d - value is integer
         String res = "";
-        if(hours > 24){
-            res = String.format("%02dd %02dh:%02dm", hours/24,hours%24, minutes);
+        if(totalMinutes < 60){
+            res = totalMinutes + " mins ago";
         }else{
-            res = String.format("%02dh:%02dm", hours, minutes);
-        }
 
+            if(hours > 24){
+                res = String.format("%02dd %02dh ago", hours/24,hours%24);
+            }else{
+                res = String.format("%02dh ago", hours);
+            }
+        }
 
         return res;
     }
