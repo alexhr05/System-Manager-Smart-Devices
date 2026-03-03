@@ -27,7 +27,13 @@ public interface ApiService {
             @Query("needParams") String needParams,
             @Query("mac_address") String mac_address
     );
-
+    @GET("houmTaimerActionApk.php")
+    Call<String> getTimerStateCount(
+            @Query("nkey") String nkey,
+            @Query("action") String action,
+            @Query("timer_id") int timer_id,
+            @Query("counts") int counts
+    );
 
 
 

@@ -316,6 +316,7 @@ public class MainAct extends AppCompatActivity {
                     item.setIsEnabled(false);
                     item.setStatus(false);
 
+
                     Toast.makeText(MainAct.this, "This devices is OFFLINE", Toast.LENGTH_SHORT).show();
                 } else {
                     boolean newState = result.equalsIgnoreCase("ON");

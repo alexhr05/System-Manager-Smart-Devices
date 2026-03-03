@@ -68,7 +68,7 @@ public class DeviceInfo extends AppCompatActivity {
                 .baseUrl("http://www.bgroutingmap.com/8/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
-
+        int counts = 5;
         apiService = retrofit.create(ApiService.class);
 
         textDevicePlace = findViewById(R.id.textDevicePlace);
@@ -132,6 +132,7 @@ public class DeviceInfo extends AppCompatActivity {
         textViewMAC.setText(deviceMacAddress);
       //  fetchTimerConfig("daytimer", deviceMacAddress);
         fetchTimerConfig("config", deviceMacAddress);
+        getTimerLog(deviceId, counts);
 
         textView.setText(deviceName);
 
@@ -165,7 +166,34 @@ public class DeviceInfo extends AppCompatActivity {
         });
     }
 
-    //
+    private void getTimerLog(int timer_id, int counts){
+        String action = "activity_log";
+        apiService.getTimerStateCount(
+                "iO92iJdwuJwe8Y",
+                action,
+                timer_id,
+                counts
+        ).enqueue(new retrofit2.Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    String res = response.body().trim();
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(DeviceInfo.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    //Get Info about certain Timer
     private void fetchTimerConfig(String needParams, String deviceMacAddress) {
         apiService.getTimerConfig(
                 "Fekm8Y3j6M43",
