@@ -76,7 +76,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Oct 24"
-            android:textColor="#8FA3AD"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="13sp" />
 
 

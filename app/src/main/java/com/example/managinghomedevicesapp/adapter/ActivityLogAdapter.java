@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.managinghomedevicesapp.ActivityLogItem;
 import com.example.managinghomedevicesapp.R;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +66,31 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         holder.tvReason.setText(displayName != null ? displayName : item.getReason() );
 
         // DATE
-        holder.tvDate.setText(item.getDate());
+
+
+        String[] wholeDate = item.getDate().split(" ");
+        String date = wholeDate[0];
+        String time = wholeDate[1];
+
+        String[] partDate = date.split("-");
+        String year = partDate[0];
+        String month = partDate[1];
+        String day = partDate[2];
+
+        Calendar today = Calendar.getInstance();
+
+        String todayYear  = today.get(Calendar.YEAR)+"";   // 2026
+        String todayMonth = (today.get(Calendar.MONTH) + 1) < 10
+                ? 0 + (today.get(Calendar.MONTH) + 1) + ""
+                : (today.get(Calendar.MONTH) + 1) + ""; // +1 because months start from 0
+        String todayDay   = today.get(Calendar.DAY_OF_MONTH) < 10
+                ? 0 + (today.get(Calendar.DAY_OF_MONTH) +"")
+                : (today.get(Calendar.DAY_OF_MONTH)+""); // 1-31
+
+//        if(year.equals(todayYear) && month.equals(todayMonth) && day.equals(todayDay)){
+//            holder.tvDate.setText(item.getDate());
+//        }
+
 
 //        // divider - hide on last item
 //        holder.divider.setVisibility(
