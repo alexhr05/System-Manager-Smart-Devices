@@ -23,7 +23,7 @@
         android:paddingEnd="16dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:weightSum="4">
+        android:weightSum="7">
 
         <!-- STATUS badge (ON/OFF) -->
         <TextView
@@ -35,29 +35,31 @@
             android:text="OFF"
             android:textColor="?attr/colorOnSurface"
             android:textSize="11sp"
-            android:textStyle="bold"/>
-<!--            android:background="@drawable/status_badge_bg" />-->
+            android:textStyle="bold"
+            android:background="@drawable/status_badge_bg" />
 
         <!-- REASON  -->
+
+        <!-- DATE -->
         <TextView
             android:id="@+id/textVReason"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="6dp"
+            android:layout_weight="2"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:text="Motion"
             android:textColor="?attr/colorOnSurface"
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <!-- DATE -->
         <TextView
             android:id="@+id/textVDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center"
             android:text="Oct 24"
             android:textColor="#8FA3AD"
@@ -68,8 +70,8 @@
             android:id="@+id/textVPassed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
+            android:layout_weight="2"
+            android:gravity="center"
             android:text="2m"
             android:textColor="#8FA3AD"
             android:textSize="13sp" />

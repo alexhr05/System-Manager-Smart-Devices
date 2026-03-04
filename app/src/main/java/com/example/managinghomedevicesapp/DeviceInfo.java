@@ -69,7 +69,7 @@ public class DeviceInfo extends AppCompatActivity {
     private int deviceId;
     private List<ActivityLogItem> logItems;
 
-    private ActivityLogAdapter adapter;
+    private ActivityLogAdapter activityLogadapter;
 
 
     @Override
@@ -89,9 +89,8 @@ public class DeviceInfo extends AppCompatActivity {
 
         logItems = new ArrayList<>();
 
-        adapter = new ActivityLogAdapter(logItems);
-        recyclerView.setAdapter(adapter);
-
+        activityLogadapter = new ActivityLogAdapter(logItems);
+        recyclerView.setAdapter(activityLogadapter);
 
 
         int counts = 5;
@@ -242,11 +241,7 @@ public class DeviceInfo extends AppCompatActivity {
 
                     }
 
-
-
-                    adapter.notifyDataSetChanged();
-
-
+                    activityLogadapter.notifyDataSetChanged();
                 }
             }
 

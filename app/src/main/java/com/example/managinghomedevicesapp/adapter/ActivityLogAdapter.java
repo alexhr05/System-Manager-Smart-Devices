@@ -36,7 +36,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
                 .inflate(R.layout.item_activity_log, parent, false);
         return new ViewHolder(view);
     }
-
+    // Change activity log styles and info table
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ActivityLogItem item = items.get(position);
@@ -72,6 +72,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         return items.size();
     }
 
+    // Defining visual elements in item_acitvity_log
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvStatus, tvReason, tvDate, tvPassed;
   //      ImageView ivReasonIcon;

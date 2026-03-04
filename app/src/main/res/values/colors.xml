@@ -52,5 +52,8 @@
     <color name="turnOffBtnText">#DB4040</color>
     <color name="utilitesElementsBlue">#019FE7</color>
 
+    <!-- For status element in recyclerView Device Info Page -->
+    <color name="toggle_bg_status">#1C3732</color>
+    <color name="toggle_text_status">#22C55E</color>
 
 </resources>
