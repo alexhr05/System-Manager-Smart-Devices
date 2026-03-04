@@ -53,7 +53,10 @@
     <color name="utilitesElementsBlue">#019FE7</color>
 
     <!-- For status element in recyclerView Device Info Page -->
-    <color name="toggle_bg_status">#1C3732</color>
-    <color name="toggle_text_status">#22C55E</color>
+    <color name="dot_ON">#4CAF50</color>
+    <color name="dot_OFF">#ED1C24</color>
+
+
+
 
 </resources>

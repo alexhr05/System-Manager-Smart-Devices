@@ -2,29 +2,37 @@ package com.example.managinghomedevicesapp.adapter;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managinghomedevicesapp.ActivityLogItem;
-import com.example.managinghomedevicesapp.CardItem;
 import com.example.managinghomedevicesapp.R;
-import com.example.managinghomedevicesapp.listener.OnDeviceToggleListener;
-import com.example.managinghomedevicesapp.listener.OnItemClickListener;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.ViewHolder> {
 
     private List<ActivityLogItem> items;
 
+    //Translation from server response to more readable one
+    private static final Map<String, String> textMap = new HashMap<>();
+    static{
+        textMap.put("startup","Device boot");
+        textMap.put("short","Turn on\n for short interval");
+        textMap.put("long","Turn on\n for long interval");
+        textMap.put("timer_on","Turn on\n daily timer");
+        textMap.put("timer_off","Expired Time");
+        textMap.put("timer_off_web","Manual\nturn off");
+    }
     public ActivityLogAdapter(List<ActivityLogItem> items) {
         this.items = items;
     }
@@ -44,23 +52,19 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         // STATUS badge
         if (item.getStatus()) {
             holder.tvStatus.setText("ON");
-            holder.tvStatus.setBackgroundTintList(
-                    ColorStateList.valueOf(Color.parseColor("#2E7D32"))); // green
+            holder.statusDot.setBackgroundResource(R.drawable.dot_on);
         } else {
             holder.tvStatus.setText("OFF");
-            holder.tvStatus.setBackgroundTintList(
-                    ColorStateList.valueOf(Color.parseColor("#424242"))); // gray
+            holder.statusDot.setBackgroundResource(R.drawable.dot_off);
         }
 
 //        // REASON icon and text
 //        holder.ivReasonIcon.setImageResource(item.getReasonIcon());
-        holder.tvReason.setText(item.getReason());
+        String displayName = textMap.get(item.getReason());
+        holder.tvReason.setText(displayName != null ? displayName : item.getReason() );
 
         // DATE
         holder.tvDate.setText(item.getDate());
-
-        // PASSED
-        holder.tvPassed.setText(item.getMinutePassed());
 
 //        // divider - hide on last item
 //        holder.divider.setVisibility(
@@ -77,13 +81,14 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         TextView tvStatus, tvReason, tvDate, tvPassed;
   //      ImageView ivReasonIcon;
         View divider;
+        View statusDot;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvStatus     = itemView.findViewById(R.id.textVStatus);
+            statusDot    = itemView.findViewById(R.id.statusDot);
             tvReason     = itemView.findViewById(R.id.textVReason);
             tvDate       = itemView.findViewById(R.id.textVDate);
-            tvPassed     = itemView.findViewById(R.id.textVPassed);
 //            ivReasonIcon = itemView.findViewById(R.id.ivReasonIcon);
             divider      = itemView.findViewById(R.id.divider);
         }
