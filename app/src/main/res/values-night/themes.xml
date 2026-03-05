@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.ManagingHomeDevicesApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <item name="android:colorBackground">@color/colorBackgroundNight</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorSurface">@color/colorSurface</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>

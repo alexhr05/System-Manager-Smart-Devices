@@ -4,9 +4,9 @@ public class ActivityLogItem {
     private String date;
     private boolean status = false;
     private String reason;
-    private String minutePassed;
+    private long minutePassed;
 
-    public ActivityLogItem(String date, boolean status, String reason, String minutePassed) {
+    public ActivityLogItem(String date, boolean status, String reason, long minutePassed) {
         this.date = date;
         this.status = status;
         this.reason = reason;
@@ -22,7 +22,7 @@ public class ActivityLogItem {
     public void setReason(String reason) {
         this.reason = reason;
     }
-    public void setMinutePassed(String minutePassed) {
+    public void setMinutePassed(long minutePassed) {
         this.minutePassed = minutePassed;
     }
     public String getDate() {
@@ -34,7 +34,7 @@ public class ActivityLogItem {
     public String getReason() {
         return reason;
     }
-    public String getMinutePassed() {
+    public long getMinutePassed() {
         return minutePassed;
     }
 

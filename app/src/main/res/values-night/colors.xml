@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Backgrounds -->
-    <color name="colorBackgroundNight" tools:ignore="MissingDefaultResource">#101C25</color>
+    <color name="colorBackground" tools:ignore="MissingDefaultResource">#101C25</color>
     <color name="colorSurface">#1C2327</color>
 
     <!-- Text -->
@@ -12,15 +12,13 @@
     <color name="colorPrimary">#1E88E5</color>
 
     <!-- Online/Offline device color -->
-    <color name="card_online">#2F2F2F</color>
-    <color name="card_offline">#7C7C7C</color>
-
+    <color name="card_online">#1C212D</color>
+    <color name="card_offline">#26353E</color>
 
     <color name="card_title_text">#EDEDED</color>
 
     <!-- Back Icon Color -->
     <color name="back_icon_bg">#FFFFFF</color>
-
 
     <color name="toggle_container">#1F2933</color>
     <color name="toggle_selected">#111827</color>

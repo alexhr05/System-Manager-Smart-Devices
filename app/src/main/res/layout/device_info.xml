@@ -93,78 +93,177 @@
                 android:textColor="@color/utilitesElementsBlue"
                 android:textSize="20sp" />
 
-            <!-- Turn On Button -->
-             <LinearLayout
-                android:id="@+id/linearLayoutButtons"
+            <!-- Power Section fieldset -->
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="16dp"
-                android:weightSum="2">
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/timeButtonShortInt"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+                <!-- Border container -->
+                <LinearLayout
+                    android:id="@+id/layoutButtons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="16dp"
-                    android:minHeight="56sp"
-                    android:padding="15dp"
-                    android:layout_weight="1"
-                    android:text="Turn On"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="15sp"
-                    app:cornerRadius="8dp"
-                    app:icon="@drawable/short_interval_image"
-                    app:iconGravity="textStart"
-                    app:iconSize="30dp"
-                    app:iconTint="@color/utilitesElementsBlue"
-                    app:iconPadding="8dp"/>
+                    android:orientation="vertical"
+                    android:background="@drawable/fieldset_border"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginTop="10dp">
+                    <!-- Turn On buttons row -->
+                    <LinearLayout
+                        android:id="@+id/layoutTurnOnButtons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/timeButtonShortInt"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:minHeight="56dp"
+                            android:text="Turn On"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"
+                            app:icon="@drawable/short_interval_image"
+                            app:iconGravity="textStart"
+                            app:iconSize="30dp"
+                            app:iconTint="@color/utilitesElementsBlue"
+                            app:iconPadding="8dp" />
 
-                 <com.google.android.material.button.MaterialButton
-                     android:id="@+id/timeButtonLongInt"
-                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center_horizontal"
-                     android:layout_marginStart="16dp"
-                     android:layout_marginTop="12dp"
-                     android:layout_marginEnd="16dp"
-                     android:minHeight="56sp"
-                     android:padding="15dp"
-                     android:layout_weight="1"
-                     android:text="Turn On"
-                     android:textColor="?attr/colorOnSurface"
-                     android:textSize="15sp"
-                     app:cornerRadius="8dp"
-                     app:icon="@drawable/long_interval_image"
-                     app:iconGravity="textStart"
-                     app:iconSize="30dp"
-                     app:iconTint="@color/utilitesElementsBlue"
-                     app:iconPadding="8dp"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/timeButtonLongInt"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="53dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:minHeight="56dp"
+                            android:text="Turn On"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"
+                            app:icon="@drawable/long_interval_image"
+                            app:iconGravity="textStart"
+                            app:iconSize="30dp"
+                            app:iconTint="@color/utilitesElementsBlue"
+                            app:iconPadding="8dp" />
 
-             </LinearLayout>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/timeButtonTurnOff"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
-                android:minHeight="56sp"
-                android:padding="15dp"
-                android:text="Turn Device Off"
-                android:textColor="@color/turnOffBtnText"
-                android:textSize="15sp"
-                app:backgroundTint="@color/turnOffBtn"
-                app:cornerRadius="14dp" />
+                    </LinearLayout>
+                    <!-- Turn OFF button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/timeButtonTurnOff"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:minHeight="56dp"
+                        android:text="Turn Device Off"
+                        android:textColor="@color/turnOffBtnText"
+                        android:textSize="15sp"
+                        android:visibility="gone"
+                        app:backgroundTint="@color/turnOffBtn"
+                        app:cornerRadius="14dp" />
+
+                </LinearLayout>
+                <!-- Fieldset label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:background="@color/colorBackground"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:text="Power section"
+                    android:textColor="@color/utilitesElementsBlue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+<!--            &lt;!&ndash; Turn On Button &ndash;&gt;-->
+<!--             <LinearLayout-->
+<!--                android:id="@+id/linearLayoutButtons"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingHorizontal="16dp"-->
+<!--                android:paddingTop="16dp"-->
+<!--                android:weightSum="2">-->
+
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/timeButtonShortInt"-->
+<!--                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:minHeight="56sp"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Turn On"-->
+<!--                    android:textColor="?attr/colorOnSurface"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    app:icon="@drawable/short_interval_image"-->
+<!--                    app:iconGravity="textStart"-->
+<!--                    app:iconSize="30dp"-->
+<!--                    app:iconTint="@color/utilitesElementsBlue"-->
+<!--                    app:iconPadding="8dp"/>-->
+
+<!--                 <com.google.android.material.button.MaterialButton-->
+<!--                     android:id="@+id/timeButtonLongInt"-->
+<!--                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--                     android:layout_width="match_parent"-->
+<!--                     android:layout_height="wrap_content"-->
+<!--                     android:layout_gravity="center_horizontal"-->
+<!--                     android:layout_marginStart="16dp"-->
+<!--                     android:layout_marginTop="12dp"-->
+<!--                     android:layout_marginEnd="16dp"-->
+<!--                     android:minHeight="56sp"-->
+<!--                     android:padding="15dp"-->
+<!--                     android:layout_weight="1"-->
+<!--                     android:text="Turn On"-->
+<!--                     android:textColor="?attr/colorOnSurface"-->
+<!--                     android:textSize="15sp"-->
+<!--                     app:cornerRadius="8dp"-->
+<!--                     app:icon="@drawable/long_interval_image"-->
+<!--                     app:iconGravity="textStart"-->
+<!--                     app:iconSize="30dp"-->
+<!--                     app:iconTint="@color/utilitesElementsBlue"-->
+<!--                     app:iconPadding="8dp"/>-->
+
+<!--             </LinearLayout>-->
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/timeButtonTurnOff"-->
+<!--                style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:minHeight="56sp"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="Turn Device Off"-->
+<!--                android:textColor="@color/turnOffBtnText"-->
+<!--                android:textSize="15sp"-->
+<!--                app:backgroundTint="@color/turnOffBtn"-->
+<!--                app:cornerRadius="14dp" />-->
             <!-- Last Restart + Signal Cards + IP card + MAC adress card -->
             <!-- Two rows of two cards each -->
             <LinearLayout

@@ -5,7 +5,9 @@ import static java.lang.Integer.parseInt;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -131,6 +133,11 @@ public class DeviceInfo extends AppCompatActivity {
         deviceWifiNetwork = getIntent().getStringExtra("device_wifi_network");
         deviceSignalStrength = getIntent().getStringExtra("device_signal_strength");
 
+        LinearLayout layoutTurnOnButtons  = findViewById(R.id.layoutTurnOnButtons);
+
+
+        updatePowerButtons(isEnabled,layoutTurnOnButtons, timeButtonTurnOff);
+
         if (isOnline) {
             if (isEnabled) {
                 textViewStatus.setText("Status: ON");
@@ -182,13 +189,22 @@ public class DeviceInfo extends AppCompatActivity {
 
         timeButtonShortInt.setOnClickListener(v -> {
             turnOnDeviceForTime(parseInt(shortInt));
+            // hide ON buttons, show OFF button
+            layoutTurnOnButtons.setVisibility(View.GONE);
+            timeButtonTurnOff.setVisibility(View.VISIBLE);
         });
 
         timeButtonLongInt.setOnClickListener(v -> {
             turnOnDeviceForTime(parseInt(longInt));
+            // hide ON buttons, show OFF button
+            layoutTurnOnButtons.setVisibility(View.GONE);
+            timeButtonTurnOff.setVisibility(View.VISIBLE);
         });
         timeButtonTurnOff.setOnClickListener(v -> {
             turnOffDevice();
+            // hide OFF button, show ON buttons
+            timeButtonTurnOff.setVisibility(View.GONE);
+            layoutTurnOnButtons.setVisibility(View.VISIBLE);
         });
     }
 
@@ -214,7 +230,7 @@ public class DeviceInfo extends AppCompatActivity {
                     String status = "";
                     String reason = "";
                     String minutesPassed = "";
-
+                    long minutesPassedLong = -1;
                     for (String row : rows) {
                         row = row.trim();
                         if (row.isEmpty()) continue;
@@ -234,10 +250,16 @@ public class DeviceInfo extends AppCompatActivity {
                                 reason = part.replace("reason=","");
                             }else if(part.startsWith("minutes_passed=")){
                                 minutesPassed = part.replace("minutes_passed=","");
+                                Log.d("MINUTESPASSED", ""+minutesPassed);
+                                if(minutesPassed.isEmpty()){
+                                    minutesPassedLong = -1;
+                                }else{
+                                    minutesPassedLong = Long.parseLong(minutesPassed);
+                                }
                             }
                         }
                         boolean statusBoolean = status.equalsIgnoreCase("ON");
-                        logItems.add(new ActivityLogItem(date,statusBoolean,reason,minutesPassed));
+                        logItems.add(new ActivityLogItem(date,statusBoolean,reason,minutesPassedLong));
 
                     }
 
@@ -252,8 +274,20 @@ public class DeviceInfo extends AppCompatActivity {
         });
     }
 
-    private String convertDatetTo(){
-        return "";
+    // Helper to set initual state
+    private void updatePowerButtons(boolean isOn,
+                                    LinearLayout layoutTurnOnButtons,
+                                    MaterialButton timeButtonTurnOff) {
+
+        if (isOn) {
+            // device is ON → show only Turn Off button
+            layoutTurnOnButtons.setVisibility(View.GONE);
+            timeButtonTurnOff.setVisibility(View.VISIBLE);
+        } else {
+            // device is OFF → show only Turn On buttons
+            layoutTurnOnButtons.setVisibility(View.VISIBLE);
+            timeButtonTurnOff.setVisibility(View.GONE);
+        }
     }
 
     //Get Info about certain Timer
@@ -337,14 +371,13 @@ public class DeviceInfo extends AppCompatActivity {
                 timeButtonShortInt.setText(shortInt + " mins");
                 timeButtonLongInt.setText(longInt + " mins");
 
-                dateText.setText(uptime);
+                dateText.setText(uptime + " ago");
 
                 Log.d("Time1+dur",""+(onTime1+duration1));
                 Log.d("Time1",""+onTime1);
                 Log.d("dur",""+duration1);
                 setTimerViews(onTime1, duration1, textViewStartTime,  textViewTimeEnd1, textViewDuration1);
                 setTimerViews(onTime2, duration2, textViewStartTime2, textViewTimeEnd2, textViewDuration2);
-                //  Toast.makeText(DeviceInfo.this, "Config " + response, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(DeviceInfo.this, "Unknown type " + response, Toast.LENGTH_SHORT).show();
