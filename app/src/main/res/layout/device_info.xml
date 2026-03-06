@@ -192,7 +192,7 @@
                     android:paddingEnd="6dp"
                     android:text="Power section"
                     android:textColor="@color/utilitesElementsBlue"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
             </FrameLayout>
 
@@ -328,7 +328,8 @@
                                     android:text="UP TIME"
                                     android:textSize="14sp"
                                     android:letterSpacing="0.08"
-                                    android:textColor="@color/text_secondary_dark" />
+                                    android:textColor="@color/text_secondary_dark"
+                                    android:textStyle="bold"/>
 
                             </LinearLayout>
 
@@ -385,7 +386,8 @@
                                     android:letterSpacing="0.08"
                                     android:text="NETWORK"
                                     android:textColor="@color/text_secondary_dark"
-                                    android:textSize="14sp" />
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"/>
 
                             </LinearLayout>
 
@@ -470,7 +472,8 @@
                                     android:text="IP ADDRESS"
                                     android:textSize="14sp"
                                     android:letterSpacing="0.08"
-                                    android:textColor="@color/text_secondary_dark" />
+                                    android:textColor="@color/text_secondary_dark"
+                                    android:textStyle="bold"/>
 
                             </LinearLayout>
 
@@ -530,7 +533,8 @@
                                     android:text="MAC ADDRESS"
                                     android:textSize="14sp"
                                     android:letterSpacing="0.08"
-                                    android:textColor="@color/text_secondary_dark" />
+                                    android:textColor="@color/text_secondary_dark"
+                                    android:textStyle="bold"/>
 
                             </LinearLayout>
 
@@ -619,6 +623,7 @@
                             android:textColor="#8FA3AD"
                             android:textSize="12sp"
                             android:gravity="center"
+                            android:textStyle="bold"
                             />
 
                         <TextView
@@ -628,7 +633,8 @@
                             android:text="REASON"
                             android:textColor="#8FA3AD"
                             android:textSize="12sp"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -637,7 +643,8 @@
                             android:text="DATE"
                             android:textColor="#8FA3AD"
                             android:textSize="12sp"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:textStyle="bold"/>
 
 
                     </LinearLayout>
@@ -765,7 +772,8 @@
                             android:layout_weight="1"
                             android:text="START"
                             android:textColor="#8FA3AD"
-                            android:textSize="11sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -773,7 +781,8 @@
                             android:layout_weight="1"
                             android:text="END"
                             android:textColor="#8FA3AD"
-                            android:textSize="11sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -781,7 +790,8 @@
                             android:layout_weight="1"
                             android:text="DURATION"
                             android:textColor="#8FA3AD"
-                            android:textSize="11sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
 
                     </LinearLayout>
 
