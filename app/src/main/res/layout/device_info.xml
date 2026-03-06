@@ -133,7 +133,7 @@
                             android:minHeight="56dp"
                             android:text="Turn On"
                             android:textColor="?attr/colorOnSurface"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:textAllCaps="false"
                             app:cornerRadius="8dp"
                             app:icon="@drawable/short_int_timer"
@@ -154,8 +154,7 @@
                             android:minHeight="56dp"
                             android:text="Turn On"
                             android:textColor="?attr/colorOnSurface"
-                            android:textSize="12sp"
-
+                            android:textSize="14sp"
                             android:textAllCaps="false"
                             app:cornerRadius="8dp"
                             app:icon="@drawable/long_int_timer"
