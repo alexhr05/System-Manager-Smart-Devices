@@ -22,7 +22,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.ViewHolder> {
 
     private List<ActivityLogItem> items;
@@ -71,7 +73,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 
 
 
-        holder.tvDate.setText(getRelativeTiming(item.getMinutePassed()));
+        holder.tvDate.setText(getRelativeTime(item.getDate()));
 
 
 
@@ -80,56 +82,43 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 //                position == items.size() - 1 ? View.GONE : View.VISIBLE);
     }
 
-    public String getRelativeTiming(long minutePassed){
-        if(minutePassed == -1){
-            return "---";
-        }
-        Log.d("MINUTEPASSEDADAPTER",""+minutePassed);
-//        long pastMiliseconds = minutePassed * 60 * 1000;
-//        long now = System.currentTimeMillis();
-//        long diff = now - pastMiliseconds;
+    private String getRelativeTime(String dateTimeString) {
+        try {
+            // match your server format exactly
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            Date pastDate     = sdf.parse(dateTimeString);
+            long now          = System.currentTimeMillis();
+            long diffMillis   = now - pastDate.getTime();
 
-//        long seconds = diff / 1000;
-        long minutes = minutePassed;
-        long hours = minutes / 60;
-        long days = hours / 24;
+            long totalSeconds = diffMillis / 1000;
+            long totalMinutes = totalSeconds / 60;
+            long totalHours   = totalMinutes / 60;
+            long totalDays    = totalHours / 24;
 
+            long remMinutes   = totalMinutes % 60;
+            long remHours     = totalHours % 24;
 
-        if(days == 0){
-            if(hours == 0){
-                if(minutes == 0){
-                    return "Just now";
-                }
-                return "Today, " + minutes+"m ago";
+            if (totalDays == 0 && totalHours == 0) {
+                if (totalMinutes == 0) return "Just now";
+                return "Today, " + totalMinutes + "m ago";
+            } else if (totalDays == 0) {
+                return remMinutes == 0
+                        ? "Today, " + totalHours + "h ago"
+                        : "Today, " + totalHours + "h " + remMinutes + "m ago";
+            } else if (totalDays == 1) {
+                return remHours == 0
+                        ? "Yesterday"
+                        : "Yesterday, " + remHours + "h ago";
+            } else {
+                return remHours == 0
+                        ? totalDays + "d ago"
+                        : totalDays + "d " + remHours + "h ago";
             }
-            return "Today, " + hours+"h ago";
-        }else{
-            long remainingHours = hours%24;
-            if(remainingHours == 0){
-                return days + "d ago";
-            }
-            return days + "d, " + remainingHours + "h ago";
+
+        } catch (Exception e) {
+            Log.e("RelativeTime", "Error parsing: " + e.getMessage());
+            return "Unknown";
         }
-
-//        String[] wholeDate = item.getDate().split(" ");
-//        String date = wholeDate[0];
-//        String time = wholeDate[1];
-//
-//        String[] partDate = date.split("-");
-//        String year = partDate[0];
-//        String month = partDate[1];
-//        String day = partDate[2];
-//
-//        Calendar today = Calendar.getInstance();
-//
-//        String todayYear  = today.get(Calendar.YEAR)+"";   // 2026
-//        String todayMonth = (today.get(Calendar.MONTH) + 1) < 10
-//                ? 0 + (today.get(Calendar.MONTH) + 1) + ""
-//                : (today.get(Calendar.MONTH) + 1) + ""; // +1 because months start from 0
-//        String todayDay   = today.get(Calendar.DAY_OF_MONTH) < 10
-//                ? 0 + (today.get(Calendar.DAY_OF_MONTH) +"")
-//                : (today.get(Calendar.DAY_OF_MONTH)+""); // 1-31
-
     }
     @Override
     public int getItemCount() {

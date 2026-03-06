@@ -152,7 +152,7 @@ public class DeviceInfo extends AppCompatActivity {
         textViewNetworkName.setText(deviceWifiNetwork);
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
         textViewIP.setText(deviceIp);
-
+        fetchTimerConfig("config", deviceMacAddress);
         StringBuilder temp = new StringBuilder(deviceMacAddress);
 
         temp.insert(2,  ':');  // "C8:C9A32F17EC"
@@ -163,7 +163,7 @@ public class DeviceInfo extends AppCompatActivity {
         deviceMacAddress = temp.toString();
         textViewMAC.setText(deviceMacAddress);
       //  fetchTimerConfig("daytimer", deviceMacAddress);
-        fetchTimerConfig("config", deviceMacAddress);
+
         Log.d("IDTIMER","deviceId="+deviceId);
         getTimerLog(deviceId, counts);
 
@@ -190,21 +190,21 @@ public class DeviceInfo extends AppCompatActivity {
         timeButtonShortInt.setOnClickListener(v -> {
             turnOnDeviceForTime(parseInt(shortInt));
             // hide ON buttons, show OFF button
-            layoutTurnOnButtons.setVisibility(View.GONE);
-            timeButtonTurnOff.setVisibility(View.VISIBLE);
+          //  layoutTurnOnButtons.setVisibility(View.GONE);
+           // timeButtonTurnOff.setVisibility(View.VISIBLE);
         });
 
         timeButtonLongInt.setOnClickListener(v -> {
             turnOnDeviceForTime(parseInt(longInt));
             // hide ON buttons, show OFF button
-            layoutTurnOnButtons.setVisibility(View.GONE);
-            timeButtonTurnOff.setVisibility(View.VISIBLE);
+           // layoutTurnOnButtons.setVisibility(View.GONE);
+            //timeButtonTurnOff.setVisibility(View.VISIBLE);
         });
         timeButtonTurnOff.setOnClickListener(v -> {
             turnOffDevice();
             // hide OFF button, show ON buttons
-            timeButtonTurnOff.setVisibility(View.GONE);
-            layoutTurnOnButtons.setVisibility(View.VISIBLE);
+            //timeButtonTurnOff.setVisibility(View.GONE);
+            //layoutTurnOnButtons.setVisibility(View.VISIBLE);
         });
     }
 
@@ -295,7 +295,7 @@ public class DeviceInfo extends AppCompatActivity {
         apiService.getTimerConfig(
                 "Fekm8Y3j6M43",
                 needParams,
-                "68C63AF70EF3"
+                deviceMacAddress
         ).enqueue(new retrofit2.Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -316,6 +316,7 @@ public class DeviceInfo extends AppCompatActivity {
     }
 
     private void handleTimerResponse(String needParams, String response) {
+        Log.d("REPONSEEEE ",""+response);
         int startIdx = response.indexOf("@");
         if (startIdx == -1) {
             Toast.makeText(DeviceInfo.this, "Invalid response format", Toast.LENGTH_SHORT).show();
@@ -345,7 +346,7 @@ public class DeviceInfo extends AppCompatActivity {
                     if (part.startsWith("place1=")) {
                         place = part.replace("place1=", "");
                     } else if (part.startsWith("shortInterval1=")) {
-                        shortInt = part.replace("shortInterval1=", "");
+                        shortInt =part.replace("shortInterval1=", "");
                     } else if (part.startsWith("longInterval1=")) {
                         longInt = part.replace("longInterval1=", "");
                     } else if (part.startsWith("uptime=")) {
@@ -362,6 +363,7 @@ public class DeviceInfo extends AppCompatActivity {
                         duration2 = part.replace("Timer1duration2=", "");
                     }
                 }
+
                 if (place.equalsIgnoreCase("vilata")) {
                     textDevicePlace.setText("Place: Vilata");
                 } else {
@@ -388,6 +390,7 @@ public class DeviceInfo extends AppCompatActivity {
     private void setTimerViews(String onTime, String duration,
                                TextView tvStart, TextView tvEnd, TextView tvDuration) {
         if (onTime.isEmpty() || duration.isEmpty()) {
+            Log.d("SETTIMERVIEWS","onTime="+onTime+";duration=");
             tvStart.setText("---");
             tvEnd.setText("---");
             tvDuration.setText("---");

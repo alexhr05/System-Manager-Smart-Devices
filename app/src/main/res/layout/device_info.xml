@@ -70,6 +70,19 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="28sp"
                 android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/textViewStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Status"
+                android:textColor="@color/utilitesElementsBlue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/textDevicePlace"
                 android:layout_width="match_parent"
@@ -81,17 +94,6 @@
                 android:textSize="22sp" />
 
             <!-- Status -->
-            <TextView
-                android:id="@+id/textViewStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Status"
-                android:textStyle="bold"
-                android:textColor="@color/utilitesElementsBlue"
-                android:textSize="20sp" />
 
             <!-- Power Section fieldset -->
             <FrameLayout
@@ -132,8 +134,9 @@
                             android:text="Turn On"
                             android:textColor="?attr/colorOnSurface"
                             android:textSize="12sp"
+                            android:textAllCaps="false"
                             app:cornerRadius="8dp"
-                            app:icon="@drawable/short_interval_image"
+                            app:icon="@drawable/short_int_timer"
                             app:iconGravity="textStart"
                             app:iconSize="30dp"
                             app:iconTint="@color/utilitesElementsBlue"
@@ -152,8 +155,10 @@
                             android:text="Turn On"
                             android:textColor="?attr/colorOnSurface"
                             android:textSize="12sp"
+
+                            android:textAllCaps="false"
                             app:cornerRadius="8dp"
-                            app:icon="@drawable/long_interval_image"
+                            app:icon="@drawable/long_int_timer"
                             app:iconGravity="textStart"
                             app:iconSize="30dp"
                             app:iconTint="@color/utilitesElementsBlue"
@@ -453,9 +458,9 @@
 
                                 <ImageView
                                     android:id="@+id/ipIcon"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:src="@drawable/restart_image"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/ip_address"
                                     app:tint="@color/blue_accent" />
 
                                 <TextView
@@ -513,9 +518,9 @@
 
                                 <ImageView
                                     android:id="@+id/macIcon"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:src="@drawable/restart_image"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/mac_address"
                                     app:tint="@color/blue_accent" />
 
                                 <TextView
