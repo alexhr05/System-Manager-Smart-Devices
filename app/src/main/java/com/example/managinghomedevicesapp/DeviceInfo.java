@@ -373,7 +373,7 @@ public class DeviceInfo extends AppCompatActivity {
                 timeButtonShortInt.setText(shortInt + " mins");
                 timeButtonLongInt.setText(longInt + " mins");
 
-                dateText.setText(uptime + " ago");
+                dateText.setText(StringDateToTime(uptime) + " ago");
 
                 Log.d("Time1+dur",""+(onTime1+duration1));
                 Log.d("Time1",""+onTime1);
@@ -417,6 +417,63 @@ public class DeviceInfo extends AppCompatActivity {
         String res = String.format("%02d:%02d", hours, minutes);
 
         return res;
+    }
+
+    private String StringDateToTime(String date) {
+        if(date.isEmpty()){
+            return "---";
+        }
+
+        // % - start of placeholder
+        // 0 - if number is short, add 0 infront
+        // 2 - minimum 2 digits wide
+        // d - value is integer
+        Log.d("PARTSTIME",""+date);
+        String[] str;
+        String days = "";
+        String time = "";
+        String res = "---";
+        if(date.contains("дни")){
+            str = date.split(",");
+            days = str[0];
+            time = str[1];
+            days = days.replace("дни","");
+
+            String[] partsTime = time.split(":");
+            Log.d("partsTime",""+partsTime.length);
+            String hours = partsTime[0];
+            String minutes = partsTime[1];
+            Log.d("minutesTIMEE",""+minutes);
+
+            if(parseInt(days) > 2){
+                res = days+"d " + hours + "h";
+            }else{
+                res = days+"d " + hours + "h:" + minutes+"m";
+            }
+
+            return res;
+        }else if(date.contains("ден")){
+            str = date.split(",");
+            days = str[0];
+            time = str[1];
+            days = days.replace("ден","");
+
+            String[] partsTime = time.split(":");
+            String hours = partsTime[0];
+            String minutes = partsTime[1];
+
+            res = "1d " + hours + "h:" + minutes + "m";
+            return res;
+        }else{
+            
+            String[] partsTime = date.split(":");
+            String hours = partsTime[0];
+            String minutes = partsTime[1];
+
+            res = hours+"h:"+minutes+"m";
+            return res;
+        }
+
     }
 
     private void turnOnDeviceForTime(int minutes) {
@@ -482,14 +539,7 @@ public class DeviceInfo extends AppCompatActivity {
                     Toast.makeText(DeviceInfo.this, "Device is OFF", Toast.LENGTH_SHORT).show();
 
                 }
-//                item.setIsEnabled(false);
-//                adapter.notifyDataSetChanged();
-
-//                Toast.makeText(
-//                        MainAct.this,
-//                        "Device turned OFF automatically",
-//                        Toast.LENGTH_SHORT
-//                ).show();
+                //adapter.notifyDataSetChanged();
             }
 
             @Override

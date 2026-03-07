@@ -19,11 +19,12 @@
             android:layout_height="45dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginStart="4dp"
-            android:backgroundTint="@color/back_icon_bg"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/outline_arrow_back_ios_24"
+            app:tint="@color/back_icon_bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/outline_arrow_back_ios_24" />
+             />
 
         <TextView
             android:id="@+id/TextdeviceDetailsText"
@@ -35,7 +36,7 @@
             android:textColor="@color/colorTextPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintHorizontal_bias="0.33"
             app:layout_constraintStart_toEndOf="@+id/backIcon"
 
             app:layout_constraintTop_toTopOf="parent" />

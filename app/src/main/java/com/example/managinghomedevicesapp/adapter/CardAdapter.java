@@ -45,9 +45,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         holder.title.setText(item.getTitle());
         if(item.getStatus() == true){
             if(item.getIsEnabled() == true){
-                holder.description.setText("ON from:\n"+minutesToTime(item.getLastActivation()));
+                holder.description.setText("Last Change:\nON from:\n"+minutesToTime(item.getLastActivation()));
             }else if(item.getIsEnabled() == false){
-                holder.description.setText("OFF from:\n"+minutesToTime(item.getLastActivation()));
+                holder.description.setText("Last Change:\nOFF from:\n"+minutesToTime(item.getLastActivation()));
             }
 
         }else{
