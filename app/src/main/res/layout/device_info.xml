@@ -6,31 +6,41 @@
     android:layout_height="match_parent">
 
     <!-- Back Icon (fixed, outside scroll) -->
-
-
-    <ImageView
-        android:id="@+id/backIcon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:backgroundTint="@color/back_icon_bg"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/outline_arrow_back_ios_24" />
-    <TextView
-        android:id="@+id/TextdeviceDetailsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="8dp"
-        android:text="Device Details"
-        android:textColor="@color/colorTextPrimary"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/backIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        >
+        <ImageView
+            android:id="@+id/backIcon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/back_icon_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_arrow_back_ios_24" />
+
+        <TextView
+            android:id="@+id/TextdeviceDetailsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="Device Details"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintStart_toEndOf="@+id/backIcon"
+
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <!-- Device Details Title (fixed, outside scroll) -->
 
     <!-- Everything else scrolls -->
@@ -39,7 +49,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@+id/TextdeviceDetailsText"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -174,12 +184,17 @@
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
                         android:minHeight="56dp"
-                        android:text="Turn Device Off"
+                        android:text="Turn Off"
                         android:textColor="@color/turnOffBtnText"
                         android:textSize="15sp"
                         android:visibility="gone"
                         app:backgroundTint="@color/turnOffBtn"
-                        app:cornerRadius="14dp" />
+                        app:cornerRadius="14dp"
+                        app:icon="@drawable/power_off_button"
+                        app:iconGravity="textStart"
+                        app:iconSize="30dp"
+                        app:iconTint="@color/turnOffBtnText"
+                        app:iconPadding="8dp"/>
 
                 </LinearLayout>
                 <!-- Fieldset label -->

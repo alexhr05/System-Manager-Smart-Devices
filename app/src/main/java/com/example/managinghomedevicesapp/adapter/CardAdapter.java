@@ -72,10 +72,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             listener.onDeviceToggled(item);
         });
 
-        holder.buttonOne.setOnClickListener(v -> {
+        holder.btnShortInterval.setOnClickListener(v -> {
             int minutes = Integer.parseInt(v.getTag().toString());
             listener.onTurnOnForTime(item,minutes);
 
+        });
+
+        holder.btnLongInterval.setOnClickListener(v -> {
+            int minutes = Integer.parseInt(v.getTag().toString());
+            listener.onTurnOnForTime(item,minutes);
         });
 
         holder.itemView.setOnClickListener(v ->
@@ -106,14 +111,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         TextView description;
 
         SwitchMaterial switchMaterial;
-        MaterialButton buttonOne;
+        MaterialButton btnShortInterval;
+        MaterialButton btnLongInterval;
         MaterialCardView materialCardView;
         CardViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.cardTitle);
             description = itemView.findViewById(R.id.cardLastActive);
             switchMaterial = itemView.findViewById(R.id.switchNotifications);
-            buttonOne = itemView.findViewById(R.id.TimeButton1);
+            btnShortInterval = itemView.findViewById(R.id.btnShortInterval);
+            btnLongInterval = itemView.findViewById(R.id.btnLongInterval);
             materialCardView = itemView.findViewById(R.id.CardView);
         }
     }

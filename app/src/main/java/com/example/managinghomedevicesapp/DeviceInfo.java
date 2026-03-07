@@ -190,21 +190,21 @@ public class DeviceInfo extends AppCompatActivity {
         timeButtonShortInt.setOnClickListener(v -> {
             turnOnDeviceForTime(parseInt(shortInt));
             // hide ON buttons, show OFF button
-          //  layoutTurnOnButtons.setVisibility(View.GONE);
-           // timeButtonTurnOff.setVisibility(View.VISIBLE);
+            layoutTurnOnButtons.setVisibility(View.GONE);
+            timeButtonTurnOff.setVisibility(View.VISIBLE);
         });
 
         timeButtonLongInt.setOnClickListener(v -> {
             turnOnDeviceForTime(parseInt(longInt));
             // hide ON buttons, show OFF button
-           // layoutTurnOnButtons.setVisibility(View.GONE);
-            //timeButtonTurnOff.setVisibility(View.VISIBLE);
+            layoutTurnOnButtons.setVisibility(View.GONE);
+            timeButtonTurnOff.setVisibility(View.VISIBLE);
         });
         timeButtonTurnOff.setOnClickListener(v -> {
             turnOffDevice();
             // hide OFF button, show ON buttons
-            //timeButtonTurnOff.setVisibility(View.GONE);
-            //layoutTurnOnButtons.setVisibility(View.VISIBLE);
+            timeButtonTurnOff.setVisibility(View.GONE);
+            layoutTurnOnButtons.setVisibility(View.VISIBLE);
         });
     }
 
