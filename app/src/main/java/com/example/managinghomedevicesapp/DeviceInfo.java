@@ -60,6 +60,7 @@ public class DeviceInfo extends AppCompatActivity {
     private boolean isOnline;
 
     private String deviceMacAddress = "";
+    private String displayMacAddress = "";
     private int deviceLastActivation;
     private String deviceWifiNetwork = "";
     private String deviceSignalStrength = "";
@@ -153,18 +154,18 @@ public class DeviceInfo extends AppCompatActivity {
         textViewSignalStrength.setText(deviceSignalStrength + " dBm");
         textViewIP.setText(deviceIp);
         fetchTimerConfig("config", deviceMacAddress);
-        StringBuilder temp = new StringBuilder(deviceMacAddress);
+        displayMacAddress = deviceMacAddress;
+        StringBuilder temp = new StringBuilder(displayMacAddress);
 
         temp.insert(2,  ':');  // "C8:C9A32F17EC"
         temp.insert(5,  ':');  // "C8:C9:A32F17EC"
         temp.insert(8,  ':');  // "C8:C9:A3:2F17EC"
         temp.insert(11, ':');  // "C8:C9:A3:2F:17EC"
         temp.insert(14, ':');  // "C8:C9:A3:2F:17:EC"
-        deviceMacAddress = temp.toString();
-        textViewMAC.setText(deviceMacAddress);
+        displayMacAddress = temp.toString();
+        textViewMAC.setText(displayMacAddress);
       //  fetchTimerConfig("daytimer", deviceMacAddress);
 
-        Log.d("IDTIMER","deviceId="+deviceId);
         getTimerLog(deviceId, counts);
 
         textView.setText(deviceName);
@@ -250,7 +251,6 @@ public class DeviceInfo extends AppCompatActivity {
                                 reason = part.replace("reason=","");
                             }else if(part.startsWith("minutes_passed=")){
                                 minutesPassed = part.replace("minutes_passed=","");
-                                Log.d("MINUTESPASSED", ""+minutesPassed);
                                 if(minutesPassed.isEmpty()){
                                     minutesPassedLong = -1;
                                 }else{
@@ -302,7 +302,6 @@ public class DeviceInfo extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     String res = response.body().trim();
-                    Log.d("TIMER RESPONSE", "Response: " + res);
   //                  Toast.makeText(DeviceInfo.this, "" + res, Toast.LENGTH_SHORT).show();
                     handleTimerResponse(needParams, res);
                 }
@@ -316,7 +315,6 @@ public class DeviceInfo extends AppCompatActivity {
     }
 
     private void handleTimerResponse(String needParams, String response) {
-        Log.d("REPONSEEEE ",""+response);
         int startIdx = response.indexOf("@");
         if (startIdx == -1) {
             Toast.makeText(DeviceInfo.this, "Invalid response format", Toast.LENGTH_SHORT).show();
@@ -375,9 +373,6 @@ public class DeviceInfo extends AppCompatActivity {
 
                 dateText.setText(StringDateToTime(uptime) + " ago");
 
-                Log.d("Time1+dur",""+(onTime1+duration1));
-                Log.d("Time1",""+onTime1);
-                Log.d("dur",""+duration1);
                 setTimerViews(onTime1, duration1, textViewStartTime,  textViewTimeEnd1, textViewDuration1);
                 setTimerViews(onTime2, duration2, textViewStartTime2, textViewTimeEnd2, textViewDuration2);
                 break;
@@ -390,7 +385,6 @@ public class DeviceInfo extends AppCompatActivity {
     private void setTimerViews(String onTime, String duration,
                                TextView tvStart, TextView tvEnd, TextView tvDuration) {
         if (onTime.isEmpty() || duration.isEmpty()) {
-            Log.d("SETTIMERVIEWS","onTime="+onTime+";duration=");
             tvStart.setText("---");
             tvEnd.setText("---");
             tvDuration.setText("---");
@@ -428,7 +422,6 @@ public class DeviceInfo extends AppCompatActivity {
         // 0 - if number is short, add 0 infront
         // 2 - minimum 2 digits wide
         // d - value is integer
-        Log.d("PARTSTIME",""+date);
         String[] str;
         String days = "";
         String time = "";
@@ -440,10 +433,8 @@ public class DeviceInfo extends AppCompatActivity {
             days = days.replace("дни","");
 
             String[] partsTime = time.split(":");
-            Log.d("partsTime",""+partsTime.length);
             String hours = partsTime[0];
             String minutes = partsTime[1];
-            Log.d("minutesTIMEE",""+minutes);
 
             if(parseInt(days) > 2){
                 res = days+"d " + hours + "h";
